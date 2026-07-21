@@ -4,6 +4,12 @@ const isProfile = page === "profile";
 const translations = {
   en: {
     tagline: "Next-Generation AI Talents",
+    home: "Home",
+    talents: "Talents",
+    homeLineOne: "The new faces",
+    homeLineTwo: "of imagination.",
+    homeManifesto: "An independent roster of AI talents built for fashion, culture and the next visual era.",
+    meetTalents: "Meet the talents",
     account: "Account",
     password: "Password",
     enter: "Enter GTAI",
@@ -50,6 +56,12 @@ const translations = {
   },
   zh: {
     tagline: "新世代 AI 藝人",
+    home: "首頁",
+    talents: "藝人",
+    homeLineOne: "想像力的",
+    homeLineTwo: "全新面孔。",
+    homeManifesto: "一組面向時尚、文化與下一個視覺時代的獨立 AI 藝人陣容。",
+    meetTalents: "探索藝人陣容",
     account: "帳號",
     password: "密碼",
     enter: "進入 GTAI",
@@ -194,12 +206,14 @@ document.querySelector("#soundToggle")?.addEventListener("click", () => {
 const gate = document.querySelector("#gate");
 const siteShell = document.querySelector("#siteShell");
 const unlocked = sessionStorage.getItem("gtai-preview") === "unlocked";
+let crystalStarted = false;
 
 function revealSite() {
   if (!gate || !siteShell) return;
   gate.classList.add("is-leaving");
   siteShell.removeAttribute("inert");
   startAmbient();
+  scheduleCrystal();
   window.setTimeout(() => gate.remove(), 950);
 }
 
@@ -230,11 +244,45 @@ const panels = [...document.querySelectorAll(".talent-panel")];
 let currentPanel = 0;
 let changing = false;
 
+function hydratePanel(panel) {
+  panel?.querySelectorAll("img[data-src]").forEach((image) => {
+    image.src = image.dataset.src;
+    image.removeAttribute("data-src");
+  });
+}
+
+const homeExperience = document.querySelector("#homeExperience");
+const talentStage = document.querySelector("#talentStage");
+const homeNav = document.querySelector("#homeNav");
+const talentsNav = document.querySelector("#talentsNav");
+
+function showView(view) {
+  const showingTalents = view === "talents";
+  homeExperience?.classList.toggle("is-hidden", showingTalents);
+  talentStage?.classList.toggle("is-visible", showingTalents);
+  homeExperience?.setAttribute("aria-hidden", String(showingTalents));
+  talentStage?.setAttribute("aria-hidden", String(!showingTalents));
+  if (showingTalents) {
+    talentStage?.removeAttribute("inert");
+    hydratePanel(panels[currentPanel]);
+    window.setTimeout(() => hydratePanel(panels[(currentPanel + 1) % panels.length]), 500);
+  } else {
+    talentStage?.setAttribute("inert", "");
+  }
+  homeNav?.classList.toggle("is-active", !showingTalents);
+  talentsNav?.classList.toggle("is-active", showingTalents);
+}
+
+document.querySelector("#rosterEntry")?.addEventListener("click", () => showView("talents"));
+homeNav?.addEventListener("click", () => showView("home"));
+talentsNav?.addEventListener("click", () => showView("talents"));
+
 function showPanel(nextIndex, direction) {
   if (!panels.length || changing || nextIndex === currentPanel) return;
   changing = true;
   const oldPanel = panels[currentPanel];
   const nextPanel = panels[nextIndex];
+  hydratePanel(nextPanel);
   oldPanel.classList.add(direction > 0 ? "is-exiting-next" : "is-exiting-prev");
   oldPanel.classList.remove("is-active");
   oldPanel.setAttribute("aria-hidden", "true");
@@ -245,7 +293,8 @@ function showPanel(nextIndex, direction) {
     oldPanel.classList.remove("is-exiting-next", "is-exiting-prev");
     currentPanel = nextIndex;
     changing = false;
-  }, 940);
+    window.setTimeout(() => hydratePanel(panels[(currentPanel + direction + panels.length) % panels.length]), 250);
+  }, 540);
 }
 
 document.querySelector("#nextTalent")?.addEventListener("click", () => showPanel((currentPanel + 1) % panels.length, 1));
@@ -284,6 +333,15 @@ document.querySelector("#inquiryForm")?.addEventListener("submit", (event) => {
 });
 
 /* Liquid-crystal brand sculpture. CSS glass fragments remain as fallback. */
+function scheduleCrystal() {
+  if (crystalStarted || isProfile || window.matchMedia("(max-width: 900px)").matches) return;
+  if (navigator.connection?.saveData || (navigator.deviceMemory && navigator.deviceMemory < 4)) return;
+  crystalStarted = true;
+  const launch = () => initCrystal();
+  if ("requestIdleCallback" in window) window.requestIdleCallback(launch, { timeout: 1800 });
+  else window.setTimeout(launch, 900);
+}
+
 async function initCrystal() {
   const canvas = document.querySelector("#crystalCanvas");
   if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -294,13 +352,13 @@ async function initCrystal() {
     const camera = new THREE.PerspectiveCamera(34, 1, .1, 100);
     camera.position.set(0, 0, compact ? 6.8 : 5.4);
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !compact, powerPreference: "high-performance" });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, compact ? 1.2 : 1.7));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, compact ? 1 : 1.25));
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.1;
 
-    const geometry = new THREE.TorusKnotGeometry(compact ? 1.22 : 1.48, compact ? .37 : .44, compact ? 92 : 170, compact ? 14 : 24, 2, 3);
+    const geometry = new THREE.TorusKnotGeometry(compact ? 1.22 : 1.48, compact ? .37 : .44, compact ? 72 : 112, compact ? 10 : 16, 2, 3);
     const material = new THREE.MeshPhysicalMaterial({
       color: 0xeaf4ff,
       roughness: .08,
@@ -342,21 +400,21 @@ async function initCrystal() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
     let frame;
+    let lastFrame = 0;
     const clock = new THREE.Clock();
-    function render() {
+    function render(timestamp = 0) {
+      frame = requestAnimationFrame(render);
+      if (document.hidden || homeExperience?.classList.contains("is-hidden") || timestamp - lastFrame < 33) return;
+      lastFrame = timestamp;
       const elapsed = clock.getElapsedTime();
       crystal.rotation.y = elapsed * .065;
       crystal.rotation.x = .4 + Math.sin(elapsed * .21) * .12;
       crystal.rotation.z = .24 + Math.cos(elapsed * .16) * .08;
       crystal.position.y = (compact ? .35 : .05) + Math.sin(elapsed * .28) * .08;
       renderer.render(scene, camera);
-      frame = requestAnimationFrame(render);
     }
     render();
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) cancelAnimationFrame(frame);
-      else render();
-    });
+    window.addEventListener("pagehide", () => cancelAnimationFrame(frame), { once: true });
   } catch (error) {
     console.warn("GTAI crystal fallback active", error);
   }
@@ -364,4 +422,4 @@ async function initCrystal() {
 
 applyLanguage();
 updateSoundUI();
-initCrystal();
+if (page === "home" && unlocked) scheduleCrystal();

@@ -44,9 +44,9 @@ const server = http.createServer((request, response) => {
     }
 
     const extension = path.extname(filePath).toLowerCase();
-    const cacheControl = extension === ".html"
+    const cacheControl = extension === ".html" || extension === ".js" || extension === ".css"
       ? "no-cache"
-      : "public, max-age=604800, immutable";
+      : "public, max-age=86400";
 
     response.writeHead(200, {
       "Content-Type": contentTypes[extension] || "application/octet-stream",

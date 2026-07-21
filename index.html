@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260722-2">
 </head>
 <body data-page="home">
   <div class="noise" aria-hidden="true"></div>
@@ -44,7 +44,10 @@
   <div class="site-shell" id="siteShell" inert>
     <header class="site-header">
       <a class="brand glitch-small" href="index.html" aria-label="GTAI home" data-text="GTAI">GTAI</a>
-      <p class="header-tag" data-i18n="tagline">Next-Generation AI Talents</p>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <button class="nav-link is-active" id="homeNav" type="button" data-i18n="home">Home</button>
+        <button class="nav-link" id="talentsNav" type="button" data-i18n="talents">Talents</button>
+      </nav>
       <div class="header-tools">
         <button class="text-button" id="langToggle" type="button" aria-label="Switch language">繁</button>
         <button class="sound-button" id="soundToggle" type="button" aria-label="Mute sound">
@@ -54,19 +57,30 @@
       </div>
     </header>
 
-    <main class="talent-stage" aria-roledescription="carousel" aria-label="GTAI talents">
-      <canvas id="crystalCanvas" aria-hidden="true"></canvas>
+    <main>
+      <section class="home-experience" id="homeExperience" aria-labelledby="homeTitle">
+        <canvas id="crystalCanvas" aria-hidden="true"></canvas>
+        <div class="home-crystal-fallback" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="grid-plane" aria-hidden="true"></div>
+        <p class="home-edition micro">GTAI / PRIVATE EDITION 001</p>
+        <h1 id="homeTitle" class="home-title"><span data-i18n="homeLineOne">The new faces</span><em data-i18n="homeLineTwo">of imagination.</em></h1>
+        <p class="home-manifesto" data-i18n="homeManifesto">An independent roster of AI talents built for fashion, culture and the next visual era.</p>
+        <button class="roster-entry" id="rosterEntry" type="button"><span data-i18n="meetTalents">Meet the talents</span><b aria-hidden="true">→</b></button>
+        <div class="home-coordinates" aria-hidden="true"><span>22.3193° N</span><span>114.1694° E</span><span>LIVE / 05 TALENTS</span></div>
+      </section>
+
+      <section class="talent-stage" id="talentStage" aria-roledescription="carousel" aria-label="GTAI talents" aria-hidden="true" inert>
       <div class="grid-plane" aria-hidden="true"></div>
-      <div class="glass-fragment fragment-a" aria-hidden="true"></div>
-      <div class="glass-fragment fragment-b" aria-hidden="true"></div>
+      <div class="talent-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
 
       <div class="talent-panels" id="talentPanels">
         <article class="talent-panel is-active" data-index="0" style="--accent:#315dff;--ink:#10246b;">
           <div class="talent-index"><span>01</span><i></i><span>05</span></div>
           <p class="talent-kicker">AI TALENT / PHOTOGRAPHER / LIFESTYLE</p>
           <h2 class="talent-name"><span>MAR</span><em>IO</em></h2>
-          <figure class="talent-figure portrait-cutout mario-figure">
-            <img src="assets/mario-hero.png" alt="Mario in a monochrome studio portrait" fetchpriority="high">
+          <figure class="talent-figure mario-figure">
+            <img data-src="assets/mario-hero.png" alt="Mario in a monochrome studio portrait" decoding="async">
+            <figcaption>MARIO / PORTRAIT 001</figcaption>
           </figure>
           <div class="talent-meta">
             <p data-i18n="marioLine">Soft-luxury city life through a photographer's eye.</p>
@@ -79,8 +93,9 @@
           <div class="talent-index"><span>02</span><i></i><span>05</span></div>
           <p class="talent-kicker">AI TALENT / FASHION / CITY CULTURE</p>
           <h2 class="talent-name"><span>NO</span><em>AH</em></h2>
-          <figure class="talent-figure portrait-cutout noah-figure">
-            <img src="assets/noah-hero.png" alt="Noah in a clean editorial portrait" loading="eager">
+          <figure class="talent-figure noah-figure">
+            <img data-src="assets/noah-hero.png" alt="Noah in a clean editorial portrait" loading="lazy" decoding="async">
+            <figcaption>NOAH / PORTRAIT 002</figcaption>
           </figure>
           <div class="talent-meta">
             <p data-i18n="noahLine">Contemporary style with an understated cinematic edge.</p>
@@ -93,8 +108,9 @@
           <div class="talent-index"><span>03</span><i></i><span>05</span></div>
           <p class="talent-kicker">AI TALENT / BEAUTY / WELLNESS</p>
           <h2 class="talent-name ooona-name"><span>OOO</span><em>NA</em></h2>
-          <figure class="talent-figure portrait-cutout ooona-figure">
-            <img src="assets/ooona-hero.png" alt="Ooona in a soft beauty portrait" loading="eager">
+          <figure class="talent-figure ooona-figure">
+            <img data-src="assets/ooona-hero.png" alt="Ooona in a soft beauty portrait" loading="lazy" decoding="async">
+            <figcaption>OOONA / PORTRAIT 003</figcaption>
           </figure>
           <div class="talent-meta">
             <p data-i18n="ooonaLine">Soft-focus beauty, wellness and a playful digital spirit.</p>
@@ -128,9 +144,10 @@
         <button id="nextTalent" type="button" aria-label="Next talent"><span>→</span></button>
       </nav>
       <p class="track-label" id="trackLabel">TRACK 01 / CRYSTAL STATIC</p>
+      </section>
     </main>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=20260722-2"></script>
 </body>
 </html>
