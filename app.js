@@ -131,15 +131,13 @@ document.querySelector("#langToggle")?.addEventListener("click", () => {
   applyLanguage();
 });
 
-/* Original procedural ambient loops for the prototype. */
+/* Real music files replace the old Web Audio oscillator prototype. */
 const soundTracks = [
-  { name: "CRYSTAL STATIC", notes: [65.41, 98, 130.81], speed: .035 },
-  { name: "WHITE SIGNAL", notes: [73.42, 110, 146.83], speed: .028 },
-  { name: "GLASS MEMORY", notes: [55, 82.41, 123.47], speed: .042 }
+  { name: "CITY IN THE RAIN", artist: "SP&AI MUSIC", src: "assets/audio/city-in-the-rain.mp3" },
+  { name: "ART OF SILENCE", artist: "UNIQ", src: "assets/audio/art-of-silence.mp3" },
+  { name: "HYPNOTIC AMBIENT", artist: "MUSICLM", src: "assets/audio/hypnotic-ambient.mp3" }
 ];
-let audioContext;
-let masterGain;
-let soundNodes = [];
+let ambientAudio;
 let soundOn = sessionStorage.getItem("gtai-sound") !== "off";
 let trackIndex = Number(sessionStorage.getItem("gtai-track"));
 if (!Number.isInteger(trackIndex) || trackIndex < 0 || trackIndex >= soundTracks.length) {
@@ -149,39 +147,28 @@ if (!Number.isInteger(trackIndex) || trackIndex < 0 || trackIndex >= soundTracks
 
 function startAmbient() {
   if (!soundOn) return;
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    masterGain = audioContext.createGain();
-    masterGain.gain.value = 0.026;
-    masterGain.connect(audioContext.destination);
-    const track = soundTracks[trackIndex];
-    track.notes.forEach((frequency, index) => {
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      const filter = audioContext.createBiquadFilter();
-      const lfo = audioContext.createOscillator();
-      const lfoGain = audioContext.createGain();
-      oscillator.type = index === 0 ? "sine" : "triangle";
-      oscillator.frequency.value = frequency;
-      gain.gain.value = index === 0 ? .42 : .18;
-      filter.type = "lowpass";
-      filter.frequency.value = 650 + index * 260;
-      lfo.frequency.value = track.speed * (index + 1);
-      lfoGain.gain.value = 3 + index * 2;
-      lfo.connect(lfoGain).connect(oscillator.detune);
-      oscillator.connect(filter).connect(gain).connect(masterGain);
-      oscillator.start();
-      lfo.start();
-      soundNodes.push(oscillator, gain, filter, lfo, lfoGain);
-    });
+  if (!ambientAudio) {
+    ambientAudio = new Audio(soundTracks[trackIndex].src);
+    ambientAudio.loop = true;
+    ambientAudio.preload = "metadata";
+    ambientAudio.volume = 0.16;
+    const savedTime = Number(sessionStorage.getItem("gtai-track-time"));
+    if (Number.isFinite(savedTime) && savedTime > 0) {
+      ambientAudio.addEventListener("loadedmetadata", () => {
+        ambientAudio.currentTime = savedTime % Math.max(ambientAudio.duration, 1);
+      }, { once: true });
+    }
   }
-  audioContext.resume();
-  if (masterGain) masterGain.gain.setTargetAtTime(.026, audioContext.currentTime, .45);
+  ambientAudio.play().catch(() => {
+    soundOn = false;
+    sessionStorage.setItem("gtai-sound", "off");
+    updateSoundUI();
+  });
   updateSoundUI();
 }
 
 function stopAmbient() {
-  if (masterGain && audioContext) masterGain.gain.setTargetAtTime(0, audioContext.currentTime, .18);
+  ambientAudio?.pause();
   updateSoundUI();
 }
 
@@ -193,8 +180,15 @@ function updateSoundUI() {
   button.setAttribute("aria-label", soundOn ? "Mute sound" : "Play sound");
   label.textContent = soundOn ? "SOUND ON" : "SOUND OFF";
   const trackLabel = document.querySelector("#trackLabel");
-  if (trackLabel) trackLabel.textContent = `TRACK 0${trackIndex + 1} / ${soundTracks[trackIndex].name}`;
+  if (trackLabel) {
+    const track = soundTracks[trackIndex];
+    trackLabel.textContent = `TRACK 0${trackIndex + 1} / ${track.name} · ${track.artist}`;
+  }
 }
+
+window.addEventListener("pagehide", () => {
+  if (ambientAudio) sessionStorage.setItem("gtai-track-time", String(ambientAudio.currentTime));
+});
 
 document.querySelector("#soundToggle")?.addEventListener("click", () => {
   soundOn = !soundOn;

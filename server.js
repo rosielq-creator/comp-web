@@ -9,6 +9,9 @@ const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
+  ".mp3": "audio/mpeg",
+  ".ogg": "audio/ogg",
+  ".wav": "audio/wav",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".png": "image/png",
@@ -48,12 +51,33 @@ const server = http.createServer((request, response) => {
       ? "no-cache"
       : "public, max-age=86400";
 
-    response.writeHead(200, {
+    const headers = {
       "Content-Type": contentTypes[extension] || "application/octet-stream",
       "Cache-Control": cacheControl,
       "X-Content-Type-Options": "nosniff",
       "X-Robots-Tag": "noindex, nofollow, noarchive"
-    });
+    };
+
+    if (extension === ".mp3" && request.headers.range) {
+      const [startText, endText] = request.headers.range.replace("bytes=", "").split("-");
+      const start = Number(startText) || 0;
+      const end = Math.min(Number(endText) || stats.size - 1, stats.size - 1);
+      if (start > end || start >= stats.size) {
+        response.writeHead(416, { "Content-Range": `bytes */${stats.size}` });
+        response.end();
+        return;
+      }
+      response.writeHead(206, {
+        ...headers,
+        "Accept-Ranges": "bytes",
+        "Content-Range": `bytes ${start}-${end}/${stats.size}`,
+        "Content-Length": end - start + 1
+      });
+      fs.createReadStream(filePath, { start, end }).pipe(response);
+      return;
+    }
+
+    response.writeHead(200, { ...headers, "Content-Length": stats.size });
     fs.createReadStream(filePath).pipe(response);
   });
 });
