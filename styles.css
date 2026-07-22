@@ -75,7 +75,7 @@ img { display: block; max-width: 100%; }
 .gate-endorsement { margin-top: 1.55rem; padding-left: 0; border-left: 0; }
 .gate-endorsement img { width: 112px; }
 .header-nav { display: flex; justify-self: center; align-items: center; gap: 24px; }
-.nav-link { position: relative; min-height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; font: 700 .58rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.nav-link { position: relative; display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; cursor: pointer; font: 700 .58rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
 .nav-link::after { content: ""; position: absolute; right: 0; bottom: 8px; left: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
 .nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); transform-origin: left; }
 .header-tools { display: flex; justify-self: end; align-items: center; gap: 22px; }
