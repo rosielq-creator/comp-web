@@ -1478,3 +1478,105 @@ textarea { font-family: var(--sans); }
   .work-play-toggle { width: 29px; height: 29px; }
   .work-time { min-width: 62px; font-size: .52rem; }
 }
+
+/* Placeholder artist signal: ranking order is visual-only until live data is connected. */
+.toy-rank {
+  position: absolute;
+  right: -2px;
+  bottom: 13%;
+  z-index: 9;
+  display: grid;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 5px;
+  place-items: center;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  color: var(--paper-bright);
+  background: var(--ink);
+  box-shadow: 4px 5px 0 rgba(44, 190, 112, .9);
+  font: 750 .58rem/1 var(--sans);
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+
+.toy-champion-flag {
+  position: absolute;
+  top: 2%;
+  left: 69%;
+  z-index: 8;
+  width: 78px;
+  height: 112px;
+  transform: rotate(7deg);
+  transform-origin: 8px 100%;
+  pointer-events: none;
+  animation: championFlagLift 4.6s var(--ease-out) infinite;
+}
+
+.toy-champion-flag i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 1px 0 0 rgba(255,255,255,.34);
+}
+
+.toy-champion-flag b {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  display: grid;
+  width: 68px;
+  min-height: 45px;
+  padding: 7px 6px;
+  place-items: center;
+  color: #062f1d;
+  background: #52d58c;
+  clip-path: polygon(0 0, 100% 5%, 86% 51%, 100% 96%, 0 100%);
+  font: 800 .46rem/1.05 var(--sans);
+  letter-spacing: .08em;
+  text-align: center;
+  transform-origin: 0 50%;
+  animation: championFlagWave 1.7s ease-in-out infinite alternate;
+}
+
+@keyframes championFlagLift {
+  0%, 64%, 100% { transform: translateY(12px) rotate(4deg); }
+  72%, 88% { transform: translateY(-8px) rotate(9deg); }
+}
+
+@keyframes championFlagWave {
+  from { transform: perspective(120px) rotateY(-7deg) skewY(-1deg); }
+  to { transform: perspective(120px) rotateY(10deg) skewY(2deg); }
+}
+
+@media (max-width: 700px) {
+  .toy-rank {
+    right: -4px;
+    bottom: 10%;
+    min-width: 27px;
+    min-height: 27px;
+    font-size: .46rem;
+    box-shadow: 3px 3px 0 rgba(44, 190, 112, .9);
+  }
+  .toy-champion-flag {
+    top: 3%;
+    left: 66%;
+    width: 58px;
+    height: 86px;
+  }
+  .toy-champion-flag b {
+    width: 52px;
+    min-height: 36px;
+    padding: 5px 4px;
+    font-size: .36rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toy-champion-flag,
+  .toy-champion-flag b { animation: none; }
+}
