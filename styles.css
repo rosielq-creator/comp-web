@@ -1390,7 +1390,8 @@ textarea { font-family: var(--sans); }
 }
 
 .work-card img,
-.work-card video {
+.work-card video,
+.work-card .work-video-embed {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1401,6 +1402,9 @@ textarea { font-family: var(--sans); }
 }
 
 .work-card video { background: #11130f; }
+.work-video-embed { border: 0; background: #11130f; }
+.work-card:has(.work-video-embed) h3 { top: 3.2rem; bottom: auto; pointer-events: none; }
+.work-card:has(.work-video-embed) > span { pointer-events: none; }
 
 .work-audio-toggle {
   position: absolute;
@@ -1989,6 +1993,130 @@ textarea { font-family: var(--sans); }
 @media (prefers-reduced-motion: reduce) {
   .profile-wordmark { animation: none !important; transform: translate3d(-2%, 0, 0); }
   .toy-orbit-device { filter: none; }
+}
+
+/* 2026-07-22 / Artist disclosure, crew route and verified editorial post card. */
+.artist-nav-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.artist-menu-trigger { padding-right: 14px; }
+.artist-menu-toggle {
+  width: 26px;
+  min-width: 26px;
+  height: 44px;
+  margin-left: -14px;
+  padding: 0 0 2px;
+  border: 0;
+  color: currentColor;
+  background: transparent;
+  font: 700 .72rem/1 var(--sans);
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+.artist-dropdown {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 50%;
+  z-index: 40;
+  display: grid;
+  width: max-content;
+  min-width: 154px;
+  padding: 8px;
+  border: 1px solid rgba(17, 17, 17, .22);
+  background: rgba(247, 248, 242, .96);
+  box-shadow: 0 16px 42px rgba(16, 31, 23, .14);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 150ms ease, transform 150ms ease, visibility 150ms ease;
+}
+.artist-dropdown a,
+.artist-dropdown button {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  padding: 0 11px;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font: 650 .67rem/1 var(--sans);
+  letter-spacing: .075em;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.artist-dropdown a:hover,
+.artist-dropdown button:hover,
+.artist-dropdown a:focus-visible,
+.artist-dropdown button:focus-visible { color: #fff; background: var(--gt-green-dark); }
+.artist-nav-menu:hover .artist-dropdown,
+.artist-nav-menu:focus-within .artist-dropdown,
+.artist-nav-menu.is-open .artist-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.artist-nav-menu.is-open .artist-menu-toggle { transform: rotate(180deg); }
+
+.crew-stage { background: #e9f4ec; }
+.crew-stage-inner { display: grid; align-content: center; }
+.crew-stage .info-stage-heading { width: 100%; }
+
+.work-grid .work-card:nth-child(n) { grid-column: span 4; }
+.work-grid .work-card:nth-child(1),
+.work-grid .work-card:nth-child(5),
+.work-grid .work-card:nth-child(9) { grid-column: span 8; }
+.work-grid .work-card:nth-child(2),
+.work-grid .work-card:nth-child(6) { grid-column: span 4; }
+
+.top-content-card {
+  grid-template-columns: minmax(220px, .82fr) minmax(180px, .62fr) minmax(400px, 1.45fr) minmax(180px, .55fr);
+}
+.top-content-cover { min-height: 420px; margin: 0; overflow: hidden; border-right: 1px solid rgba(17,17,17,.24); }
+.top-content-cover img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
+.top-content-copy { min-height: 240px; }
+.top-content-link {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 44px;
+  align-items: center;
+  padding: .72rem .9rem;
+  border: 1px solid #111;
+  color: #111;
+  font: 700 .66rem/1 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: color 160ms ease, background 160ms ease;
+}
+.top-content-link:hover,
+.top-content-link:focus-visible { color: #fff; background: #111; }
+
+@media (max-width: 1100px) {
+  .header-nav { gap: clamp(8px, 1.1vw, 16px); }
+  .nav-link { font-size: .58rem; }
+  .top-content-card { grid-template-columns: minmax(220px, .8fr) 1.35fr; }
+  .top-content-cover { grid-row: span 2; }
+  .top-content-copy { border-bottom: 1px solid rgba(17,17,17,.24); }
+  .top-content-rate { grid-column: 2; min-height: 180px; }
+}
+
+@media (max-width: 760px) {
+  .artist-menu-toggle { width: 30px; min-width: 30px; }
+  .artist-dropdown { position: fixed; top: 78px; right: 14px; left: auto; transform: translateY(8px); }
+  .artist-nav-menu:hover .artist-dropdown,
+  .artist-nav-menu:focus-within .artist-dropdown,
+  .artist-nav-menu.is-open .artist-dropdown { transform: translateY(0); }
+  .work-grid .work-card:nth-child(n) { grid-column: auto; }
+  .top-content-card { grid-template-columns: 1fr; }
+  .top-content-cover { grid-row: auto; min-height: 0; aspect-ratio: 3 / 4; border-right: 0; border-bottom: 1px solid rgba(17,17,17,.24); }
+  .top-content-copy { min-height: 150px; }
+  .top-content-rate { grid-column: auto; }
 }
 
 /* 2026-07-22 / Keep ranking markers in the open pockets around the mobile.

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260722-19">
+  <link rel="stylesheet" href="styles.css?v=20260722-20">
 </head>
 <body data-page="home">
   <div class="noise" aria-hidden="true"></div>
@@ -54,8 +54,16 @@
         <button class="nav-link is-active" type="button" data-view="home" data-i18n="home">Home</button>
         <a class="nav-link nav-external" href="https://gtomato.com/" target="_blank" rel="noreferrer" data-i18n="companyNav">Company</a>
         <button class="nav-link" type="button" data-view="services" data-i18n="servicesNav">Services</button>
-        <button class="nav-link" type="button" data-view="artists" data-i18n="artistsNav">Artists</button>
+        <div class="artist-nav-menu">
+          <button class="nav-link artist-menu-trigger" type="button" data-view="artists" data-i18n="artistsNav">Artists</button>
+          <button class="artist-menu-toggle" type="button" aria-expanded="false" aria-label="Open artist list">⌄</button>
+          <div class="artist-dropdown" aria-label="Artist profiles">
+            <button type="button" data-view="artists" data-i18n="allArtists">All artists</button>
+            <a href="mario.html">Mario</a><a href="ooona.html">Ooona</a><a href="noah.html">Noah</a><a href="maya.html">Maya</a><a href="amber.html">Amber</a>
+          </div>
+        </div>
         <button class="nav-link" type="button" data-view="work" data-i18n="workNav">Work</button>
+        <button class="nav-link" type="button" data-view="crew" data-i18n="crewNav">Crew</button>
       </nav>
       <div class="header-tools">
         <button class="text-button" id="langToggle" type="button" aria-label="Switch language">繁</button>
@@ -243,35 +251,57 @@
           </header>
           <div class="work-grid" aria-label="Selected brand work">
             <article class="work-card work-card-a">
-              <video data-work-video src="assets/work/video/bowtie.mp4" poster="assets/work/bowtie.png" muted loop playsinline preload="metadata" aria-label="Bowtie AI production project video"></video>
-              <span>PROJECT / 01</span><button class="work-audio-toggle" type="button" aria-label="Play Bowtie project with sound">SOUND OFF</button><h3>BOWTIE</h3>
+              <iframe class="work-video-embed" src="https://www.youtube-nocookie.com/embed/o_pLyf4Htcc?controls=1&amp;rel=0&amp;playsinline=1&amp;enablejsapi=1" title="Octopus AI production project video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <span>PROJECT / 01</span><h3>OCTOPUS</h3>
             </article>
             <article class="work-card work-card-b">
-              <video data-work-video src="assets/work/video/dah-sing.mp4" poster="assets/work/dah-sing.png" muted loop playsinline preload="metadata" aria-label="Dah Sing Bank digital human project video"></video>
-              <span>PROJECT / 02</span><button class="work-audio-toggle" type="button" aria-label="Play Dah Sing project with sound">SOUND OFF</button><h3>DAH SING</h3>
+              <video data-work-video src="assets/work/video/mgm-01.mp4" poster="assets/work/mgm-01.jpg" muted loop playsinline preload="metadata" aria-label="MGM Spa project video 1"></video>
+              <span>PROJECT / 02</span><button class="work-audio-toggle" type="button" aria-label="Play MGM project 1 with sound">SOUND OFF</button><h3>MGM 01</h3>
             </article>
             <article class="work-card work-card-c">
-              <video data-work-video src="assets/work/video/kicks-crew.mp4" poster="assets/work/kicks-crew.png" muted loop playsinline preload="metadata" aria-label="Kicks Crew AI production project video"></video>
-              <span>PROJECT / 03</span><button class="work-audio-toggle" type="button" aria-label="Play Kicks Crew project with sound">SOUND OFF</button><h3>KICKS CREW</h3>
+              <video data-work-video src="assets/work/video/mgm-02.mp4" poster="assets/work/mgm-02.jpg" muted loop playsinline preload="metadata" aria-label="MGM project video 2"></video>
+              <span>PROJECT / 03</span><button class="work-audio-toggle" type="button" aria-label="Play MGM project 2 with sound">SOUND OFF</button><h3>MGM 02</h3>
             </article>
             <article class="work-card work-card-d">
-              <video data-work-video src="assets/work/video/koisea.mp4" poster="assets/work/koisea.png" muted loop playsinline preload="metadata" aria-label="Koisea AI fashion production project video"></video>
-              <span>PROJECT / 04</span><button class="work-audio-toggle" type="button" aria-label="Play Koisea project with sound">SOUND OFF</button><h3>KOISEA</h3>
+              <video data-work-video src="assets/work/video/mgm-03.mp4" poster="assets/work/mgm-03.jpg" muted loop playsinline preload="metadata" aria-label="MGM project video 3"></video>
+              <span>PROJECT / 04</span><button class="work-audio-toggle" type="button" aria-label="Play MGM project 3 with sound">SOUND OFF</button><h3>MGM 03</h3>
             </article>
             <article class="work-card work-card-e">
-              <video data-work-video src="assets/work/video/grams28.mp4" poster="assets/work/grams28.png" muted loop playsinline preload="metadata" aria-label="Grams28 AI campaign project video"></video>
-              <span>PROJECT / 05</span><button class="work-audio-toggle" type="button" aria-label="Play Grams28 project with sound">SOUND OFF</button><h3>GRAMS28</h3>
+              <video data-work-video src="assets/work/video/grams-color.mp4" poster="assets/work/grams-color.jpg" muted loop playsinline preload="metadata" aria-label="GRAMS 28 color project video"></video>
+              <span>PROJECT / 05</span><button class="work-audio-toggle" type="button" aria-label="Play GRAMS color project with sound">SOUND OFF</button><h3>GRAMS COLOR</h3>
             </article>
             <article class="work-card work-card-f">
-              <video data-work-video src="assets/work/video/neopets.mp4" poster="assets/work/neopets.png" muted loop playsinline preload="metadata" aria-label="Neopets AI production project video"></video>
-              <span>PROJECT / 06</span><button class="work-audio-toggle" type="button" aria-label="Play Neopets project with sound">SOUND OFF</button><h3>NEOPETS</h3>
+              <iframe class="work-video-embed" src="https://www.youtube-nocookie.com/embed/gd0juNF6eUM?controls=1&amp;rel=0&amp;playsinline=1&amp;enablejsapi=1" title="GRAMS 28 black and white project video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <span>PROJECT / 06</span><h3>GRAMS B&amp;W</h3>
+            </article>
+            <article class="work-card work-card-g">
+              <iframe class="work-video-embed" src="https://www.youtube-nocookie.com/embed/8m-_UJayJKE?controls=1&amp;rel=0&amp;playsinline=1&amp;enablejsapi=1" title="Koisea Japanese Landscape project video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <span>PROJECT / 07</span><h3>KOISEA 01</h3>
+            </article>
+            <article class="work-card work-card-h">
+              <video data-work-video src="assets/work/video/koisea-underground.mp4" poster="assets/work/koisea-underground.jpg" muted loop playsinline preload="metadata" aria-label="Koisea Underground Culture project video"></video>
+              <span>PROJECT / 08</span><button class="work-audio-toggle" type="button" aria-label="Play Koisea underground project with sound">SOUND OFF</button><h3>KOISEA 02</h3>
+            </article>
+            <article class="work-card work-card-i">
+              <iframe class="work-video-embed" src="https://www.youtube-nocookie.com/embed/KNbBGw7SaWo?controls=1&amp;rel=0&amp;playsinline=1&amp;enablejsapi=1" title="Takoyaki project video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <span>PROJECT / 09</span><h3>TAKOYAKI</h3>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section class="information-stage crew-stage" id="crewStage" aria-labelledby="crewTitle" aria-hidden="true" inert>
+        <div class="info-stage-inner crew-stage-inner">
+          <header class="info-stage-heading">
+            <p class="micro">GTAI / THE PEOPLE BEHIND THE WORK</p>
+            <h2 id="crewTitle" data-i18n="crewHeadline">Meet the crew.<br><em>Profiles coming next.</em></h2>
+            <p data-i18n="crewIntro">The crew directory is ready for approved names, roles, portraits and biographies.</p>
+          </header>
         </div>
       </section>
     </main>
   </div>
 
-  <script type="module" src="app.js?v=20260722-19"></script>
+  <script type="module" src="app.js?v=20260722-20"></script>
 </body>
 </html>

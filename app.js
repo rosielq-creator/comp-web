@@ -9,7 +9,12 @@ const translations = {
     companyNav: "Company",
     servicesNav: "Services",
     artistsNav: "Artists",
+    allArtists: "All artists",
     workNav: "Work",
+    crewNav: "Crew",
+    crewHeadline: "Meet the crew.<br><em>Profiles coming next.</em>",
+    crewIntro: "The crew directory is ready for approved names, roles, portraits and biographies.",
+    profileSlogan: "IMAGINED WITH AI. MADE TO MOVE PEOPLE.",
     homeLineOne: "AI PRODUCTION",
     homeLineTwo: "",
     homeManifesto: "An independent roster of AI talents built for fashion, culture and the next visual era.",
@@ -47,6 +52,8 @@ const translations = {
     height: "Height",
     focus: "Focus",
     platforms: "Platforms",
+    guangdongChina: "Guangdong, China",
+    marioFocusValue: "Lifestyle / Fashion / Sport / Travel",
     socialData: "Social data",
     signalHeadline: "Audience signal,<br><em>made legible.</em>",
     sampleNote: "Prototype data — not live metrics",
@@ -96,7 +103,12 @@ const translations = {
     companyNav: "公司",
     servicesNav: "服務",
     artistsNav: "藝人",
+    allArtists: "所有藝人",
     workNav: "作品",
+    crewNav: "團隊",
+    crewHeadline: "認識幕後團隊。<br><em>成員檔案即將登場。</em>",
+    crewIntro: "團隊名錄已準備好加入經確認的姓名、職位、照片與簡介。",
+    profileSlogan: "由 AI 構想，為打動人而生。",
     homeLineOne: "AI PRODUCTION",
     homeLineTwo: "",
     homeManifesto: "一組面向時尚、文化與下一個視覺時代的獨立 AI 藝人陣容。",
@@ -134,6 +146,8 @@ const translations = {
     height: "身高",
     focus: "內容領域",
     platforms: "平台",
+    guangdongChina: "中國廣東",
+    marioFocusValue: "生活風格／時尚／運動／旅遊",
     socialData: "社交數據",
     signalHeadline: "讓受眾訊號，<br><em>變得清晰可讀。</em>",
     sampleNote: "原型資料 — 非即時數據",
@@ -178,7 +192,7 @@ const translations = {
   }
 };
 
-const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether", "servicesHeadline", "workHeadline"]);
+const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether", "servicesHeadline", "workHeadline", "crewHeadline"]);
 let language = localStorage.getItem("gtai-language") || (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
 
 function applyLanguage() {
@@ -194,6 +208,7 @@ function applyLanguage() {
   if (languageButton) languageButton.textContent = language === "en" ? "繁" : "EN";
   localStorage.setItem("gtai-language", language);
   updateSoundUI();
+  window.dispatchEvent(new CustomEvent("gtai:languagechange", { detail: { language } }));
 }
 
 document.querySelector("#langToggle")?.addEventListener("click", () => {
@@ -586,8 +601,10 @@ const homeExperience = document.querySelector("#homeExperience");
 const talentStage = document.querySelector("#talentStage");
 const servicesStage = document.querySelector("#servicesStage");
 const workStage = document.querySelector("#workStage");
+const crewStage = document.querySelector("#crewStage");
 const viewNavButtons = [...document.querySelectorAll("[data-view]")];
 const workVideos = [...document.querySelectorAll("[data-work-video]")];
+const workEmbeds = [...document.querySelectorAll(".work-video-embed")];
 const workMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const mainSiteHeader = document.querySelector(".site-header:not(.profile-header)");
 
@@ -626,6 +643,9 @@ function syncWorkVideoPlayback() {
     const shouldPause = !workIsActive || video.dataset.inView !== "true" || document.hidden;
     if (shouldPause) video.pause();
   });
+  if (!workIsActive) {
+    workEmbeds.forEach((embed) => embed.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: [] }), "https://www.youtube-nocookie.com"));
+  }
 }
 
 function formatWorkTime(value) {
@@ -748,7 +768,8 @@ function showView(view) {
     ["home", homeExperience],
     ["artists", talentStage],
     ["services", servicesStage],
-    ["work", workStage]
+    ["work", workStage],
+    ["crew", crewStage]
   ];
   stages.forEach(([name, stage]) => {
     const isCurrent = name === normalizedView;
@@ -771,8 +792,35 @@ document.querySelector("#rosterEntry")?.addEventListener("click", () => showView
 viewNavButtons.forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
 if (page === "home") {
   const initialView = location.hash.slice(1);
-  if (["artists", "talents", "services", "work"].includes(initialView)) showView(initialView);
+  if (["artists", "talents", "services", "work", "crew"].includes(initialView)) showView(initialView);
 }
+
+/* ARTISTS remains a direct route to the carousel while the adjacent chevron
+   exposes individual profiles. This avoids the ambiguous first-tap behavior
+   of a single control that is both a link and a disclosure. */
+document.querySelectorAll(".artist-nav-menu").forEach((menu) => {
+  const toggle = menu.querySelector(".artist-menu-toggle");
+  const close = () => {
+    menu.classList.remove("is-open");
+    toggle?.setAttribute("aria-expanded", "false");
+  };
+  toggle?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const open = !menu.classList.contains("is-open");
+    document.querySelectorAll(".artist-nav-menu.is-open").forEach((item) => item.classList.remove("is-open"));
+    menu.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+  menu.querySelectorAll(".artist-dropdown a, .artist-dropdown button").forEach((item) => item.addEventListener("click", close));
+});
+document.addEventListener("pointerdown", (event) => {
+  document.querySelectorAll(".artist-nav-menu.is-open").forEach((menu) => {
+    if (!menu.contains(event.target)) {
+      menu.classList.remove("is-open");
+      menu.querySelector(".artist-menu-toggle")?.setAttribute("aria-expanded", "false");
+    }
+  });
+});
 
 function showPanel(nextIndex, direction) {
   if (!panels.length || changing || nextIndex === currentPanel) return;
