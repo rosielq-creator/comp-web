@@ -3,8 +3,9 @@ const profiles = {
     name: "NOAH",
     label: "Noah Jae",
     images: [
-      ["assets/profiles/noah/hero.png", "Noah in a clean editorial portrait"],
-      ["assets/profiles/noah/toy.png", "Noah collectible figure cutout"]
+      ["assets/profiles/noah/black-portrait.png", "Noah in a black portrait"],
+      ["assets/profiles/noah/apple-portrait.jpg", "Noah holding an apple in a sunlit kitchen"],
+      ["assets/profiles/noah/cafe-portrait.png", "Noah seated in a warm cafe interior"]
     ],
     headline: "An independent eye,<br><em>always in motion.</em>",
     bio: "Noah Jae is a Chinese–Korean fashion and lifestyle creator with a quiet, art-led point of view. His visual world moves through menswear, city culture, travel, photography and considered everyday spaces.",
@@ -37,10 +38,10 @@ const profiles = {
     name: "AMBER",
     label: "Amber Yun",
     images: [
-      ["assets/profiles/amber/street.png", "Amber in a restrained black street look"],
-      ["assets/profiles/amber/gallery.jpg", "Amber at a Los Angeles gallery and music studio"],
-      ["assets/profiles/amber/car.jpg", "Amber in a quiet city car portrait"],
-      ["assets/profiles/amber/sofa.png", "Amber in an editorial interior portrait"]
+      ["assets/profiles/amber/festival-wheel.png", "Amber at a music festival ferris wheel"],
+      ["assets/profiles/amber/night-portrait.png", "Amber in a black evening portrait"],
+      ["assets/profiles/amber/denim-editorial.png", "Amber in an oversized denim editorial look"],
+      ["assets/profiles/amber/festival-stage.png", "Amber at an outdoor music festival"]
     ],
     headline: "Sound in restraint,<br><em>style with intent.</em>",
     bio: "Amber Yun is a Korean-American music producer based in Los Angeles. Her creative identity brings together genre-defying sound, fashion-forward restraint and the quiet rhythm of the city’s studio and cultural scene.",
@@ -55,10 +56,10 @@ const profiles = {
     name: "MAYA",
     label: "Maya",
     images: [
-      ["assets/profiles/maya/palais.png", "Maya in a Paris architectural editorial"],
-      ["assets/profiles/maya/canal-01.jpg", "Maya along a Paris canal"],
-      ["assets/profiles/maya/canal-02.jpg", "Maya Paris lifestyle editorial"],
-      ["assets/profiles/maya/canal-03.jpg", "Maya in a quiet Paris street moment"]
+      ["assets/profiles/maya/street-grey.png", "Maya in a grey street style portrait"],
+      ["assets/profiles/maya/pink-closeup.png", "Maya in a soft pink outdoor portrait"],
+      ["assets/profiles/maya/pink-editorial.png", "Maya in a pink architectural editorial"],
+      ["assets/profiles/maya/black-tailoring.png", "Maya in black tailoring"]
     ],
     headline: "Quiet power,<br><em>framed through culture.</em>",
     bio: "Maya is a high-fashion and art-world digital talent defined by restrained elegance. Her visual direction moves through galleries, museums, architecture and quiet-luxury city spaces without reducing her to a conventional fashion influencer.",
