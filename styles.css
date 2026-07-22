@@ -1381,8 +1381,7 @@ textarea { font-family: var(--sans); }
 }
 
 .work-card:hover .work-video-controls,
-.work-card.is-controls-visible .work-video-controls,
-.work-video-controls:focus-within {
+.work-card:has(.work-video-controls :focus-visible) .work-video-controls {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);

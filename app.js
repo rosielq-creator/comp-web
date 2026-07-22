@@ -616,6 +616,14 @@ workVideos.forEach((video) => {
   const progress = controls.querySelector(".work-progress");
   const time = controls.querySelector(".work-time");
 
+  /* Pointer interaction must never pin the controls open after the cursor
+     leaves. Keyboard focus remains supported until an actual pointer exit. */
+  card.addEventListener("pointerleave", () => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    controls.querySelector(":focus")?.blur();
+    card.classList.remove("is-controls-visible");
+  });
+
   const updatePlayState = () => {
     const isPaused = video.paused;
     playIcon.textContent = isPaused ? "▶" : "Ⅱ";
