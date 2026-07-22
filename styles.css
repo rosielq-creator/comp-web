@@ -63,7 +63,8 @@ img { display: block; max-width: 100%; }
 /* Shared shell */
 .site-shell { min-height: 100svh; opacity: 1; transition: opacity .7s ease; }
 .site-shell[inert] { opacity: 0; pointer-events: none; }
-.site-header { position: fixed; top: 0; left: 0; z-index: 30; display: grid; width: 100%; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 30px; mix-blend-mode: multiply; }
+.site-header { position: fixed; top: 0; left: 0; z-index: 30; display: grid; width: 100%; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 30px; mix-blend-mode: multiply; transform: translate3d(0, 0, 0); transition: transform 220ms var(--ease-out), background-color 180ms ease; will-change: transform; }
+.site-header.is-hidden { transform: translate3d(0, -110%, 0); }
 .brand-lockup { display: flex; width: fit-content; align-items: center; gap: 13px; }
 .brand { position: relative; width: fit-content; font: 400 2.1rem/1 var(--serif); letter-spacing: -.06em; }
 .glitch-small::before { color: var(--gt-green); clip-path: inset(45% 0 36%); transform: translateX(2px); opacity: 0; }

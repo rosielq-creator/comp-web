@@ -548,6 +548,30 @@ const workStage = document.querySelector("#workStage");
 const viewNavButtons = [...document.querySelectorAll("[data-view]")];
 const workVideos = [...document.querySelectorAll("[data-work-video]")];
 const workMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const mainSiteHeader = document.querySelector(".site-header:not(.profile-header)");
+
+/* The information views scroll inside their own fixed-height panels, so the
+   reading-aware header must follow those scrollers rather than window.scrollY. */
+document.querySelectorAll(".information-stage .info-stage-inner").forEach((scroller) => {
+  let lastScrollTop = Math.max(scroller.scrollTop, 0);
+  let scrollFrame = 0;
+
+  scroller.addEventListener("scroll", () => {
+    if (scrollFrame || !scroller.closest(".information-stage")?.classList.contains("is-visible")) return;
+    scrollFrame = requestAnimationFrame(() => {
+      const currentScrollTop = Math.max(scroller.scrollTop, 0);
+      const delta = currentScrollTop - lastScrollTop;
+      if (currentScrollTop <= 24 || delta < -6) mainSiteHeader?.classList.remove("is-hidden");
+      else if (delta > 8 && currentScrollTop > (mainSiteHeader?.offsetHeight || 72)) mainSiteHeader?.classList.add("is-hidden");
+      lastScrollTop = currentScrollTop;
+      scrollFrame = 0;
+    });
+  }, { passive: true });
+
+  scroller.addEventListener("scrollend", () => {
+    lastScrollTop = Math.max(scroller.scrollTop, 0);
+  }, { passive: true });
+});
 
 function syncWorkVideoPlayback() {
   const workIsActive = workStage?.classList.contains("is-visible") && !document.hidden;
@@ -686,6 +710,7 @@ function showView(view) {
     window.setTimeout(() => hydratePanel(panels[(currentPanel + 1) % panels.length]), 500);
   }
   viewNavButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.view === normalizedView));
+  mainSiteHeader?.classList.remove("is-hidden");
   if (page === "home") history.replaceState(null, "", normalizedView === "home" ? location.pathname : `#${normalizedView}`);
   window.requestAnimationFrame(syncWorkVideoPlayback);
 }
