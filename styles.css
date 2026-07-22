@@ -487,7 +487,12 @@ img { display: block; max-width: 100%; }
   .talent-guides { opacity: .82; }
   .talent-guide { width: 56px; height: 98px; }
   .guide-label { display: none; }
-  .guide-noah, .guide-amber { top: 10%; }
+  .guide-mario, .guide-noah, .guide-ooona, .guide-amber, .guide-maya { top: 17%; right: auto; bottom: auto; }
+  .guide-mario { left: 1%; }
+  .guide-noah { left: 21%; }
+  .guide-ooona { left: 41%; }
+  .guide-amber { left: 61%; }
+  .guide-maya { left: 81%; }
   .talent-figure { right: 6vw; width: 82vw; }
   .profile-shot { right: 6vw; width: 84vw; }
   .profile-motion-line { right: 6vw; width: 84vw; }
