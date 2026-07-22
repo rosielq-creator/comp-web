@@ -1904,3 +1904,46 @@ textarea { font-family: var(--sans); }
   .profile-wordmark { animation: none !important; transform: translate3d(-2%, 0, 0); }
   .toy-orbit-device { filter: none; }
 }
+
+/* 2026-07-22 / Keep ranking markers in the open pockets around the mobile.
+   Each marker has its own position so it never sits on a face, prop or letter. */
+.toy-ranking-tree .toy-mario .toy-rank {
+  top: 39%;
+  right: auto;
+  bottom: auto;
+  left: -24px;
+}
+
+.toy-ranking-tree .toy-ooona .toy-rank {
+  top: 54%;
+  right: -38px;
+  bottom: auto;
+}
+
+.toy-ranking-tree .toy-noah .toy-rank {
+  top: 8%;
+  right: auto;
+  bottom: auto;
+  left: -36px;
+}
+
+.toy-ranking-tree .toy-maya .toy-rank {
+  top: 46%;
+  right: -38px;
+  bottom: auto;
+}
+
+.toy-ranking-tree .toy-amber .toy-rank {
+  top: 48%;
+  right: auto;
+  bottom: auto;
+  left: -36px;
+}
+
+@media (max-width: 700px) {
+  .toy-ranking-tree .toy-mario .toy-rank { top: 43%; left: -62px; }
+  .toy-ranking-tree .toy-ooona .toy-rank { top: 60%; right: auto; left: -24px; }
+  .toy-ranking-tree .toy-noah .toy-rank { top: 10%; left: -2px; }
+  .toy-ranking-tree .toy-maya .toy-rank { top: 52%; right: auto; left: -34px; }
+  .toy-ranking-tree .toy-amber .toy-rank { top: 51%; left: -2px; }
+}

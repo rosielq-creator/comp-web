@@ -385,12 +385,17 @@ function initKineticType() {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let bounds = field.getBoundingClientRect();
   const pointer = { x: -1000, y: -1000, active: false };
+  const positionRatio = (element, axis, fallback) => {
+    const mobileKey = `mobile${axis.toUpperCase()}`;
+    const value = window.innerWidth <= 520 ? element.dataset[mobileKey] : null;
+    return Number(value || element.dataset[axis] || fallback);
+  };
   const states = pieces.map((element, index) => ({
     element,
-    x: bounds.width * Number(element.dataset.x || .5),
-    y: reduceMotion ? bounds.height * Number(element.dataset.y || .5) : -90 - index * 34,
-    anchorX: bounds.width * Number(element.dataset.x || .5),
-    floorY: bounds.height * Number(element.dataset.y || .5),
+    x: bounds.width * positionRatio(element, "x", .5),
+    y: reduceMotion ? bounds.height * positionRatio(element, "y", .5) : -90 - index * 34,
+    anchorX: bounds.width * positionRatio(element, "x", .5),
+    floorY: bounds.height * positionRatio(element, "y", .5),
     vx: (index % 2 ? -1 : 1) * (.35 + index * .04),
     vy: 0,
     radius: Math.max(element.offsetWidth, element.offsetHeight) * .48,
@@ -408,8 +413,8 @@ function initKineticType() {
   function resize() {
     bounds = field.getBoundingClientRect();
     states.forEach((state) => {
-      state.anchorX = bounds.width * Number(state.element.dataset.x || .5);
-      state.floorY = bounds.height * Number(state.element.dataset.y || .5);
+      state.anchorX = bounds.width * positionRatio(state.element, "x", .5);
+      state.floorY = bounds.height * positionRatio(state.element, "y", .5);
       state.radius = Math.max(state.element.offsetWidth, state.element.offsetHeight) * .48;
     });
   }
