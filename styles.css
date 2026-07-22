@@ -383,3 +383,123 @@ img { display: block; max-width: 100%; }
   .kinetic-piece { transition: none !important; }
   #crystalCanvas { display: none; }
 }
+
+/* 2026-07-22 / Poch-inspired kinetic roster and editorial cleanup. */
+.talent-guides { position: absolute; inset: 86px 3.5vw 70px; z-index: 9; pointer-events: none; }
+.talent-guide { --guide-accent: var(--gt-green); position: absolute; display: grid; width: clamp(82px, 8vw, 126px); height: clamp(142px, 16vh, 190px); padding: 0; border: 0; background: transparent; cursor: pointer; pointer-events: auto; transform-origin: 50% 100%; animation: guidePatrolA 13s ease-in-out infinite alternate; }
+.talent-guide:nth-child(even) { animation-name: guidePatrolB; animation-duration: 15s; animation-delay: -6s; }
+.talent-guide:nth-child(3) { animation-duration: 17s; animation-delay: -10s; }
+.talent-guide:nth-child(4) { animation-duration: 14s; animation-delay: -3s; }
+.talent-guide:nth-child(5) { animation-duration: 16s; animation-delay: -8s; }
+.guide-mario { left: 8%; bottom: 2%; }
+.guide-noah { left: 25%; top: 5%; --guide-accent: #ff5038; }
+.guide-ooona { right: 8%; bottom: 5%; --guide-accent: #a957ef; }
+.guide-amber { right: 25%; top: 6%; --guide-accent: #00a883; }
+.guide-maya { left: 49%; bottom: 0; --guide-accent: #c99c00; }
+.guide-portrait { position: relative; display: grid; width: 100%; height: 100%; place-items: end center; overflow: hidden; border-bottom: 2px solid var(--guide-accent); filter: drop-shadow(0 13px 12px rgba(0,61,49,.16)); transition: transform 180ms ease, filter 180ms ease; }
+.guide-portrait::after { content: ""; position: absolute; right: 8%; bottom: 0; left: 8%; height: 20%; z-index: -1; border-radius: 50%; background: color-mix(in srgb, var(--guide-accent) 16%, transparent); filter: blur(12px); }
+.guide-portrait img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: saturate(.72) contrast(1.03); }
+.guide-label { position: absolute; bottom: 10%; left: 85%; display: grid; width: max-content; padding: 7px 9px; border: 1px solid color-mix(in srgb, var(--guide-accent) 70%, white); color: var(--ink); background: rgba(251,253,251,.9); opacity: 0; transform: translateX(-8px); transition: opacity 150ms ease, transform 180ms var(--ease-out); }
+.guide-label b, .guide-label small { font: 700 .49rem/1.35 var(--mono); letter-spacing: .11em; }
+.guide-label small { color: var(--guide-accent); font-size: .38rem; }
+.talent-guide:hover .guide-portrait, .talent-guide:focus-visible .guide-portrait { filter: drop-shadow(0 18px 15px rgba(0,61,49,.24)); transform: translateY(-7px) rotate(-1deg); }
+.talent-guide:hover .guide-label, .talent-guide:focus-visible .guide-label { opacity: 1; transform: translateX(0); }
+.talent-guide.is-pending .guide-portrait { align-items: center; border: 1px solid var(--guide-accent); border-radius: 50% 50% 8px 8px; background: linear-gradient(160deg, color-mix(in srgb, var(--guide-accent) 8%, white), transparent), repeating-linear-gradient(90deg, transparent 0 15px, color-mix(in srgb, var(--guide-accent) 12%, transparent) 16px); }
+.talent-guide.is-pending .guide-portrait::before { content: ""; position: absolute; top: 16%; width: 42%; aspect-ratio: .78; border: 1px solid currentColor; border-radius: 50%; opacity: .38; }
+.talent-guide.is-pending .guide-portrait i { margin-bottom: 18%; color: var(--guide-accent); font: 400 clamp(2.5rem, 4vw, 4rem) var(--serif); }
+@keyframes guidePatrolA { 0% { translate: -8px 1px; rotate: -1.5deg; } 45% { translate: 18px -8px; rotate: 1deg; } 100% { translate: 40px 3px; rotate: -1deg; } }
+@keyframes guidePatrolB { 0% { translate: 25px -5px; rotate: 1.2deg; } 50% { translate: -12px 4px; rotate: -1.4deg; } 100% { translate: -35px -9px; rotate: .6deg; } }
+
+/* Talent view: one strong image plate, protected copy, and restrained motion. */
+.talent-panel { overflow: hidden; }
+.talent-panel.is-active .talent-figure,
+.talent-panel.is-active .placeholder-portrait { animation: portraitDrift 8s ease-in-out infinite alternate; }
+.talent-stage.is-visible .talent-objects i { animation: objectHover 5s ease-in-out infinite alternate; }
+.talent-stage.is-visible .talent-objects i:nth-child(2) { animation-delay: -2.2s; animation-duration: 6.2s; }
+.talent-stage.is-visible .talent-objects i:nth-child(3) { animation-delay: -3.4s; animation-duration: 7s; }
+.talent-figure { top: 13%; right: 5vw; width: min(43vw, 650px); height: 72%; transform: none; transition: transform 240ms var(--ease-out); }
+.talent-figure::before { inset: -12px 12px 12px -12px; transform: none; background: color-mix(in srgb, var(--accent) 8%, var(--paper-bright)); }
+.talent-figure img { object-fit: contain; object-position: center bottom; clip-path: none; background: color-mix(in srgb, var(--accent) 4%, var(--paper-bright)); filter: none; }
+.talent-figure::after { right: -2%; bottom: 7%; }
+.mario-figure img, .noah-figure img, .ooona-figure img { object-position: center bottom; }
+.talent-name { top: 38%; text-shadow: none; }
+.talent-index { top: 25%; }
+.talent-meta { bottom: 11%; }
+.profile-link:not(.is-disabled) { overflow: hidden; position: relative; }
+.profile-link:not(.is-disabled)::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--ink); transform: translateX(-102%); transition: transform 220ms var(--ease-out); }
+.profile-link:not(.is-disabled):hover { background: transparent; }
+.profile-link:not(.is-disabled):hover::before { transform: translateX(0); }
+@keyframes portraitDrift { from { translate: 0 0; } to { translate: 0 -8px; } }
+@keyframes objectHover { from { translate: 0 0; rotate: -1deg; } to { translate: 7px -10px; rotate: 2deg; } }
+
+/* Profile keeps the HOME kinetic language and uses uncut portrait plates. */
+.profile-hero { background: radial-gradient(circle at 68% 30%, rgba(0,167,93,.13), transparent 32%), var(--paper); }
+.profile-gallery { transition: transform 240ms var(--ease-out); }
+.profile-shot { top: 12%; right: 5vw; width: min(43vw, 650px); height: 72%; transform: translateX(5%) perspective(1100px) rotateY(8deg) scale(.975); }
+.profile-shot::before { inset: -12px 12px 12px -12px; transform: none; background: rgba(0,167,93,.055); }
+.profile-shot.is-active { transform: translateX(0) perspective(1100px) rotateY(0) scale(1); }
+.profile-shot img { object-fit: contain; object-position: center bottom; clip-path: none; background: rgba(255,255,255,.42); filter: none; }
+.profile-shot.is-active img { animation: profileImageBreathe 7s ease-in-out infinite alternate; }
+.profile-objects i { animation: objectHover 5.4s ease-in-out infinite alternate; }
+.profile-objects i:nth-child(2) { animation-delay: -2s; animation-duration: 6.4s; }
+.profile-objects i:nth-child(3) { animation-delay: -3.5s; animation-duration: 7.3s; }
+.profile-motion-line { position: absolute; right: 5vw; bottom: 14%; z-index: 12; display: flex; width: min(43vw, 650px); align-items: center; gap: 12px; pointer-events: none; }
+.profile-motion-line i { height: 1px; flex: 1; overflow: hidden; background: rgba(0,86,70,.2); }
+.profile-motion-line i::after { content: ""; display: block; width: 30%; height: 100%; background: var(--gt-green); animation: liveScan 2.8s ease-in-out infinite alternate; }
+.profile-motion-line span { font: 700 .45rem var(--mono); letter-spacing: .13em; }
+@keyframes profileImageBreathe { from { transform: scale(1); } to { transform: scale(1.018); } }
+@keyframes liveScan { from { transform: translateX(0); } to { transform: translateX(235%); } }
+
+/* Portfolio: preserve source ratios, sequence cleanly, and never overlap numbering. */
+.portfolio-section { overflow: hidden; }
+.portfolio-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3.5vw, 56px); margin-top: clamp(64px, 8vw, 112px); align-items: start; }
+.portfolio-item,
+.portfolio-item:nth-child(2),
+.portfolio-item:nth-child(3) { grid-column: auto; width: 100%; margin: 0; }
+.portfolio-item:nth-child(2) { margin-top: 7vw; }
+.portfolio-item img,
+.item-wide img { width: 100%; height: auto; max-height: none; object-fit: contain; image-rendering: auto; filter: none; }
+.portfolio-item figcaption { position: relative; z-index: 2; min-height: 42px; align-items: start; margin-top: 10px; padding: 10px 0 0; background: var(--paper); }
+.portfolio-item figcaption b { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid var(--ink); border-radius: 50%; flex: 0 0 auto; }
+.profile-section > * { opacity: 0; transform: translateY(24px); transition: opacity 460ms var(--ease-out), transform 460ms var(--ease-out); }
+.profile-section.is-revealed > * { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .talent-guides { inset: 110px 10px 86px; }
+  .talent-guide { width: clamp(58px, 17vw, 86px); height: clamp(105px, 16vh, 145px); }
+  .guide-mario { left: 1%; bottom: 2%; }
+  .guide-noah { left: 12%; top: 2%; }
+  .guide-ooona { right: 1%; bottom: 7%; }
+  .guide-amber { right: 10%; top: 2%; }
+  .guide-maya { left: 45%; bottom: -2%; }
+  .guide-label { left: 55%; bottom: 3%; }
+  .talent-figure { top: 34%; right: 8vw; width: 75vw; height: 48%; }
+  .talent-figure img { object-fit: contain; }
+  .profile-shot { top: 35%; right: 8vw; width: 78vw; height: 48%; }
+  .profile-motion-line { right: 8vw; bottom: 15%; width: 78vw; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 56px; }
+  .portfolio-item,
+  .portfolio-item:nth-child(2),
+  .portfolio-item:nth-child(3) { width: min(100%, 620px); margin: 0 auto; }
+}
+
+@media (max-width: 520px) {
+  .talent-guides { opacity: .82; }
+  .talent-guide { width: 56px; height: 98px; }
+  .guide-label { display: none; }
+  .guide-noah, .guide-amber { top: 10%; }
+  .talent-figure { right: 6vw; width: 82vw; }
+  .profile-shot { right: 6vw; width: 84vw; }
+  .profile-motion-line { right: 6vw; width: 84vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .talent-guide,
+  .talent-panel.is-active .talent-figure,
+  .talent-panel.is-active .placeholder-portrait,
+  .talent-stage.is-visible .talent-objects i,
+  .profile-shot.is-active img,
+  .profile-objects i,
+  .profile-motion-line i::after { animation: none !important; }
+  .profile-section > * { opacity: 1; transform: none; transition: none; }
+}

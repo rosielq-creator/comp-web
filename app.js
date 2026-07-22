@@ -419,6 +419,16 @@ function showPanel(nextIndex, direction) {
 
 document.querySelector("#nextTalent")?.addEventListener("click", () => showPanel((currentPanel + 1) % panels.length, 1));
 document.querySelector("#prevTalent")?.addEventListener("click", () => showPanel((currentPanel - 1 + panels.length) % panels.length, -1));
+document.querySelectorAll(".talent-guide").forEach((guide) => {
+  guide.addEventListener("click", () => {
+    const nextIndex = Number(guide.dataset.talent);
+    showView("talents");
+    if (Number.isInteger(nextIndex) && nextIndex !== currentPanel) {
+      const forward = nextIndex > currentPanel ? 1 : -1;
+      window.setTimeout(() => showPanel(nextIndex, forward), 120);
+    }
+  });
+});
 if (panels.length) {
   window.addEventListener("keydown", (event) => {
     if (event.key === "ArrowRight") showPanel((currentPanel + 1) % panels.length, 1);
@@ -435,9 +445,55 @@ function showShot(index) {
   currentShot = (index + shots.length) % shots.length;
   shots[currentShot].classList.add("is-active");
   document.querySelector("#shotCount").textContent = `${String(currentShot + 1).padStart(2, "0")} / ${String(shots.length).padStart(2, "0")}`;
+  const liveLabel = document.querySelector(".profile-motion-line span");
+  if (liveLabel) liveLabel.textContent = `LIVE PORTRAIT / ${String(currentShot + 1).padStart(2, "0")}`;
 }
 document.querySelector("#nextShot")?.addEventListener("click", () => showShot(currentShot + 1));
 document.querySelector("#prevShot")?.addEventListener("click", () => showShot(currentShot - 1));
+
+/* Editorial motion stays subtle: portraits respond to the cursor and sections reveal in sequence. */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!reduceMotion) {
+  talentStage?.addEventListener("pointermove", (event) => {
+    const activeFigure = panels[currentPanel]?.querySelector(".talent-figure, .placeholder-portrait");
+    if (!activeFigure) return;
+    const x = (event.clientX / window.innerWidth - .5) * -10;
+    const y = (event.clientY / window.innerHeight - .5) * -7;
+    activeFigure.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  }, { passive: true });
+  talentStage?.addEventListener("pointerleave", () => {
+    const activeFigure = panels[currentPanel]?.querySelector(".talent-figure, .placeholder-portrait");
+    if (activeFigure) activeFigure.style.transform = "translate3d(0, 0, 0)";
+  });
+
+  const profileHero = document.querySelector(".profile-hero");
+  const profileGallery = document.querySelector(".profile-gallery");
+  profileHero?.addEventListener("pointermove", (event) => {
+    const bounds = profileHero.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - .5) * -9;
+    const y = ((event.clientY - bounds.top) / bounds.height - .5) * -6;
+    if (profileGallery) profileGallery.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  }, { passive: true });
+  profileHero?.addEventListener("pointerleave", () => {
+    if (profileGallery) profileGallery.style.transform = "translate3d(0, 0, 0)";
+  });
+}
+
+const profileSections = [...document.querySelectorAll(".profile-section")];
+if (profileSections.length) {
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    profileSections.forEach((section) => section.classList.add("is-revealed"));
+  } else {
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .14, rootMargin: "0px 0px -8%" });
+    profileSections.forEach((section) => sectionObserver.observe(section));
+  }
+}
 
 document.querySelector("#inquiryForm")?.addEventListener("submit", (event) => {
   event.preventDefault();
