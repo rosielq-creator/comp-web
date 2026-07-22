@@ -8,8 +8,8 @@
   <title>GTAI — Next-Generation AI Talents</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260722-9">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,100..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260722-10">
 </head>
 <body data-page="home">
   <div class="noise" aria-hidden="true"></div>
@@ -80,26 +80,30 @@
           <i class="kinetic-piece kinetic-block piece-cobalt" data-x=".65" data-y=".74"><span>01</span></i>
           <i class="kinetic-piece kinetic-orb" data-x=".43" data-y=".18"><span></span></i>
         </div>
-        <div class="talent-guides" id="talentGuides" aria-label="Explore the GTAI roster">
-          <button class="talent-guide guide-mario" type="button" data-talent="0" aria-label="Meet Mario">
-            <span class="guide-portrait"><img src="assets/mario-portrait.png" alt="" decoding="async"></span>
-            <span class="guide-label"><b>MARIO</b><small>VIEW PROFILE ↗</small></span>
+        <div class="toy-cast" id="talentGuides" aria-label="Explore the GTAI roster">
+          <button class="toy-talent toy-mario" type="button" data-talent="0" aria-label="Meet Mario">
+            <span class="toy-anchor toy-plinth" aria-hidden="true"><i>M</i></span>
+            <img class="toy-figure" src="assets/figures/mario-toy.png" alt="" decoding="async">
+            <span class="toy-label"><b>MARIO</b><small>VIEW PROFILE ↗</small></span>
           </button>
-          <button class="talent-guide guide-noah" type="button" data-talent="1" aria-label="Meet Noah">
-            <span class="guide-portrait"><img src="assets/noah-hero.png" alt="" decoding="async"></span>
-            <span class="guide-label"><b>NOAH</b><small>VIEW PROFILE ↗</small></span>
+          <button class="toy-talent toy-noah" type="button" data-talent="1" aria-label="Meet Noah">
+            <img class="toy-figure" src="assets/figures/noah-toy.png" alt="" decoding="async">
+            <span class="toy-label"><b>NOAH</b><small>VIEW TALENT ↗</small></span>
           </button>
-          <button class="talent-guide guide-ooona" type="button" data-talent="2" aria-label="Meet Ooona">
-            <span class="guide-portrait"><img src="assets/ooona-hero.png" alt="" decoding="async"></span>
-            <span class="guide-label"><b>OOONA</b><small>VIEW PROFILE ↗</small></span>
+          <button class="toy-talent toy-ooona" type="button" data-talent="2" aria-label="Meet Ooona">
+            <span class="toy-anchor toy-cube" aria-hidden="true"><i>A</i></span>
+            <img class="toy-figure" src="assets/figures/ooona-toy.png" alt="" decoding="async">
+            <span class="toy-label"><b>OOONA</b><small>VIEW TALENT ↗</small></span>
           </button>
-          <button class="talent-guide guide-amber is-pending" type="button" data-talent="3" aria-label="Meet Amber">
-            <span class="guide-portrait"><i>A</i></span>
-            <span class="guide-label"><b>AMBER</b><small>VIEW TALENT ↗</small></span>
+          <button class="toy-talent toy-amber" type="button" data-talent="3" aria-label="Meet Amber">
+            <span class="toy-anchor toy-bar" aria-hidden="true"></span>
+            <img class="toy-figure" src="assets/figures/amber-toy.png" alt="" decoding="async">
+            <span class="toy-label"><b>AMBER</b><small>VIEW TALENT ↗</small></span>
           </button>
-          <button class="talent-guide guide-maya is-pending" type="button" data-talent="4" aria-label="Meet Maya">
-            <span class="guide-portrait"><i>M</i></span>
-            <span class="guide-label"><b>MAYA</b><small>VIEW TALENT ↗</small></span>
+          <button class="toy-talent toy-maya" type="button" data-talent="4" aria-label="Meet Maya">
+            <span class="toy-anchor toy-steps" aria-hidden="true"><i></i><i></i><i></i></span>
+            <img class="toy-figure" src="assets/figures/maya-toy.png" alt="" decoding="async">
+            <span class="toy-label"><b>MAYA</b><small>VIEW TALENT ↗</small></span>
           </button>
         </div>
         <p class="home-manifesto" data-i18n="homeManifesto">An independent roster of AI talents built for fashion, culture and the next visual era.</p>
@@ -192,6 +196,6 @@
     </main>
   </div>
 
-  <script type="module" src="app.js?v=20260722-8"></script>
+  <script type="module" src="app.js?v=20260722-10"></script>
 </body>
 </html>

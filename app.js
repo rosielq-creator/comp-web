@@ -396,6 +396,7 @@ function showView(view) {
 document.querySelector("#rosterEntry")?.addEventListener("click", () => showView("talents"));
 homeNav?.addEventListener("click", () => showView("home"));
 talentsNav?.addEventListener("click", () => showView("talents"));
+if (page === "home" && window.location.hash === "#talents") showView("talents");
 
 function showPanel(nextIndex, direction) {
   if (!panels.length || changing || nextIndex === currentPanel) return;
@@ -419,7 +420,7 @@ function showPanel(nextIndex, direction) {
 
 document.querySelector("#nextTalent")?.addEventListener("click", () => showPanel((currentPanel + 1) % panels.length, 1));
 document.querySelector("#prevTalent")?.addEventListener("click", () => showPanel((currentPanel - 1 + panels.length) % panels.length, -1));
-document.querySelectorAll(".talent-guide").forEach((guide) => {
+document.querySelectorAll(".talent-guide, .toy-talent").forEach((guide) => {
   guide.addEventListener("click", () => {
     const nextIndex = Number(guide.dataset.talent);
     showView("talents");
@@ -434,6 +435,37 @@ if (panels.length) {
     if (event.key === "ArrowRight") showPanel((currentPanel + 1) % panels.length, 1);
     if (event.key === "ArrowLeft") showPanel((currentPanel - 1 + panels.length) % panels.length, -1);
   });
+}
+
+/* The long first profile section converts vertical reading into a diagonal image rail. */
+const profileShowcase = document.querySelector("#profileShowcase");
+const profileRail = document.querySelector("#profileRail");
+if (profileShowcase && profileRail) {
+  const profileReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let railFrame = 0;
+
+  function positionProfileRail() {
+    railFrame = 0;
+    if (profileReduceMotion) return;
+    const bounds = profileShowcase.getBoundingClientRect();
+    const travel = Math.max(profileShowcase.offsetHeight - window.innerHeight, 1);
+    const progress = Math.min(1, Math.max(0, -bounds.top / travel));
+    const available = Math.max(profileRail.scrollWidth - window.innerWidth * .86, window.innerWidth * .7);
+    const x = window.innerWidth * .08 - progress * available;
+    const y = 26 - progress * Math.min(110, window.innerHeight * .12);
+    profileRail.style.setProperty("--rail-x", `${x.toFixed(1)}px`);
+    profileRail.style.setProperty("--rail-y", `${y.toFixed(1)}px`);
+  }
+
+  function requestRailPosition() {
+    if (!railFrame) railFrame = requestAnimationFrame(positionProfileRail);
+  }
+
+  window.addEventListener("scroll", requestRailPosition, { passive: true });
+  window.addEventListener("resize", requestRailPosition, { passive: true });
+  window.addEventListener("load", requestRailPosition, { once: true });
+  profileRail.querySelectorAll("img").forEach((image) => image.addEventListener("load", requestRailPosition, { once: true }));
+  requestRailPosition();
 }
 
 /* Mario gallery. */
