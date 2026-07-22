@@ -270,7 +270,7 @@ function initKineticType() {
         const distance = Math.hypot(dx, dy) || 1;
         const reach = 145 + state.radius;
         if (distance < reach) {
-          const force = (1 - distance / reach) * 2.9 * step;
+          const force = (1 - distance / reach) * .82 * step;
           state.vx += dx / distance * force;
           state.vy += dy / distance * force;
           state.spin += dx * .0012;
@@ -282,6 +282,8 @@ function initKineticType() {
       state.rotation += state.spin * step;
       state.vx *= .985;
       state.spin *= .992;
+      state.vx = Math.max(-11, Math.min(11, state.vx));
+      state.vy = Math.max(-11, Math.min(11, state.vy));
 
       if (state.y + state.radius > state.floorY) {
         state.y = state.floorY - state.radius;
@@ -291,6 +293,7 @@ function initKineticType() {
       }
       if (state.x < state.radius) { state.x = state.radius; state.vx = Math.abs(state.vx) * .6; }
       if (state.x > bounds.width - state.radius) { state.x = bounds.width - state.radius; state.vx = -Math.abs(state.vx) * .6; }
+      if (state.y < state.radius) { state.y = state.radius; state.vy = Math.abs(state.vy) * .35; }
     });
 
     for (let a = 0; a < states.length; a += 1) {
