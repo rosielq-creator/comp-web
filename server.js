@@ -10,6 +10,9 @@ const contentTypes = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".mp3": "audio/mpeg",
+  ".mp4": "video/mp4",
+  ".mov": "video/quicktime",
+  ".webm": "video/webm",
   ".ogg": "audio/ogg",
   ".wav": "audio/wav",
   ".jpg": "image/jpeg",
@@ -58,7 +61,7 @@ const server = http.createServer((request, response) => {
       "X-Robots-Tag": "noindex, nofollow, noarchive"
     };
 
-    if (extension === ".mp3" && request.headers.range) {
+    if ([".mp3", ".mp4", ".mov", ".webm"].includes(extension) && request.headers.range) {
       const [startText, endText] = request.headers.range.replace("bytes=", "").split("-");
       const start = Number(startText) || 0;
       const end = Math.min(Number(endText) || stats.size - 1, stats.size - 1);

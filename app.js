@@ -546,6 +546,54 @@ const talentStage = document.querySelector("#talentStage");
 const servicesStage = document.querySelector("#servicesStage");
 const workStage = document.querySelector("#workStage");
 const viewNavButtons = [...document.querySelectorAll("[data-view]")];
+const workVideos = [...document.querySelectorAll("[data-work-video]")];
+const workMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+function syncWorkVideoPlayback() {
+  const workIsActive = workStage?.classList.contains("is-visible") && !document.hidden;
+  if (!workIsActive) {
+    workVideos.forEach((video) => { video.muted = true; });
+    document.querySelectorAll(".work-audio-toggle").forEach((button) => { button.textContent = "SOUND OFF"; });
+  }
+  workVideos.forEach((video) => {
+    const shouldPlay = workIsActive && video.dataset.inView === "true" && !workMotionQuery.matches;
+    if (shouldPlay) video.play().catch(() => {});
+    else video.pause();
+  });
+}
+
+if (workVideos.length && "IntersectionObserver" in window) {
+  const workVideoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.dataset.inView = String(entry.isIntersecting && entry.intersectionRatio >= .12);
+    });
+    syncWorkVideoPlayback();
+  }, { root: workStage?.querySelector(".info-stage-inner") || null, threshold: [.12, .35] });
+  workVideos.forEach((video) => workVideoObserver.observe(video));
+} else {
+  workVideos.forEach((video) => { video.dataset.inView = "true"; });
+}
+
+document.querySelectorAll(".work-audio-toggle").forEach((button) => {
+  button.addEventListener("click", () => {
+    const video = button.closest(".work-card")?.querySelector("video");
+    if (!video) return;
+    const enableSound = video.muted;
+    workVideos.forEach((item) => { item.muted = true; });
+    document.querySelectorAll(".work-audio-toggle").forEach((item) => { item.textContent = "SOUND OFF"; });
+    if (enableSound) {
+      video.muted = false;
+      button.textContent = "SOUND ON";
+      soundOn = false;
+      sessionStorage.setItem("gtai-sound", "off");
+      stopAmbient();
+      video.play().catch(() => {});
+    }
+  });
+});
+
+document.addEventListener("visibilitychange", syncWorkVideoPlayback);
+workMotionQuery.addEventListener?.("change", syncWorkVideoPlayback);
 
 function showView(view) {
   const normalizedView = view === "talents" ? "artists" : view;
@@ -568,6 +616,7 @@ function showView(view) {
   }
   viewNavButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.view === normalizedView));
   if (page === "home") history.replaceState(null, "", normalizedView === "home" ? location.pathname : `#${normalizedView}`);
+  window.requestAnimationFrame(syncWorkVideoPlayback);
 }
 
 document.querySelector("#rosterEntry")?.addEventListener("click", () => showView("artists"));
