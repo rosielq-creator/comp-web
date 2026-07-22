@@ -556,11 +556,82 @@ function syncWorkVideoPlayback() {
     document.querySelectorAll(".work-audio-toggle").forEach((button) => { button.textContent = "SOUND OFF"; });
   }
   workVideos.forEach((video) => {
-    const shouldPlay = workIsActive && video.dataset.inView === "true" && !workMotionQuery.matches;
+    const shouldPlay = workIsActive
+      && video.dataset.inView === "true"
+      && video.dataset.userPaused !== "true"
+      && !workMotionQuery.matches;
     if (shouldPlay) video.play().catch(() => {});
     else video.pause();
   });
 }
+
+function formatWorkTime(value) {
+  if (!Number.isFinite(value)) return "0:00";
+  const minutes = Math.floor(value / 60);
+  const seconds = Math.floor(value % 60).toString().padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
+/* Custom controls keep the project grid visually consistent while exposing
+   the two essential video actions: explicit play/pause and precise seeking. */
+workVideos.forEach((video) => {
+  const card = video.closest(".work-card");
+  if (!card) return;
+
+  const controls = document.createElement("div");
+  controls.className = "work-video-controls";
+  controls.innerHTML = `
+    <button class="work-play-toggle" type="button" aria-label="Pause project video">
+      <span aria-hidden="true">Ⅱ</span>
+    </button>
+    <input class="work-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Video progress">
+    <output class="work-time" aria-live="off">0:00 / 0:00</output>
+  `;
+  video.insertAdjacentElement("afterend", controls);
+
+  const playButton = controls.querySelector(".work-play-toggle");
+  const playIcon = playButton.querySelector("span");
+  const progress = controls.querySelector(".work-progress");
+  const time = controls.querySelector(".work-time");
+
+  const updatePlayState = () => {
+    const isPaused = video.paused;
+    playIcon.textContent = isPaused ? "▶" : "Ⅱ";
+    playButton.setAttribute("aria-label", `${isPaused ? "Play" : "Pause"} project video`);
+    card.classList.toggle("is-video-paused", isPaused);
+  };
+
+  const updateTimeline = () => {
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    progress.value = duration ? String(Math.round((video.currentTime / duration) * 1000)) : "0";
+    progress.style.setProperty("--work-progress", `${duration ? (video.currentTime / duration) * 100 : 0}%`);
+    time.value = `${formatWorkTime(video.currentTime)} / ${formatWorkTime(duration)}`;
+  };
+
+  playButton.addEventListener("click", () => {
+    if (video.paused) {
+      video.dataset.userPaused = "false";
+      video.play().catch(() => {});
+    } else {
+      video.dataset.userPaused = "true";
+      video.pause();
+    }
+  });
+
+  progress.addEventListener("input", () => {
+    if (!Number.isFinite(video.duration)) return;
+    video.currentTime = (Number(progress.value) / 1000) * video.duration;
+    updateTimeline();
+  });
+
+  video.addEventListener("play", updatePlayState);
+  video.addEventListener("pause", updatePlayState);
+  video.addEventListener("loadedmetadata", updateTimeline);
+  video.addEventListener("durationchange", updateTimeline);
+  video.addEventListener("timeupdate", updateTimeline);
+  updatePlayState();
+  updateTimeline();
+});
 
 if (workVideos.length && "IntersectionObserver" in window) {
   const workVideoObserver = new IntersectionObserver((entries) => {
