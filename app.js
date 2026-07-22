@@ -652,6 +652,22 @@ if (profileSections.length) {
   }
 }
 
+/* Use the rendered width of one complete image group as the loop distance.
+   This avoids the blank seam caused by translating an assumed 50%. */
+function syncProfileRailLoop() {
+  const rail = document.querySelector("#profileRail");
+  const firstGroup = rail?.querySelector(".profile-rail-group");
+  if (!rail || !firstGroup) return;
+  rail.style.setProperty("--rail-loop-distance", `-${firstGroup.offsetWidth}px`);
+}
+
+if (document.querySelector("#profileRail")) {
+  const profileImages = [...document.querySelectorAll("#profileRail img")];
+  Promise.all(profileImages.map((image) => image.decode?.().catch(() => {}) ?? Promise.resolve()))
+    .then(syncProfileRailLoop);
+  window.addEventListener("resize", syncProfileRailLoop, { passive: true });
+}
+
 document.querySelector("#inquiryForm")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const status = document.querySelector("#formStatus");

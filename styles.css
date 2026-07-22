@@ -875,3 +875,130 @@ body { font-family: var(--sans); }
   .profile-rail { transform: rotate(-2deg); }
   .profile-rail-group[aria-hidden="true"] { display: none; }
 }
+
+/* 2026-07-22 / Readable editorial type, clear HOME CTA and measured profile reel. */
+:root {
+  --sans: "DM Sans", sans-serif;
+  --serif: "Instrument Serif", Georgia, serif;
+  --mono: "DM Sans", sans-serif;
+}
+
+body,
+button,
+input,
+select,
+textarea { font-family: var(--sans); }
+
+.brand,
+.gate-copy h1,
+.home-title,
+.talent-name,
+.profile-wordmark,
+.profile-showcase-copy h1,
+.intro-grid h2,
+.section-heading-row h2,
+.inquiry-copy h2,
+.metrics-grid strong,
+.site-footer a {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: -.035em;
+}
+
+.intro-grid h2 em,
+.section-heading-row h2 em,
+.inquiry-copy h2 em {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+
+.micro,
+.profile-code,
+.profile-showcase-copy .profile-role,
+.section-marker,
+.fact-list dt,
+.metrics-grid span,
+.metrics-grid small,
+.prototype-note,
+.inquiry-form label,
+.form-submit-row p,
+.site-footer p {
+  font-family: var(--sans);
+  font-weight: 600;
+  letter-spacing: .045em;
+}
+
+.inquiry-form label { font-size: .78rem; }
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea { font-family: var(--sans); font-size: 1.05rem; }
+
+/* Keep Mario fully clear of the black MEET THE TALENTS control. */
+.toy-mario { bottom: 22%; }
+.roster-entry { z-index: 14; font-family: var(--sans); letter-spacing: .08em; }
+
+/* One aligned diagonal belt: images retain their intrinsic ratio and the measured
+   first group width becomes the exact loop distance. */
+.profile-rail-window { inset: 34% -5vw -8%; overflow: hidden; }
+.profile-rail {
+  --rail-gap: clamp(24px, 2.4vw, 44px);
+  --rail-loop-distance: -2000px;
+  align-items: center;
+  height: 64vh;
+  padding: 6vh 0;
+  animation: profileRailMeasured 34s linear infinite;
+  transform-origin: 0 50%;
+}
+.profile-rail-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--rail-gap);
+  padding: 0 var(--rail-gap) 0 0;
+}
+.rail-shot,
+.profile-rail-group .rail-shot:nth-child(2),
+.profile-rail-group .rail-shot:nth-child(3) {
+  flex: 0 0 auto;
+  width: auto;
+  height: clamp(330px, 48vh, 560px);
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+.rail-shot img {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+}
+@keyframes profileRailMeasured {
+  from { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  to { transform: translate3d(var(--rail-loop-distance), 0, 0) rotate(-4deg); }
+}
+
+@media (max-width: 900px) {
+  .toy-mario { left: 2%; bottom: 25%; }
+  .profile-rail { height: 58vh; animation-duration: 28s; }
+  .rail-shot,
+  .profile-rail-group .rail-shot:nth-child(2),
+  .profile-rail-group .rail-shot:nth-child(3) { height: clamp(280px, 42vh, 430px); }
+}
+
+@media (max-width: 520px) {
+  .toy-mario { left: 0; bottom: 29%; }
+  .profile-rail-window { inset: 39% -10vw -5%; }
+  .profile-rail { --rail-gap: 18px; height: 54vh; animation-duration: 24s; }
+  .rail-shot,
+  .profile-rail-group .rail-shot:nth-child(2),
+  .profile-rail-group .rail-shot:nth-child(3) { height: clamp(250px, 37vh, 350px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-rail { animation: none !important; transform: rotate(-2deg); }
+  .profile-rail-group[aria-hidden="true"] { display: none; }
+}
