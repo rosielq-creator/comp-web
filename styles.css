@@ -1708,3 +1708,199 @@ textarea { font-family: var(--sans); }
 @media (prefers-reduced-motion: reduce) {
   .toy-ranking-tree .toy-mario { transform: translateX(-50%) !important; }
 }
+
+/* 2026-07-22 / One kinetic mobile unites the five ranked artists around the
+   protected AI PRODUCTION wordmark. Profile motion uses opposing directions. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.home-title {
+  z-index: 13;
+  width: min(72vw, 1120px);
+  font-size: clamp(4.8rem, 10.4vw, 11rem);
+  text-shadow: 0 2px 0 rgba(251, 253, 251, .96), 0 0 38px rgba(251, 253, 251, .92);
+}
+
+.toy-ranking-tree {
+  inset: 88px 14vw 78px;
+  z-index: 11;
+}
+
+.toy-ranking-tree::before,
+.toy-ranking-tree::after { display: none; }
+
+.toy-orbit-device {
+  position: absolute;
+  inset: 2% 0 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 22px rgba(24, 25, 20, .1));
+}
+
+.orbit-device-loop {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: min(100%, 960px);
+  height: 86%;
+  border: clamp(5px, .55vw, 9px) solid rgba(231, 235, 229, .96);
+  border-right-color: rgba(32, 45, 38, .72);
+  border-bottom-color: var(--gt-green);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(21, 34, 28, .14), 0 0 0 1px rgba(255,255,255,.78);
+  transform: translateX(-50%) perspective(900px) rotateX(63deg) rotateZ(-8deg);
+}
+
+.orbit-device-spine {
+  position: absolute;
+  top: 2%;
+  bottom: 2%;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, rgba(21,34,28,.36) 12%, rgba(0,167,93,.52) 50%, rgba(21,34,28,.3) 88%, transparent);
+  transform: translateX(-50%);
+}
+
+.orbit-device-spine::before,
+.orbit-device-spine::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: min(31vw, 430px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(21,34,28,.34), transparent);
+  transform: translateX(-50%) rotate(-8deg);
+}
+
+.orbit-device-spine::before { top: 30%; }
+.orbit-device-spine::after { bottom: 25%; transform: translateX(-50%) rotate(9deg); }
+
+.orbit-device-node {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--paper-bright);
+  border-radius: 50%;
+  background: var(--gt-green);
+  box-shadow: 0 0 0 1px rgba(21,34,28,.28), 0 7px 12px rgba(21,34,28,.16);
+}
+.orbit-device-node::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  width: 1px;
+  height: clamp(28px, 5vh, 58px);
+  background: rgba(21,34,28,.34);
+}
+.node-one { top: 1%; left: calc(50% - 6px); }
+.node-two { top: 24%; right: 6%; }
+.node-three { top: 42%; left: 5%; }
+.node-four { right: 18%; bottom: 17%; }
+.node-five { bottom: 13%; left: 20%; }
+
+.toy-ranking-tree .toy-mario {
+  top: -2%;
+  left: 50%;
+  width: clamp(126px, 10.5vw, 184px);
+  height: clamp(182px, 27vh, 250px);
+}
+.toy-ranking-tree .toy-ooona {
+  top: 17%;
+  right: 2%;
+  width: clamp(88px, 7.2vw, 124px);
+  height: clamp(140px, 21vh, 198px);
+}
+.toy-ranking-tree .toy-noah {
+  top: 34%;
+  left: 1%;
+  width: clamp(80px, 6.5vw, 112px);
+  height: clamp(132px, 20vh, 184px);
+}
+.toy-ranking-tree .toy-maya {
+  right: 16%;
+  bottom: 0;
+  width: clamp(82px, 6.5vw, 112px);
+  height: clamp(142px, 21vh, 196px);
+}
+.toy-ranking-tree .toy-amber {
+  bottom: -1%;
+  left: 18%;
+  width: clamp(74px, 5.9vw, 102px);
+  height: clamp(138px, 20vh, 190px);
+}
+
+.profile-wordmark {
+  left: 0;
+  gap: 5vw;
+  animation: profileNameLoopRight 24s linear infinite;
+}
+
+.profile-wordmark span:nth-child(even) {
+  color: transparent;
+  -webkit-text-stroke: 2px #d5d6cf;
+}
+
+@keyframes profileNameLoopRight {
+  from { transform: translate3d(calc(-50% - 2.5vw), 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.profile-meta-band {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(52px, 5vw, 80px);
+  padding-inline: 5vw;
+  text-align: center;
+}
+
+.profile-unified-line {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(.92rem, 1.15vw, 1.1rem);
+  letter-spacing: .07em;
+  text-align: center;
+}
+
+.profile-rail-window { margin-top: clamp(54px, 5vw, 82px); }
+
+@media (max-width: 900px) {
+  .home-title { width: 78vw; font-size: 11.6vw; }
+  .toy-ranking-tree { inset: 104px 7vw 88px; }
+  .toy-ranking-tree .toy-mario { top: 0; width: 104px; height: 158px; }
+  .toy-ranking-tree .toy-ooona { top: 20%; right: -1%; width: 70px; height: 118px; }
+  .toy-ranking-tree .toy-noah { top: 38%; left: -1%; width: 66px; height: 108px; }
+  .toy-ranking-tree .toy-maya { right: 14%; bottom: 5%; width: 67px; height: 126px; }
+  .toy-ranking-tree .toy-amber { left: 15%; bottom: 4%; width: 61px; height: 120px; }
+  .profile-meta-band { margin-top: 48px; }
+  .profile-rail-window { margin-top: 52px; }
+}
+
+@media (max-width: 520px) {
+  .home-title { width: 82vw; font-size: 12.8vw; line-height: .84; }
+  .toy-ranking-tree { inset: 116px 3vw 104px; }
+  .orbit-device-loop { height: 78%; }
+  .orbit-device-spine { bottom: 12%; }
+  .toy-ranking-tree .toy-mario { top: 2%; width: 88px; height: 136px; }
+  .toy-ranking-tree .toy-ooona { top: 22%; right: -2%; width: 58px; height: 98px; }
+  .toy-ranking-tree .toy-noah { top: 40%; left: -2%; width: 57px; height: 94px; }
+  .toy-ranking-tree .toy-maya { right: 9%; bottom: 13%; width: 58px; height: 110px; }
+  .toy-ranking-tree .toy-amber { left: 8%; bottom: 13%; width: 53px; height: 104px; }
+  .profile-meta-band { display: flex; margin-top: 40px; padding-inline: 18px; }
+  .profile-unified-line { font-size: .76rem; line-height: 1.4; }
+  .profile-rail-window { margin-top: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-wordmark { animation: none !important; transform: translate3d(-2%, 0, 0); }
+  .toy-orbit-device { filter: none; }
+}
