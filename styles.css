@@ -1822,7 +1822,7 @@ textarea { font-family: var(--sans); }
 }
 .toy-ranking-tree .toy-noah {
   top: 34%;
-  left: 1%;
+  left: -11%;
   width: clamp(80px, 6.5vw, 112px);
   height: clamp(132px, 20vh, 184px);
 }
@@ -1878,7 +1878,7 @@ textarea { font-family: var(--sans); }
   .toy-ranking-tree { inset: 104px 7vw 88px; }
   .toy-ranking-tree .toy-mario { top: 0; width: 104px; height: 158px; }
   .toy-ranking-tree .toy-ooona { top: 20%; right: -1%; width: 70px; height: 118px; }
-  .toy-ranking-tree .toy-noah { top: 38%; left: -1%; width: 66px; height: 108px; }
+  .toy-ranking-tree .toy-noah { top: 38%; left: -8%; width: 66px; height: 108px; }
   .toy-ranking-tree .toy-maya { right: 14%; bottom: 5%; width: 67px; height: 126px; }
   .toy-ranking-tree .toy-amber { left: 15%; bottom: 4%; width: 61px; height: 120px; }
   .profile-meta-band { margin-top: 48px; }
@@ -1892,7 +1892,7 @@ textarea { font-family: var(--sans); }
   .orbit-device-spine { bottom: 12%; }
   .toy-ranking-tree .toy-mario { top: 2%; width: 88px; height: 136px; }
   .toy-ranking-tree .toy-ooona { top: 22%; right: -2%; width: 58px; height: 98px; }
-  .toy-ranking-tree .toy-noah { top: 40%; left: -2%; width: 57px; height: 94px; }
+  .toy-ranking-tree .toy-noah { top: 31%; left: -5%; width: 57px; height: 94px; }
   .toy-ranking-tree .toy-maya { right: 9%; bottom: 13%; width: 58px; height: 110px; }
   .toy-ranking-tree .toy-amber { left: 8%; bottom: 13%; width: 53px; height: 104px; }
   .profile-meta-band { display: flex; margin-top: 40px; padding-inline: 18px; }
