@@ -6,8 +6,8 @@ const translations = {
     tagline: "Next-Generation AI Talents",
     home: "Home",
     talents: "Talents",
-    homeLineOne: "The new faces",
-    homeLineTwo: "of imagination.",
+    homeLineOne: "AI PRODUCTION",
+    homeLineTwo: "",
     homeManifesto: "An independent roster of AI talents built for fashion, culture and the next visual era.",
     meetTalents: "Meet the talents",
     account: "Account",
@@ -58,8 +58,8 @@ const translations = {
     tagline: "新世代 AI 藝人",
     home: "首頁",
     talents: "藝人",
-    homeLineOne: "想像力的",
-    homeLineTwo: "全新面孔。",
+    homeLineOne: "AI PRODUCTION",
+    homeLineTwo: "",
     homeManifesto: "一組面向時尚、文化與下一個視覺時代的獨立 AI 藝人陣容。",
     meetTalents: "探索藝人陣容",
     account: "帳號",
@@ -437,35 +437,24 @@ if (panels.length) {
   });
 }
 
-/* The long first profile section converts vertical reading into a diagonal image rail. */
-const profileShowcase = document.querySelector("#profileShowcase");
-const profileRail = document.querySelector("#profileRail");
-if (profileShowcase && profileRail) {
-  const profileReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let railFrame = 0;
+/* Profile header yields on downward reading and returns immediately on upward intent. */
+const profileHeader = document.querySelector(".profile-header");
+if (profileHeader) {
+  let lastScrollY = Math.max(window.scrollY, 0);
+  let headerFrame = 0;
 
-  function positionProfileRail() {
-    railFrame = 0;
-    if (profileReduceMotion) return;
-    const bounds = profileShowcase.getBoundingClientRect();
-    const travel = Math.max(profileShowcase.offsetHeight - window.innerHeight, 1);
-    const progress = Math.min(1, Math.max(0, -bounds.top / travel));
-    const available = Math.max(profileRail.scrollWidth - window.innerWidth * .86, window.innerWidth * .7);
-    const x = window.innerWidth * .08 - progress * available;
-    const y = 26 - progress * Math.min(110, window.innerHeight * .12);
-    profileRail.style.setProperty("--rail-x", `${x.toFixed(1)}px`);
-    profileRail.style.setProperty("--rail-y", `${y.toFixed(1)}px`);
+  function updateProfileHeader() {
+    headerFrame = 0;
+    const currentScrollY = Math.max(window.scrollY, 0);
+    const delta = currentScrollY - lastScrollY;
+    if (currentScrollY <= 24 || delta < -6) profileHeader.classList.remove("is-hidden");
+    else if (delta > 8 && currentScrollY > profileHeader.offsetHeight) profileHeader.classList.add("is-hidden");
+    lastScrollY = currentScrollY;
   }
 
-  function requestRailPosition() {
-    if (!railFrame) railFrame = requestAnimationFrame(positionProfileRail);
-  }
-
-  window.addEventListener("scroll", requestRailPosition, { passive: true });
-  window.addEventListener("resize", requestRailPosition, { passive: true });
-  window.addEventListener("load", requestRailPosition, { once: true });
-  profileRail.querySelectorAll("img").forEach((image) => image.addEventListener("load", requestRailPosition, { once: true }));
-  requestRailPosition();
+  window.addEventListener("scroll", () => {
+    if (!headerFrame) headerFrame = requestAnimationFrame(updateProfileHeader);
+  }, { passive: true });
 }
 
 /* Mario gallery. */

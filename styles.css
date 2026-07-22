@@ -671,3 +671,219 @@ body { background: var(--paper); }
   .profile-motion-line i::after { animation: none !important; }
   .profile-section > * { opacity: 1; transform: none; transition: none; }
 }
+
+/* 2026-07-22 / Loli-inspired type, character motion and continuous profile reel. */
+:root {
+  --sans: "Barlow Condensed", sans-serif;
+  --mono: "Silkscreen", monospace;
+}
+
+body { font-family: var(--sans); }
+.brand,
+.gate-copy h1,
+.home-title,
+.talent-name,
+.profile-wordmark,
+.profile-showcase-copy h1,
+.intro-grid h2,
+.section-heading-row h2,
+.inquiry-copy h2,
+.metrics-grid strong,
+.site-footer a {
+  font-family: var(--sans);
+  font-stretch: normal;
+  font-weight: 600;
+  letter-spacing: .018em;
+}
+
+.home-title {
+  width: min(96vw, 1600px);
+  font-size: clamp(5rem, 13.5vw, 14rem);
+  font-weight: 600;
+  line-height: .78;
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+.home-title span { color: var(--ink); }
+.nav-link { font-size: .76rem; letter-spacing: .09em; }
+.text-button,
+.sound-button { font-size: .66rem; letter-spacing: .08em; }
+.micro,
+.home-coordinates { letter-spacing: .08em; }
+
+/* Each figure has a distinct readable action while the group keeps a slow scene drift. */
+.toy-talent { animation: toySceneFloat 7.8s ease-in-out infinite alternate; }
+.toy-talent:nth-child(2) { animation-name: toySceneFloatReverse; }
+.toy-talent:nth-child(3) { animation-name: toySceneFloatWide; }
+.toy-talent:nth-child(4) { animation-name: toyHangDrift; transform-origin: 50% 0; }
+.toy-talent:nth-child(5) { animation-name: toySceneFloatReverse; }
+.toy-figure { will-change: transform; }
+.toy-mario { left: 8%; bottom: 3%; width: clamp(154px, 14vw, 236px); height: clamp(210px, 34vh, 310px); }
+.toy-mario .toy-plinth { display: none; }
+.toy-mario .toy-figure { animation: tennisSwing 1.75s ease-in-out infinite; transform-origin: 54% 72%; }
+.toy-noah .toy-figure { animation: toyJump 2.35s ease-in-out infinite; transform-origin: 50% 100%; }
+.toy-ooona .toy-figure { animation: toyWave 2.7s ease-in-out infinite; transform-origin: 46% 78%; }
+.toy-amber .toy-figure { animation: toyHang 2.9s ease-in-out infinite; transform-origin: 50% 4%; }
+.toy-maya .toy-figure { animation: toyClimb 3.1s ease-in-out infinite; transform-origin: 50% 100%; }
+.toy-mario::before {
+  content: "";
+  position: absolute;
+  top: 32%;
+  left: -8%;
+  z-index: 1;
+  width: 48%;
+  height: 28%;
+  border-top: 2px solid color-mix(in srgb, var(--gt-green) 62%, transparent);
+  border-radius: 50%;
+  opacity: .6;
+  transform: rotate(-14deg);
+  animation: tennisTrail 1.75s ease-in-out infinite;
+}
+.toy-talent:hover .toy-figure,
+.toy-talent:focus-visible .toy-figure { animation-play-state: paused; }
+
+@keyframes toySceneFloat {
+  from { transform: translate3d(0, 0, 0) rotate(-.6deg); }
+  to { transform: translate3d(10px, -8px, 0) rotate(.7deg); }
+}
+@keyframes toySceneFloatReverse {
+  from { transform: translate3d(6px, -5px, 0) rotate(.6deg); }
+  to { transform: translate3d(-8px, 7px, 0) rotate(-.8deg); }
+}
+@keyframes toySceneFloatWide {
+  from { transform: translate3d(-7px, 4px, 0) rotate(-.7deg); }
+  to { transform: translate3d(12px, -10px, 0) rotate(.8deg); }
+}
+@keyframes toyHangDrift {
+  from { transform: translate3d(-4px, 0, 0) rotate(-2deg); }
+  to { transform: translate3d(8px, 4px, 0) rotate(2.4deg); }
+}
+@keyframes tennisSwing {
+  0%, 100% { transform: translate3d(0, 3px, 0) rotate(-2deg); }
+  42% { transform: translate3d(8px, -13px, 0) rotate(3deg); }
+  58% { transform: translate3d(13px, -17px, 0) rotate(5deg); }
+  74% { transform: translate3d(5px, -8px, 0) rotate(1deg); }
+}
+@keyframes tennisTrail {
+  0%, 22%, 100% { opacity: 0; transform: rotate(-18deg) scaleX(.55); }
+  48%, 66% { opacity: .62; transform: rotate(-8deg) scaleX(1); }
+}
+@keyframes toyJump {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+  42% { transform: translate3d(-4px, -20px, 0) rotate(-3deg); }
+  58% { transform: translate3d(3px, -22px, 0) rotate(2deg); }
+}
+@keyframes toyWave {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+  35% { transform: translate3d(2px, -7px, 0) rotate(3deg); }
+  55% { transform: translate3d(-2px, -9px, 0) rotate(-3deg); }
+  72% { transform: translate3d(2px, -6px, 0) rotate(2deg); }
+}
+@keyframes toyHang {
+  0%, 100% { transform: rotate(-2.8deg); }
+  50% { transform: rotate(3.2deg); }
+}
+@keyframes toyClimb {
+  0%, 100% { transform: translate3d(0, 6px, 0) rotate(-1deg); }
+  38% { transform: translate3d(-5px, -10px, 0) rotate(2deg); }
+  62% { transform: translate3d(4px, -18px, 0) rotate(-1deg); }
+}
+
+/* Profile navigation behaves like a reading-aware drawer. */
+.profile-header {
+  transform: translate3d(0, 0, 0);
+  transition: transform 220ms var(--ease-out), background-color 180ms ease;
+  will-change: transform;
+}
+.profile-header.is-hidden { transform: translate3d(0, -110%, 0); }
+
+/* The hero is now an autonomous, seamless reel rather than a scroll-controlled track. */
+.profile-showcase { height: 100svh; min-height: 720px; }
+.profile-showcase-sticky { position: relative; min-height: inherit; }
+.profile-wordmark { top: 10%; font-weight: 600; letter-spacing: .018em; }
+.profile-showcase-copy { top: 24%; }
+.profile-showcase-copy h1 { font-weight: 600; letter-spacing: .035em; }
+.profile-rail-window { overflow: hidden; }
+.profile-rail {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  padding: 4vh 0 8vh;
+  animation: profileRailLoop 24s linear infinite;
+  transform: translate3d(0, 0, 0) rotate(-4deg);
+}
+.profile-rail-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  gap: clamp(26px, 3vw, 58px);
+  padding: 0 1.5vw;
+}
+.profile-rail:hover { animation-play-state: paused; }
+.rail-shot { height: 51vh; box-shadow: 0 16px 32px rgba(24,25,20,.11); }
+.profile-rail-group .rail-shot:nth-child(2) { margin-top: 4vh; transform: rotate(2deg); }
+.profile-rail-group .rail-shot:nth-child(3) { margin-top: -2vh; transform: rotate(-1.5deg); }
+.rail-shot figcaption { display: none; }
+@keyframes profileRailLoop {
+  from { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  to { transform: translate3d(-50%, 0, 0) rotate(-4deg); }
+}
+
+/* Secondary information grows; editorial display headings retain their established scale. */
+.profile-page .nav-link { font-size: .8rem; }
+.profile-code,
+.profile-showcase-copy .profile-role { font-size: .66rem; letter-spacing: .07em; }
+.profile-showcase .scroll-cue { font-size: .68rem; letter-spacing: .08em; }
+.section-marker { font-size: .68rem; letter-spacing: .08em; }
+.intro-grid h2,
+.section-heading-row h2,
+.inquiry-copy h2 { font-size: clamp(3.4rem, 7.5vw, 8rem); }
+.intro-copy > p { font-size: clamp(1.35rem, 1.9vw, 1.95rem); }
+.fact-list dt { font-size: .64rem; letter-spacing: .07em; }
+.fact-list dd { font-size: 1rem; }
+.prototype-note { font-size: .65rem; letter-spacing: .07em; }
+.metrics-grid span,
+.metrics-grid small { font-size: .65rem; letter-spacing: .07em; }
+.inquiry-copy > p:last-child { font-size: 1rem; }
+.inquiry-form label { font-size: .64rem; letter-spacing: .07em; }
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea { font-size: 1.05rem; }
+.form-submit-row p { font-size: .76rem; }
+.submit-button { font-size: .68rem; }
+.site-footer p { font-size: .6rem; letter-spacing: .07em; }
+
+@media (max-width: 900px) {
+  .home-title { width: 96vw; font-size: 16vw; letter-spacing: .02em; }
+  .toy-mario { left: -2%; bottom: 10%; width: 116px; height: 178px; }
+  .profile-showcase { min-height: 680px; }
+  .profile-wordmark { top: 11%; }
+  .profile-rail { animation-duration: 20s; }
+  .profile-rail-group { gap: 24px; padding-inline: 12px; }
+  .rail-shot { height: 44vh; }
+}
+
+@media (max-width: 520px) {
+  .home-title { font-size: 16.5vw; }
+  .nav-link { font-size: .7rem; }
+  .profile-page .nav-link { font-size: .73rem; }
+  .profile-code,
+  .profile-showcase-copy .profile-role { font-size: .58rem; }
+  .profile-wordmark { top: 13%; }
+  .profile-showcase-copy { top: 30%; }
+  .profile-rail-window { inset: 40% 0 0; }
+  .rail-shot { height: 40vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toy-talent,
+  .toy-figure,
+  .toy-mario::before,
+  .profile-rail { animation: none !important; }
+  .profile-header { transition: opacity 150ms ease; transform: none !important; }
+  .profile-header.is-hidden { opacity: 0; pointer-events: none; }
+  .profile-showcase { height: 100svh; }
+  .profile-rail-window { overflow-x: auto; overflow-y: hidden; }
+  .profile-rail { transform: rotate(-2deg); }
+  .profile-rail-group[aria-hidden="true"] { display: none; }
+}
