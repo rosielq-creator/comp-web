@@ -82,7 +82,10 @@
         <div class="toy-cast" id="talentGuides" aria-label="Explore the GTAI roster">
           <button class="toy-talent toy-mario" type="button" data-talent="0" aria-label="Meet Mario">
             <span class="toy-anchor toy-plinth" aria-hidden="true"><i>M</i></span>
-            <img class="toy-figure" src="assets/figures/mario-tennis-toy.png" alt="" decoding="async">
+            <span class="toy-figure mario-tennis-rig" aria-hidden="true">
+              <img class="mario-tennis-fallback" src="assets/figures/mario-tennis-toy.png" alt="" decoding="async">
+              <canvas class="mario-tennis-canvas" width="768" height="1152" data-source="assets/figures/mario-tennis-toy.png"></canvas>
+            </span>
             <span class="toy-label"><b>MARIO</b><small>VIEW PROFILE ↗</small></span>
           </button>
           <button class="toy-talent toy-noah" type="button" data-talent="1" aria-label="Meet Noah">
@@ -195,6 +198,6 @@
     </main>
   </div>
 
-  <script type="module" src="app.js?v=20260722-11"></script>
+  <script type="module" src="app.js?v=20260722-12"></script>
 </body>
 </html>

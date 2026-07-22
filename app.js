@@ -203,6 +203,142 @@ const unlocked = sessionStorage.getItem("gtai-preview") === "unlocked";
 let crystalStarted = false;
 let kineticStarted = false;
 
+/* Mario uses a small articulated canvas rig so his racket arm swings independently. */
+function initMarioTennisRig() {
+  if (page !== "home") return;
+  const canvas = document.querySelector(".mario-tennis-canvas");
+  const rig = canvas?.closest(".mario-tennis-rig");
+  const source = canvas?.dataset.source;
+  if (!canvas || !rig || !source) return;
+
+  const context = canvas.getContext("2d");
+  const image = new Image();
+  image.decoding = "async";
+  image.src = source;
+  image.onload = () => {
+    const sourceWidth = image.naturalWidth;
+    const sourceHeight = image.naturalHeight;
+    const scaleX = canvas.width / sourceWidth;
+    const scaleY = canvas.height / sourceHeight;
+    const bodyLayer = document.createElement("canvas");
+    const armLayer = document.createElement("canvas");
+    bodyLayer.width = armLayer.width = canvas.width;
+    bodyLayer.height = armLayer.height = canvas.height;
+    const body = bodyLayer.getContext("2d");
+    const arm = armLayer.getContext("2d");
+
+    const traceArm = (target) => {
+      target.beginPath();
+      target.moveTo(36 * scaleX, 188 * scaleY);
+      target.lineTo(298 * scaleX, 176 * scaleY);
+      target.lineTo(430 * scaleX, 328 * scaleY);
+      target.lineTo(545 * scaleX, 366 * scaleY);
+      target.lineTo(610 * scaleX, 455 * scaleY);
+      target.lineTo(558 * scaleX, 535 * scaleY);
+      target.lineTo(432 * scaleX, 510 * scaleY);
+      target.lineTo(286 * scaleX, 474 * scaleY);
+      target.lineTo(40 * scaleX, 505 * scaleY);
+      target.closePath();
+    };
+
+    body.drawImage(image, 0, 0, canvas.width, canvas.height);
+    body.globalCompositeOperation = "destination-out";
+    traceArm(body);
+    body.fill();
+    body.beginPath();
+    body.arc(218 * scaleX, 419 * scaleY, 54 * scaleX, 0, Math.PI * 2);
+    body.fill();
+
+    traceArm(arm);
+    arm.clip();
+    arm.drawImage(image, 0, 0, canvas.width, canvas.height);
+    arm.globalCompositeOperation = "destination-out";
+    arm.beginPath();
+    arm.arc(218 * scaleX, 419 * scaleY, 54 * scaleX, 0, Math.PI * 2);
+    arm.fill();
+
+    const pivotX = 462 * scaleX;
+    const pivotY = 382 * scaleY;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duration = 2200;
+    let frame;
+
+    const ease = (value) => value < .5
+      ? 4 * value * value * value
+      : 1 - Math.pow(-2 * value + 2, 3) / 2;
+
+    function swingAngle(progress) {
+      if (progress < .32) return -12;
+      if (progress < .48) return -12 + 31 * ease((progress - .32) / .16);
+      if (progress < .62) return 19 - 5 * ease((progress - .48) / .14);
+      return 14 - 26 * ease((progress - .62) / .38);
+    }
+
+    function drawBall(progress) {
+      let x;
+      let y;
+      let opacity = 1;
+      if (progress < .48) {
+        const inbound = Math.max(0, (progress - .18) / .3);
+        x = (45 + 173 * inbound) * scaleX;
+        y = (360 + 59 * inbound) * scaleY;
+        opacity = Math.min(1, inbound * 3);
+      } else {
+        const outbound = (progress - .48) / .52;
+        x = (218 - 330 * outbound) * scaleX;
+        y = (419 - 210 * outbound - 90 * outbound * (1 - outbound)) * scaleY;
+        opacity = Math.min(1, (1 - outbound) * 2.4);
+      }
+      if (opacity <= 0) return;
+      context.save();
+      context.globalAlpha = opacity;
+      const radius = 22 * scaleX;
+      const gradient = context.createRadialGradient(x - radius * .35, y - radius * .4, 2, x, y, radius);
+      gradient.addColorStop(0, "#ffffb8");
+      gradient.addColorStop(.38, "#edff35");
+      gradient.addColorStop(1, "#b5cf00");
+      context.fillStyle = gradient;
+      context.shadowColor = "rgba(144, 177, 0, .35)";
+      context.shadowBlur = 12;
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+    }
+
+    function draw(timestamp = 0) {
+      const progress = reducedMotion ? .48 : (timestamp % duration) / duration;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(bodyLayer, 0, 0);
+      context.save();
+      context.translate(pivotX, pivotY);
+      context.rotate(swingAngle(progress) * Math.PI / 180);
+      context.translate(-pivotX, -pivotY);
+      context.drawImage(armLayer, 0, 0);
+      context.restore();
+      drawBall(progress);
+
+      if (progress > .455 && progress < .525) {
+        const pulse = 1 - Math.abs(progress - .49) / .035;
+        context.save();
+        context.globalAlpha = Math.max(0, pulse) * .72;
+        context.strokeStyle = "#0a9b59";
+        context.lineWidth = 3 * scaleX;
+        context.beginPath();
+        context.arc(218 * scaleX, 419 * scaleY, (35 + 26 * pulse) * scaleX, -.9, .9);
+        context.stroke();
+        context.restore();
+      }
+
+      if (!reducedMotion) frame = requestAnimationFrame(draw);
+    }
+
+    rig.classList.add("is-ready");
+    draw();
+    window.addEventListener("pagehide", () => cancelAnimationFrame(frame), { once: true });
+  };
+}
+
 /* Lightweight rigid-body type: pieces fall into place, collide, and yield to the cursor. */
 function initKineticType() {
   if (kineticStarted || page !== "home") return;
@@ -617,6 +753,7 @@ async function initCrystal() {
   }
 }
 
+initMarioTennisRig();
 applyLanguage();
 updateSoundUI();
 if (page === "home" && unlocked) scheduleCrystal();
