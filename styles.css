@@ -1124,3 +1124,223 @@ textarea { font-family: var(--sans); }
   .information-stage { transition: opacity 120ms ease; }
   .profile-wordmark, .service-grid article::after, .work-card i { animation: none !important; transition: none !important; }
 }
+
+/* 2026-07-22 / Profile rhythm reset.
+   Name, navigation/statement and reel are separate flow regions so they cannot
+   overlap. Every image keeps its intrinsic ratio and shares one tilted baseline. */
+.profile-showcase {
+  height: auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.profile-showcase-sticky {
+  position: relative;
+  top: auto;
+  display: block;
+  height: auto;
+  min-height: 0;
+  padding: clamp(112px, 10vw, 160px) 0 clamp(64px, 7vw, 104px);
+  overflow: hidden;
+}
+
+.profile-name-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-wordmark {
+  position: relative;
+  top: auto;
+  left: -0.5vw;
+  gap: 5vw;
+  font-size: clamp(7.5rem, 14vw, 14rem);
+  line-height: .74;
+}
+
+.profile-meta-band {
+  position: relative;
+  z-index: 8;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: clamp(32px, 6vw, 96px);
+  margin-top: clamp(64px, 7vw, 112px);
+  padding: 0 5vw;
+}
+
+.profile-local-nav,
+.profile-unified-line,
+.profile-showcase-copy {
+  position: static;
+  inset: auto;
+}
+
+.profile-local-nav {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  font-size: clamp(.82rem, 1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.profile-unified-line {
+  margin: 1.25rem 0 0;
+  font-size: clamp(.88rem, 1.15vw, 1.08rem);
+  font-weight: 600;
+  letter-spacing: .045em;
+}
+
+.profile-showcase-copy {
+  display: grid;
+  justify-items: end;
+  color: var(--ink);
+  text-align: right;
+}
+
+.profile-showcase-copy h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.profile-rail-window {
+  position: relative;
+  inset: auto;
+  z-index: 5;
+  margin-top: clamp(64px, 7vw, 112px);
+  padding: clamp(28px, 3.5vw, 52px) 0;
+  overflow: hidden;
+}
+
+.profile-rail {
+  --rail-gap: clamp(24px, 2.4vw, 44px);
+  --rail-loop-distance: -2000px;
+  --rail-loop-duration: 34s;
+  display: flex;
+  width: max-content;
+  height: auto;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  animation: none;
+  transform: translate3d(0, 0, 0);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+
+.profile-rail.is-ready {
+  animation: profileRailMeasured var(--rail-loop-duration) linear infinite;
+}
+
+.profile-rail:hover {
+  animation-play-state: running;
+}
+
+.profile-rail-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--rail-gap);
+  padding: 0 var(--rail-gap) 0 0;
+}
+
+.rail-shot,
+.profile-rail-group .rail-shot:nth-child(2),
+.profile-rail-group .rail-shot:nth-child(3) {
+  flex: 0 0 auto;
+  width: auto;
+  height: clamp(320px, 38vw, 540px);
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+  transform: rotate(-4deg);
+  transform-origin: center;
+}
+
+.rail-shot img {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+@keyframes profileRailMeasured {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(var(--rail-loop-distance), 0, 0); }
+}
+
+@media (max-width: 900px) {
+  .profile-showcase-sticky { padding-top: 136px; }
+  .profile-wordmark { font-size: clamp(7rem, 20vw, 11rem); }
+  .profile-meta-band { margin-top: 56px; padding-inline: 18px; }
+  .profile-rail-window { margin-top: 64px; }
+  .rail-shot,
+  .profile-rail-group .rail-shot:nth-child(2),
+  .profile-rail-group .rail-shot:nth-child(3) { height: clamp(280px, 46vw, 430px); }
+}
+
+@media (max-width: 520px) {
+  .profile-showcase-sticky { padding-top: 128px; }
+  .profile-wordmark { font-size: 24vw; }
+  .profile-meta-band { grid-template-columns: 1fr; gap: 20px; margin-top: 48px; }
+  .profile-showcase-copy { display: none; }
+  .profile-unified-line { max-width: 30ch; font-size: .8rem; line-height: 1.35; }
+  .profile-rail-window { margin-top: 56px; padding-block: 24px; }
+  .profile-rail { --rail-gap: 18px; }
+  .rail-shot,
+  .profile-rail-group .rail-shot:nth-child(2),
+  .profile-rail-group .rail-shot:nth-child(3) { height: clamp(250px, 78vw, 350px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-rail-window { overflow-x: auto; overflow-y: hidden; }
+  .profile-rail.is-ready { animation: none !important; transform: none; }
+  .profile-rail-group[aria-hidden="true"] { display: none; }
+}
+
+/* Deck-approved project media now lives locally; typography remains legible
+   over both light and dark frames through one restrained editorial gradient. */
+.work-card {
+  color: #fff;
+  background: #11130f;
+}
+
+.work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(8, 12, 10, .5) 0%, transparent 42%, rgba(8, 12, 10, .76) 100%);
+  pointer-events: none;
+}
+
+.work-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  transition: transform 500ms var(--ease-out);
+}
+
+.work-card span,
+.work-card h3 { z-index: 2; text-shadow: 0 1px 18px rgba(0, 0, 0, .28); }
+
+@media (hover: hover) and (pointer: fine) {
+  .work-card:hover img { transform: scale(1.025); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-card img { transition: none; }
+}

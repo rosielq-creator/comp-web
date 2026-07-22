@@ -695,20 +695,50 @@ if (profileSections.length) {
   }
 }
 
-/* Use the rendered width of one complete image group as the loop distance.
-   This avoids the blank seam caused by translating an assumed 50%. */
-function syncProfileRailLoop() {
+/* Build two pixel-identical image groups and move by exactly one group width.
+   Extra shots are added to the first group on wide screens so the viewport can
+   never outrun the loop and reveal an empty seam. */
+function buildProfileRailLoop() {
   const rail = document.querySelector("#profileRail");
   const firstGroup = rail?.querySelector(".profile-rail-group");
   if (!rail || !firstGroup) return;
-  rail.style.setProperty("--rail-loop-distance", `-${firstGroup.offsetWidth}px`);
+
+  rail.classList.remove("is-ready");
+  rail.querySelectorAll(".profile-rail-group:not(:first-child)").forEach((group) => group.remove());
+  firstGroup.querySelectorAll("[data-loop-fill]").forEach((shot) => shot.remove());
+
+  const sourceShots = [...firstGroup.children];
+  const minimumGroupWidth = window.innerWidth * 1.35;
+  let sourceIndex = 0;
+  while (firstGroup.scrollWidth < minimumGroupWidth && sourceShots.length && sourceIndex < 32) {
+    const clone = sourceShots[sourceIndex % sourceShots.length].cloneNode(true);
+    clone.dataset.loopFill = "";
+    clone.querySelector("img")?.setAttribute("alt", "");
+    firstGroup.append(clone);
+    sourceIndex += 1;
+  }
+
+  const secondGroup = firstGroup.cloneNode(true);
+  secondGroup.setAttribute("aria-hidden", "true");
+  secondGroup.querySelectorAll("img").forEach((image) => image.setAttribute("alt", ""));
+  rail.append(secondGroup);
+
+  const loopDistance = firstGroup.getBoundingClientRect().width;
+  rail.style.setProperty("--rail-loop-distance", `-${loopDistance}px`);
+  rail.style.setProperty("--rail-loop-duration", `${Math.max(26, loopDistance / 55)}s`);
+  requestAnimationFrame(() => rail.classList.add("is-ready"));
 }
 
 if (document.querySelector("#profileRail")) {
   const profileImages = [...document.querySelectorAll("#profileRail img")];
   Promise.all(profileImages.map((image) => image.decode?.().catch(() => {}) ?? Promise.resolve()))
-    .then(syncProfileRailLoop);
-  window.addEventListener("resize", syncProfileRailLoop, { passive: true });
+    .then(buildProfileRailLoop);
+
+  let profileRailResizeFrame = 0;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(profileRailResizeFrame);
+    profileRailResizeFrame = requestAnimationFrame(buildProfileRailLoop);
+  }, { passive: true });
 }
 
 document.querySelector("#inquiryForm")?.addEventListener("submit", (event) => {
