@@ -498,14 +498,14 @@ async function initCrystal() {
     crystal.position.set(compact ? .35 : .2, compact ? .35 : .05, 0);
     scene.add(crystal);
 
-    const wire = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x315dff, wireframe: true, transparent: true, opacity: .055 }));
+    const wire = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: 0x00a75d, wireframe: true, transparent: true, opacity: .065 }));
     wire.scale.setScalar(1.018);
     crystal.add(wire);
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x91a7d0, 2.4));
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x86bfa3, 2.4));
     const key = new THREE.DirectionalLight(0xffffff, 5);
     key.position.set(3, 5, 4);
     scene.add(key);
-    const rim = new THREE.DirectionalLight(0x315dff, 4);
+    const rim = new THREE.DirectionalLight(0x00a75d, 4);
     rim.position.set(-4, 1, -2);
     scene.add(rim);
 
