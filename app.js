@@ -580,12 +580,10 @@ function syncWorkVideoPlayback() {
     document.querySelectorAll(".work-audio-toggle").forEach((button) => { button.textContent = "SOUND OFF"; });
   }
   workVideos.forEach((video) => {
-    const shouldPlay = workIsActive
-      && video.dataset.inView === "true"
-      && video.dataset.userPaused !== "true"
-      && !workMotionQuery.matches;
-    if (shouldPlay) video.play().catch(() => {});
-    else video.pause();
+    /* Playback is always user initiated. Leaving WORK, hiding the tab or
+       scrolling a card out of view pauses it without scheduling a resume. */
+    const shouldPause = !workIsActive || video.dataset.inView !== "true" || document.hidden;
+    if (shouldPause) video.pause();
   });
 }
 
@@ -634,12 +632,18 @@ workVideos.forEach((video) => {
 
   playButton.addEventListener("click", () => {
     if (video.paused) {
-      video.dataset.userPaused = "false";
       video.play().catch(() => {});
     } else {
-      video.dataset.userPaused = "true";
       video.pause();
     }
+  });
+
+  video.addEventListener("click", () => {
+    if (!window.matchMedia("(hover: none)").matches) return;
+    document.querySelectorAll(".work-card.is-controls-visible").forEach((item) => {
+      if (item !== card) item.classList.remove("is-controls-visible");
+    });
+    card.classList.toggle("is-controls-visible");
   });
 
   progress.addEventListener("input", () => {
@@ -682,7 +686,6 @@ document.querySelectorAll(".work-audio-toggle").forEach((button) => {
       soundOn = false;
       sessionStorage.setItem("gtai-sound", "off");
       stopAmbient();
-      video.play().catch(() => {});
     }
   });
 });

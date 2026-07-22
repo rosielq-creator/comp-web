@@ -1374,12 +1374,26 @@ textarea { font-family: var(--sans); }
   background: rgba(8, 12, 10, .48);
   box-shadow: 0 8px 28px rgba(0, 0, 0, .14);
   backdrop-filter: blur(12px);
-  opacity: .92;
-  transition: opacity 180ms ease, background 180ms ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 180ms ease, transform 180ms var(--ease-out), background 180ms ease;
 }
 
 .work-card:hover .work-video-controls,
-.work-video-controls:focus-within { opacity: 1; background: rgba(8, 12, 10, .7); }
+.work-card.is-controls-visible .work-video-controls,
+.work-video-controls:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  background: rgba(8, 12, 10, .7);
+}
+
+@media (hover: none) {
+  .work-card:hover .work-video-controls { opacity: 0; pointer-events: none; transform: translateY(6px); }
+  .work-card.is-controls-visible .work-video-controls,
+  .work-video-controls:focus-within { opacity: 1; pointer-events: auto; transform: translateY(0); }
+}
 
 .work-play-toggle {
   display: grid;
