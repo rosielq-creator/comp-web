@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260722-12">
+  <link rel="stylesheet" href="styles.css?v=20260722-13">
 </head>
 <body data-page="home">
   <div class="noise" aria-hidden="true"></div>
@@ -51,8 +51,11 @@
         <a class="gt-endorsement" href="https://gtomato.com/" target="_blank" rel="noreferrer" aria-label="GreenTomato company website"><span>BY</span><img src="https://gtomato.com/_next/static/media/logo-gt-color.fd039543.svg" alt="GreenTomato"></a>
       </div>
       <nav class="header-nav" aria-label="Primary navigation">
-        <button class="nav-link is-active" id="homeNav" type="button" data-i18n="home">Home</button>
-        <button class="nav-link" id="talentsNav" type="button" data-i18n="talents">Talents</button>
+        <button class="nav-link is-active" type="button" data-view="home" data-i18n="home">Home</button>
+        <a class="nav-link nav-external" href="https://gtomato.com/" target="_blank" rel="noreferrer" data-i18n="companyNav">Company</a>
+        <button class="nav-link" type="button" data-view="services" data-i18n="servicesNav">Services</button>
+        <button class="nav-link" type="button" data-view="artists" data-i18n="artistsNav">Artists</button>
+        <button class="nav-link" type="button" data-view="work" data-i18n="workNav">Work</button>
       </nav>
       <div class="header-tools">
         <button class="text-button" id="langToggle" type="button" aria-label="Switch language">繁</button>
@@ -90,22 +93,22 @@
           </button>
           <button class="toy-talent toy-noah" type="button" data-talent="1" aria-label="Meet Noah">
             <img class="toy-figure" src="assets/figures/noah-toy.png" alt="" decoding="async">
-            <span class="toy-label"><b>NOAH</b><small>VIEW TALENT ↗</small></span>
+            <span class="toy-label"><b>NOAH</b><small>VIEW PROFILE ↗</small></span>
           </button>
           <button class="toy-talent toy-ooona" type="button" data-talent="2" aria-label="Meet Ooona">
             <span class="toy-anchor toy-cube" aria-hidden="true"><i>A</i></span>
             <img class="toy-figure" src="assets/figures/ooona-toy.png" alt="" decoding="async">
-            <span class="toy-label"><b>OOONA</b><small>VIEW TALENT ↗</small></span>
+            <span class="toy-label"><b>OOONA</b><small>VIEW PROFILE ↗</small></span>
           </button>
           <button class="toy-talent toy-amber" type="button" data-talent="3" aria-label="Meet Amber">
             <span class="toy-anchor toy-bar" aria-hidden="true"></span>
             <img class="toy-figure" src="assets/figures/amber-toy.png" alt="" decoding="async">
-            <span class="toy-label"><b>AMBER</b><small>VIEW TALENT ↗</small></span>
+            <span class="toy-label"><b>AMBER</b><small>VIEW PROFILE ↗</small></span>
           </button>
           <button class="toy-talent toy-maya" type="button" data-talent="4" aria-label="Meet Maya">
             <span class="toy-anchor toy-steps" aria-hidden="true"><i></i><i></i><i></i></span>
             <img class="toy-figure" src="assets/figures/maya-toy.png" alt="" decoding="async">
-            <span class="toy-label"><b>MAYA</b><small>VIEW TALENT ↗</small></span>
+            <span class="toy-label"><b>MAYA</b><small>VIEW PROFILE ↗</small></span>
           </button>
         </div>
         <p class="home-manifesto" data-i18n="homeManifesto">An independent roster of AI talents built for fashion, culture and the next visual era.</p>
@@ -195,9 +198,50 @@
       </nav>
       <p class="track-label" id="trackLabel">TRACK 01 / CRYSTAL STATIC</p>
       </section>
+
+      <section class="information-stage services-stage" id="servicesStage" aria-labelledby="servicesTitle" aria-hidden="true" inert>
+        <div class="info-stage-inner">
+          <header class="info-stage-heading">
+            <p class="micro">GTAI / CAPABILITIES / 2026</p>
+            <h2 id="servicesTitle" data-i18n="servicesHeadline">Ideas become<br><em>living worlds.</em></h2>
+            <p data-i18n="servicesIntro">From AI film and digital humans to always-on social content, we unite creative direction, production and technology in one team.</p>
+          </header>
+          <div class="service-grid">
+            <article><span>01</span><h3>AI VIDEO<br>PRODUCTION</h3><p data-i18n="serviceVideo">Concept, art direction and AI-powered film production for campaigns and branded stories.</p></article>
+            <article><span>02</span><h3>DIGITAL HUMAN<br>CREATION</h3><p data-i18n="serviceHuman">Distinctive virtual personalities designed for long-term brand worlds, content and engagement.</p></article>
+            <article><span>03</span><h3>AI CAMPAIGN<br>&amp; SOCIAL</h3><p data-i18n="serviceSocial">Scalable creative systems for launch campaigns, social channels and continuous content.</p></article>
+            <article><span>04</span><h3>CUSTOM AI<br>INTEGRATION</h3><p data-i18n="serviceIntegration">Persona, voice, agentic tools and tailored software, hardware or data connections.</p></article>
+          </div>
+          <div class="proof-strip" aria-label="GreenTomato group credentials">
+            <p><strong>600+</strong><span data-i18n="clientsPartners">Clients &amp; partners</span></p>
+            <p><strong>1,500+</strong><span data-i18n="projectsDelivered">Projects delivered</span></p>
+            <p><strong>300+</strong><span data-i18n="professionals">Professionals</span></p>
+            <p><strong>100+</strong><span data-i18n="awards">Awards</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="information-stage work-stage" id="workStage" aria-labelledby="workTitle" aria-hidden="true" inert>
+        <div class="info-stage-inner">
+          <header class="info-stage-heading work-heading">
+            <p class="micro">SELECTED WORK / GT GROUP NETWORK</p>
+            <h2 id="workTitle" data-i18n="workHeadline">Built with brands.<br><em>Made for culture.</em></h2>
+            <p data-i18n="workIntro">A selection of brands and creative partnerships featured across the GreenTomato company portfolio.</p>
+          </header>
+          <div class="work-grid" aria-label="Selected brand work">
+            <article class="work-card work-card-a"><span>PROJECT / 01</span><h3>BOWTIE</h3><i aria-hidden="true"></i></article>
+            <article class="work-card work-card-b"><span>PROJECT / 02</span><h3>DAH SING</h3><i aria-hidden="true"></i></article>
+            <article class="work-card work-card-c"><span>PROJECT / 03</span><h3>KICKS CREW</h3><i aria-hidden="true"></i></article>
+            <article class="work-card work-card-d"><span>PROJECT / 04</span><h3>KOISEA</h3><i aria-hidden="true"></i></article>
+            <article class="work-card work-card-e"><span>PROJECT / 05</span><h3>GRAMS28</h3><i aria-hidden="true"></i></article>
+            <article class="work-card work-card-f"><span>PROJECT / 06</span><h3>NEOPETS</h3><i aria-hidden="true"></i></article>
+          </div>
+          <p class="work-disclaimer" data-i18n="workDisclaimer">Project imagery and detailed credits will be added after final approval.</p>
+        </div>
+      </section>
     </main>
   </div>
 
-  <script type="module" src="app.js?v=20260722-12"></script>
+  <script type="module" src="app.js?v=20260722-13"></script>
 </body>
 </html>

@@ -6,10 +6,27 @@ const translations = {
     tagline: "Next-Generation AI Talents",
     home: "Home",
     talents: "Talents",
+    companyNav: "Company",
+    servicesNav: "Services",
+    artistsNav: "Artists",
+    workNav: "Work",
     homeLineOne: "AI PRODUCTION",
     homeLineTwo: "",
     homeManifesto: "An independent roster of AI talents built for fashion, culture and the next visual era.",
-    meetTalents: "Meet the talents",
+    meetTalents: "Meet the artists",
+    servicesHeadline: "Ideas become<br><em>living worlds.</em>",
+    servicesIntro: "From AI film and digital humans to always-on social content, we unite creative direction, production and technology in one team.",
+    serviceVideo: "Concept, art direction and AI-powered film production for campaigns and branded stories.",
+    serviceHuman: "Distinctive virtual personalities designed for long-term brand worlds, content and engagement.",
+    serviceSocial: "Scalable creative systems for launch campaigns, social channels and continuous content.",
+    serviceIntegration: "Persona, voice, agentic tools and tailored software, hardware or data connections.",
+    clientsPartners: "Clients & partners",
+    projectsDelivered: "Projects delivered",
+    professionals: "Professionals",
+    awards: "Awards",
+    workHeadline: "Built with brands.<br><em>Made for culture.</em>",
+    workIntro: "A selection of brands and creative partnerships featured across the GreenTomato company portfolio.",
+    workDisclaimer: "Project imagery and detailed credits will be added after final approval.",
     account: "Account",
     password: "Password",
     enter: "Enter GTAI",
@@ -58,10 +75,27 @@ const translations = {
     tagline: "新世代 AI 藝人",
     home: "首頁",
     talents: "藝人",
+    companyNav: "公司",
+    servicesNav: "服務",
+    artistsNav: "藝人",
+    workNav: "作品",
     homeLineOne: "AI PRODUCTION",
     homeLineTwo: "",
     homeManifesto: "一組面向時尚、文化與下一個視覺時代的獨立 AI 藝人陣容。",
     meetTalents: "探索藝人陣容",
+    servicesHeadline: "讓創意成為<br><em>鮮活世界。</em>",
+    servicesIntro: "從 AI 影片、數字人到持續運作的社交內容，我們以一個團隊整合創意指導、製作與技術。",
+    serviceVideo: "為品牌企劃與故事提供概念、藝術指導及 AI 影片製作。",
+    serviceHuman: "建立鮮明的虛擬人物，延伸為品牌世界、長期內容及互動體驗。",
+    serviceSocial: "為品牌發佈、社交平台及持續內容建立可規模化的創意系統。",
+    serviceIntegration: "整合人物設定、聲音、智能工具，以及客製軟件、硬件與數據連接。",
+    clientsPartners: "客戶與合作夥伴",
+    projectsDelivered: "完成項目",
+    professionals: "專業團隊",
+    awards: "獎項",
+    workHeadline: "與品牌共創，<br><em>為文化而生。</em>",
+    workIntro: "精選 GreenTomato 公司作品集中涵蓋的品牌與創意合作。",
+    workDisclaimer: "項目圖片及詳細製作名單將於最終確認後加入。",
     account: "帳號",
     password: "密碼",
     enter: "進入 GTAI",
@@ -108,7 +142,7 @@ const translations = {
   }
 };
 
-const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether"]);
+const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether", "servicesHeadline", "workHeadline"]);
 let language = localStorage.getItem("gtai-language") || (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
 
 function applyLanguage() {
@@ -509,30 +543,39 @@ function hydratePanel(panel) {
 
 const homeExperience = document.querySelector("#homeExperience");
 const talentStage = document.querySelector("#talentStage");
-const homeNav = document.querySelector("#homeNav");
-const talentsNav = document.querySelector("#talentsNav");
+const servicesStage = document.querySelector("#servicesStage");
+const workStage = document.querySelector("#workStage");
+const viewNavButtons = [...document.querySelectorAll("[data-view]")];
 
 function showView(view) {
-  const showingTalents = view === "talents";
-  homeExperience?.classList.toggle("is-hidden", showingTalents);
-  talentStage?.classList.toggle("is-visible", showingTalents);
-  homeExperience?.setAttribute("aria-hidden", String(showingTalents));
-  talentStage?.setAttribute("aria-hidden", String(!showingTalents));
-  if (showingTalents) {
-    talentStage?.removeAttribute("inert");
+  const normalizedView = view === "talents" ? "artists" : view;
+  const stages = [
+    ["home", homeExperience],
+    ["artists", talentStage],
+    ["services", servicesStage],
+    ["work", workStage]
+  ];
+  stages.forEach(([name, stage]) => {
+    const isCurrent = name === normalizedView;
+    stage?.classList.toggle(name === "home" ? "is-hidden" : "is-visible", name === "home" ? !isCurrent : isCurrent);
+    stage?.setAttribute("aria-hidden", String(!isCurrent));
+    if (isCurrent) stage?.removeAttribute("inert");
+    else stage?.setAttribute("inert", "");
+  });
+  if (normalizedView === "artists") {
     hydratePanel(panels[currentPanel]);
     window.setTimeout(() => hydratePanel(panels[(currentPanel + 1) % panels.length]), 500);
-  } else {
-    talentStage?.setAttribute("inert", "");
   }
-  homeNav?.classList.toggle("is-active", !showingTalents);
-  talentsNav?.classList.toggle("is-active", showingTalents);
+  viewNavButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.view === normalizedView));
+  if (page === "home") history.replaceState(null, "", normalizedView === "home" ? location.pathname : `#${normalizedView}`);
 }
 
-document.querySelector("#rosterEntry")?.addEventListener("click", () => showView("talents"));
-homeNav?.addEventListener("click", () => showView("home"));
-talentsNav?.addEventListener("click", () => showView("talents"));
-if (page === "home" && window.location.hash === "#talents") showView("talents");
+document.querySelector("#rosterEntry")?.addEventListener("click", () => showView("artists"));
+viewNavButtons.forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
+if (page === "home") {
+  const initialView = location.hash.slice(1);
+  if (["artists", "talents", "services", "work"].includes(initialView)) showView(initialView);
+}
 
 function showPanel(nextIndex, direction) {
   if (!panels.length || changing || nextIndex === currentPanel) return;
@@ -559,7 +602,7 @@ document.querySelector("#prevTalent")?.addEventListener("click", () => showPanel
 document.querySelectorAll(".talent-guide, .toy-talent").forEach((guide) => {
   guide.addEventListener("click", () => {
     const nextIndex = Number(guide.dataset.talent);
-    showView("talents");
+    showView("artists");
     if (Number.isInteger(nextIndex) && nextIndex !== currentPanel) {
       const forward = nextIndex > currentPanel ? 1 : -1;
       window.setTimeout(() => showPanel(nextIndex, forward), 120);
