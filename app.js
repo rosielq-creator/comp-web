@@ -201,12 +201,135 @@ const gate = document.querySelector("#gate");
 const siteShell = document.querySelector("#siteShell");
 const unlocked = sessionStorage.getItem("gtai-preview") === "unlocked";
 let crystalStarted = false;
+let kineticStarted = false;
+
+/* Lightweight rigid-body type: pieces fall into place, collide, and yield to the cursor. */
+function initKineticType() {
+  if (kineticStarted || page !== "home") return;
+  const field = document.querySelector("#kineticType");
+  const hero = field?.closest(".home-experience");
+  const pieces = [...field?.querySelectorAll(".kinetic-piece") || []];
+  if (!field || !hero || !pieces.length) return;
+  kineticStarted = true;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let bounds = field.getBoundingClientRect();
+  const pointer = { x: -1000, y: -1000, active: false };
+  const states = pieces.map((element, index) => ({
+    element,
+    x: bounds.width * Number(element.dataset.x || .5),
+    y: reduceMotion ? bounds.height * Number(element.dataset.y || .5) : -90 - index * 34,
+    anchorX: bounds.width * Number(element.dataset.x || .5),
+    floorY: bounds.height * Number(element.dataset.y || .5),
+    vx: (index % 2 ? -1 : 1) * (.35 + index * .04),
+    vy: 0,
+    radius: Math.max(element.offsetWidth, element.offsetHeight) * .48,
+    rotation: -18 + index * 11,
+    spin: (index % 2 ? -1 : 1) * .22
+  }));
+
+  function place(state) {
+    state.element.style.transform = `translate3d(${state.x - state.element.offsetWidth / 2}px, ${state.y - state.element.offsetHeight / 2}px, 0) rotate(${state.rotation}deg)`;
+  }
+
+  states.forEach(place);
+  if (reduceMotion) return;
+
+  function resize() {
+    bounds = field.getBoundingClientRect();
+    states.forEach((state) => {
+      state.anchorX = bounds.width * Number(state.element.dataset.x || .5);
+      state.floorY = bounds.height * Number(state.element.dataset.y || .5);
+      state.radius = Math.max(state.element.offsetWidth, state.element.offsetHeight) * .48;
+    });
+  }
+
+  hero.addEventListener("pointermove", (event) => {
+    pointer.x = event.clientX - bounds.left;
+    pointer.y = event.clientY - bounds.top;
+    pointer.active = true;
+  }, { passive: true });
+  hero.addEventListener("pointerleave", () => { pointer.active = false; });
+  window.addEventListener("resize", resize, { passive: true });
+
+  let frame;
+  let previous = performance.now();
+  function tick(now) {
+    frame = requestAnimationFrame(tick);
+    if (document.hidden || hero.classList.contains("is-hidden")) return;
+    const step = Math.min((now - previous) / 16.67, 1.7);
+    previous = now;
+
+    states.forEach((state) => {
+      state.vx += (state.anchorX - state.x) * .0018 * step;
+      state.vy += .19 * step;
+
+      if (pointer.active) {
+        const dx = state.x - pointer.x;
+        const dy = state.y - pointer.y;
+        const distance = Math.hypot(dx, dy) || 1;
+        const reach = 145 + state.radius;
+        if (distance < reach) {
+          const force = (1 - distance / reach) * 2.9 * step;
+          state.vx += dx / distance * force;
+          state.vy += dy / distance * force;
+          state.spin += dx * .0012;
+        }
+      }
+
+      state.x += state.vx * step;
+      state.y += state.vy * step;
+      state.rotation += state.spin * step;
+      state.vx *= .985;
+      state.spin *= .992;
+
+      if (state.y + state.radius > state.floorY) {
+        state.y = state.floorY - state.radius;
+        state.vy *= -.48;
+        if (Math.abs(state.vy) < .25) state.vy = 0;
+        state.vx *= .9;
+      }
+      if (state.x < state.radius) { state.x = state.radius; state.vx = Math.abs(state.vx) * .6; }
+      if (state.x > bounds.width - state.radius) { state.x = bounds.width - state.radius; state.vx = -Math.abs(state.vx) * .6; }
+    });
+
+    for (let a = 0; a < states.length; a += 1) {
+      for (let b = a + 1; b < states.length; b += 1) {
+        const first = states[a];
+        const second = states[b];
+        const dx = second.x - first.x;
+        const dy = second.y - first.y;
+        const distance = Math.hypot(dx, dy) || 1;
+        const minimum = (first.radius + second.radius) * .78;
+        if (distance >= minimum) continue;
+        const overlap = (minimum - distance) * .5;
+        const nx = dx / distance;
+        const ny = dy / distance;
+        first.x -= nx * overlap;
+        first.y -= ny * overlap;
+        second.x += nx * overlap;
+        second.y += ny * overlap;
+        const impulse = (second.vx - first.vx) * nx + (second.vy - first.vy) * ny;
+        if (impulse < 0) {
+          first.vx += impulse * nx * .5;
+          first.vy += impulse * ny * .5;
+          second.vx -= impulse * nx * .5;
+          second.vy -= impulse * ny * .5;
+        }
+      }
+    }
+    states.forEach(place);
+  }
+  frame = requestAnimationFrame(tick);
+  window.addEventListener("pagehide", () => cancelAnimationFrame(frame), { once: true });
+}
 
 function revealSite() {
   if (!gate || !siteShell) return;
   gate.classList.add("is-leaving");
   siteShell.removeAttribute("inert");
   startAmbient();
+  initKineticType();
   scheduleCrystal();
   window.setTimeout(() => gate.remove(), 950);
 }
