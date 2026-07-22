@@ -2068,12 +2068,24 @@ textarea { font-family: var(--sans); }
 .crew-stage-inner { display: grid; align-content: center; }
 .crew-stage .info-stage-heading { width: 100%; }
 
-.work-grid .work-card:nth-child(n) { grid-column: span 4; }
-.work-grid .work-card:nth-child(1),
-.work-grid .work-card:nth-child(5),
-.work-grid .work-card:nth-child(9) { grid-column: span 8; }
-.work-grid .work-card:nth-child(2),
-.work-grid .work-card:nth-child(6) { grid-column: span 4; }
+/* Every reel uses the same YouTube player ratio and equal grid footprint.
+   Source videos may be portrait or landscape; YouTube letterboxes them inside
+   the shared 16:9 frame instead of changing the card geometry. */
+.work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.work-grid .work-card:nth-child(n) {
+  grid-column: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+.work-grid .work-card h3 {
+  top: 2.65rem;
+  right: .8rem;
+  bottom: auto;
+  left: .8rem;
+  font-size: clamp(1.25rem, 2vw, 2.2rem);
+  line-height: .88;
+}
+.work-grid .work-card > span { position: absolute; top: .8rem; left: .8rem; }
 
 .top-content-card {
   grid-template-columns: minmax(220px, .82fr) minmax(180px, .62fr) minmax(400px, 1.45fr) minmax(180px, .55fr);
@@ -2104,6 +2116,7 @@ textarea { font-family: var(--sans); }
   .top-content-cover { grid-row: span 2; }
   .top-content-copy { border-bottom: 1px solid rgba(17,17,17,.24); }
   .top-content-rate { grid-column: 2; min-height: 180px; }
+  .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 760px) {
@@ -2112,6 +2125,7 @@ textarea { font-family: var(--sans); }
   .artist-nav-menu:hover .artist-dropdown,
   .artist-nav-menu:focus-within .artist-dropdown,
   .artist-nav-menu.is-open .artist-dropdown { transform: translateY(0); }
+  .work-grid { grid-template-columns: 1fr; }
   .work-grid .work-card:nth-child(n) { grid-column: auto; }
   .top-content-card { grid-template-columns: 1fr; }
   .top-content-cover { grid-row: auto; min-height: 0; aspect-ratio: 3 / 4; border-right: 0; border-bottom: 1px solid rgba(17,17,17,.24); }
