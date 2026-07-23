@@ -1442,24 +1442,27 @@ textarea { font-family: var(--sans); }
   background: rgba(8, 12, 10, .48);
   box-shadow: 0 8px 28px rgba(0, 0, 0, .14);
   backdrop-filter: blur(12px);
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);
-  transition: opacity 180ms ease, transform 180ms var(--ease-out), background 180ms ease;
+  transition: opacity 180ms ease, transform 180ms var(--ease-out), background 180ms ease, visibility 0s linear 180ms;
 }
 
 .work-card:hover .work-video-controls,
 .work-card:has(.work-video-controls :focus-visible) .work-video-controls {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
   background: rgba(8, 12, 10, .7);
+  transition-delay: 0s;
 }
 
 @media (hover: none) {
   .work-card:hover .work-video-controls { opacity: 0; pointer-events: none; transform: translateY(6px); }
   .work-card.is-controls-visible .work-video-controls,
-  .work-video-controls:focus-within { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .work-video-controls:focus-within { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
 }
 
 .work-play-toggle {
@@ -2068,19 +2071,20 @@ textarea { font-family: var(--sans); }
 .crew-stage-inner { display: grid; align-content: center; }
 .crew-stage .info-stage-heading { width: 100%; }
 
-/* Every reel uses the same YouTube player ratio and equal grid footprint.
-   Source videos may be portrait or landscape; YouTube letterboxes them inside
-   the shared 16:9 frame instead of changing the card geometry. */
+/* Every local reel uses the same 16:9 player ratio and equal grid footprint.
+   object-fit: contain preserves the source frame without cropping, while the
+   shared dark surface keeps any letterboxing intentional and consistent. */
 .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .work-grid .work-card:nth-child(n) {
   grid-column: auto;
   min-height: 0;
   aspect-ratio: 16 / 9;
 }
+.work-grid .work-card video { object-fit: contain; }
 .work-grid .work-card h3 {
-  top: 2.65rem;
+  top: auto;
   right: .8rem;
-  bottom: auto;
+  bottom: .8rem;
   left: .8rem;
   font-size: clamp(1.25rem, 2vw, 2.2rem);
   line-height: .88;

@@ -604,7 +604,6 @@ const workStage = document.querySelector("#workStage");
 const crewStage = document.querySelector("#crewStage");
 const viewNavButtons = [...document.querySelectorAll("[data-view]")];
 const workVideos = [...document.querySelectorAll("[data-work-video]")];
-const workEmbeds = [...document.querySelectorAll(".work-video-embed")];
 const workMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const mainSiteHeader = document.querySelector(".site-header:not(.profile-header)");
 
@@ -643,9 +642,6 @@ function syncWorkVideoPlayback() {
     const shouldPause = !workIsActive || video.dataset.inView !== "true" || document.hidden;
     if (shouldPause) video.pause();
   });
-  if (!workIsActive) {
-    workEmbeds.forEach((embed) => embed.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: [] }), "https://www.youtube-nocookie.com"));
-  }
 }
 
 function formatWorkTime(value) {
