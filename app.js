@@ -607,6 +607,12 @@ const workVideos = [...document.querySelectorAll("[data-work-video]")];
 const workMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const mainSiteHeader = document.querySelector(".site-header:not(.profile-header)");
 
+function syncWorkAudioButton(button, isSoundOn) {
+  button.classList.toggle("is-muted", !isSoundOn);
+  button.setAttribute("aria-label", isSoundOn ? "Mute project video" : "Turn sound on");
+  button.setAttribute("aria-pressed", String(isSoundOn));
+}
+
 /* The information views scroll inside their own fixed-height panels, so the
    reading-aware header must follow those scrollers rather than window.scrollY. */
 document.querySelectorAll(".information-stage .info-stage-inner").forEach((scroller) => {
@@ -635,8 +641,7 @@ function syncWorkVideoPlayback() {
   if (!workIsActive) {
     workVideos.forEach((video) => { video.muted = true; });
     document.querySelectorAll(".work-audio-toggle").forEach((button) => {
-      button.textContent = "MUTE";
-      button.setAttribute("aria-pressed", "false");
+      syncWorkAudioButton(button, false);
     });
   }
   workVideos.forEach((video) => {
@@ -669,7 +674,13 @@ workVideos.forEach((video) => {
     </button>
     <input class="work-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Video progress">
     <output class="work-time" aria-live="off">0:00 / 0:00</output>
-    <button class="work-audio-toggle work-control-icon" type="button" aria-label="Turn sound on" aria-pressed="false">MUTE</button>
+    <button class="work-audio-toggle work-control-icon is-muted" type="button" aria-label="Turn sound on" aria-pressed="false">
+      <svg class="work-audio-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path class="work-audio-speaker" d="M4 9h4l5-4v14l-5-4H4z"/>
+        <path class="work-audio-waves" d="M16 9.2c.9.8 1.4 1.7 1.4 2.8s-.5 2-1.4 2.8M18.5 6.8c1.6 1.4 2.5 3.1 2.5 5.2s-.9 3.8-2.5 5.2"/>
+        <path class="work-audio-slash" d="M4.5 4.5l15 15"/>
+      </svg>
+    </button>
     <button class="work-fullscreen-toggle work-control-icon" type="button" aria-label="Enter fullscreen">
       <svg viewBox="0 0 20 20" aria-hidden="true">
         <path d="M7 3H3v4M13 3h4v4M7 17H3v-4M13 17h4v-4"/>
@@ -733,15 +744,11 @@ workVideos.forEach((video) => {
     const enableSound = video.muted;
     workVideos.forEach((item) => { item.muted = true; });
     document.querySelectorAll(".work-audio-toggle").forEach((button) => {
-      button.textContent = "MUTE";
-      button.setAttribute("aria-label", "Turn sound on");
-      button.setAttribute("aria-pressed", "false");
+      syncWorkAudioButton(button, false);
     });
     if (enableSound) {
       video.muted = false;
-      audioButton.textContent = "SOUND";
-      audioButton.setAttribute("aria-label", "Mute project video");
-      audioButton.setAttribute("aria-pressed", "true");
+      syncWorkAudioButton(audioButton, true);
       soundOn = false;
       sessionStorage.setItem("gtai-sound", "off");
       stopAmbient();

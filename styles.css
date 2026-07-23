@@ -2155,6 +2155,10 @@ textarea { font-family: var(--sans); }
 
 .work-meta p:first-child { color: var(--ink); }
 .work-meta strong { font: inherit; }
+.work-meta .work-title-case {
+  font-family: "DM Sans", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  text-transform: none;
+}
 
 .work-card-featured .work-meta {
   min-height: 84px;
@@ -2206,6 +2210,27 @@ textarea { font-family: var(--sans); }
   stroke-linecap: square;
   stroke-width: 1.6;
 }
+
+.work-audio-icon {
+  width: 19px;
+  height: 19px;
+  overflow: visible;
+}
+
+.work-audio-speaker { fill: currentColor; }
+
+.work-audio-waves,
+.work-audio-slash {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.work-audio-slash { display: none; }
+.work-audio-toggle.is-muted .work-audio-waves { display: none; }
+.work-audio-toggle.is-muted .work-audio-slash { display: block; }
 
 .work-media:fullscreen {
   display: grid;
