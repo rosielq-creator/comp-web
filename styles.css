@@ -2071,25 +2071,153 @@ textarea { font-family: var(--sans); }
 .crew-stage-inner { display: grid; align-content: center; }
 .crew-stage .info-stage-heading { width: 100%; }
 
-/* Every local reel uses the same 16:9 player ratio and equal grid footprint.
-   object-fit: contain preserves the source frame without cropping, while the
-   shared dark surface keeps any letterboxing intentional and consistent. */
-.work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* 2026-07-23 / Editorial 1 + 8 work wall.
+   One full-width feature establishes hierarchy; the remaining projects form
+   a disciplined two-column index. Project information stays outside media. */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(18px, 2.2vw, 36px);
+  row-gap: clamp(44px, 6vw, 88px);
+  padding-top: clamp(40px, 5vw, 76px);
+}
+
 .work-grid .work-card:nth-child(n) {
+  display: grid;
   grid-column: auto;
+  gap: 0;
   min-height: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  color: var(--ink);
+  background: transparent;
+}
+
+.work-grid .work-card.work-card-featured { grid-column: 1 / -1; }
+
+.work-media {
+  position: relative;
   aspect-ratio: 16 / 9;
+  overflow: hidden;
+  color: #fff;
+  background: #090b0a;
+  isolation: isolate;
 }
-.work-grid .work-card video { object-fit: contain; }
-.work-grid .work-card h3 {
-  top: auto;
-  right: .8rem;
-  bottom: .8rem;
-  left: .8rem;
-  font-size: clamp(1.25rem, 2vw, 2.2rem);
-  line-height: .88;
+
+.work-grid .work-card::after { display: none; }
+
+.work-grid .work-media video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #090b0a;
 }
-.work-grid .work-card > span { position: absolute; top: .8rem; left: .8rem; }
+
+.work-media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .58));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.work-media:hover::after,
+.work-media:focus-within::after,
+.work-card.is-controls-visible .work-media::after { opacity: 1; }
+
+.work-meta {
+  display: flex;
+  min-height: 72px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 14px 0 18px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 72%, transparent);
+}
+
+.work-meta p {
+  display: flex;
+  gap: clamp(12px, 1.5vw, 24px);
+  margin: 0;
+  color: var(--muted);
+  font: 650 .66rem/1.2 var(--sans);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.work-meta p:first-child { color: var(--ink); }
+.work-meta strong { font: inherit; }
+
+.work-card-featured .work-meta {
+  min-height: 84px;
+  padding-top: 18px;
+}
+
+.work-card-featured .work-meta strong {
+  font-size: clamp(.86rem, 1.1vw, 1.05rem);
+}
+
+.work-grid .work-video-controls {
+  right: clamp(12px, 1.6vw, 24px);
+  bottom: clamp(12px, 1.6vw, 24px);
+  left: clamp(12px, 1.6vw, 24px);
+  grid-template-columns: 44px minmax(80px, 1fr) auto 44px 44px;
+  gap: clamp(5px, .7vw, 10px);
+  padding: 6px 8px;
+}
+
+.work-control-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: transparent;
+  font: 700 .56rem/1 var(--sans);
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.work-control-icon:hover,
+.work-control-icon:focus-visible { color: #0b2418; background: #fff; }
+
+.work-grid .work-play-toggle {
+  width: 44px;
+  height: 44px;
+}
+
+.work-fullscreen-toggle svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-width: 1.6;
+}
+
+.work-media:fullscreen {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  place-items: center;
+  background: #000;
+}
+
+.work-media:fullscreen video { object-fit: contain; }
+.work-media:fullscreen .work-video-controls { bottom: max(24px, env(safe-area-inset-bottom)); }
 
 .top-content-card {
   grid-template-columns: minmax(220px, .82fr) minmax(180px, .62fr) minmax(400px, 1.45fr) minmax(180px, .55fr);
@@ -2131,6 +2259,19 @@ textarea { font-family: var(--sans); }
   .artist-nav-menu.is-open .artist-dropdown { transform: translateY(0); }
   .work-grid { grid-template-columns: 1fr; }
   .work-grid .work-card:nth-child(n) { grid-column: auto; }
+  .work-grid .work-card.work-card-featured { grid-column: auto; }
+  .work-meta { min-height: 68px; padding-block: 12px 16px; }
+  .work-meta p:last-child { text-align: right; }
+  .work-grid .work-video-controls {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    grid-template-columns: 44px minmax(46px, 1fr) auto 44px 44px;
+    gap: 2px;
+    padding: 4px 5px;
+  }
+  .work-control-icon { width: 44px; height: 44px; font-size: .5rem; }
+  .work-time { min-width: 58px; font-size: .5rem; }
   .top-content-card { grid-template-columns: 1fr; }
   .top-content-cover { grid-row: auto; min-height: 0; aspect-ratio: 3 / 4; border-right: 0; border-bottom: 1px solid rgba(17,17,17,.24); }
   .top-content-copy { min-height: 150px; }

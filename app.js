@@ -634,7 +634,10 @@ function syncWorkVideoPlayback() {
   const workIsActive = workStage?.classList.contains("is-visible") && !document.hidden;
   if (!workIsActive) {
     workVideos.forEach((video) => { video.muted = true; });
-    document.querySelectorAll(".work-audio-toggle").forEach((button) => { button.textContent = "SOUND OFF"; });
+    document.querySelectorAll(".work-audio-toggle").forEach((button) => {
+      button.textContent = "MUTE";
+      button.setAttribute("aria-pressed", "false");
+    });
   }
   workVideos.forEach((video) => {
     /* Playback is always user initiated. Leaving WORK, hiding the tab or
@@ -651,11 +654,12 @@ function formatWorkTime(value) {
   return `${minutes}:${seconds}`;
 }
 
-/* Custom controls keep the project grid visually consistent while exposing
-   the two essential video actions: explicit play/pause and precise seeking. */
+/* Custom controls keep every reel visually consistent while exposing play,
+   seeking, sound and fullscreen without permanently covering the work. */
 workVideos.forEach((video) => {
   const card = video.closest(".work-card");
-  if (!card) return;
+  const media = video.closest(".work-media");
+  if (!card || !media) return;
 
   const controls = document.createElement("div");
   controls.className = "work-video-controls";
@@ -665,6 +669,12 @@ workVideos.forEach((video) => {
     </button>
     <input class="work-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Video progress">
     <output class="work-time" aria-live="off">0:00 / 0:00</output>
+    <button class="work-audio-toggle work-control-icon" type="button" aria-label="Turn sound on" aria-pressed="false">MUTE</button>
+    <button class="work-fullscreen-toggle work-control-icon" type="button" aria-label="Enter fullscreen">
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M7 3H3v4M13 3h4v4M7 17H3v-4M13 17h4v-4"/>
+      </svg>
+    </button>
   `;
   video.insertAdjacentElement("afterend", controls);
 
@@ -672,6 +682,8 @@ workVideos.forEach((video) => {
   const playIcon = playButton.querySelector("span");
   const progress = controls.querySelector(".work-progress");
   const time = controls.querySelector(".work-time");
+  const audioButton = controls.querySelector(".work-audio-toggle");
+  const fullscreenButton = controls.querySelector(".work-fullscreen-toggle");
 
   /* Pointer interaction must never pin the controls open after the cursor
      leaves. Keyboard focus remains supported until an actual pointer exit. */
@@ -717,6 +729,50 @@ workVideos.forEach((video) => {
     updateTimeline();
   });
 
+  audioButton.addEventListener("click", () => {
+    const enableSound = video.muted;
+    workVideos.forEach((item) => { item.muted = true; });
+    document.querySelectorAll(".work-audio-toggle").forEach((button) => {
+      button.textContent = "MUTE";
+      button.setAttribute("aria-label", "Turn sound on");
+      button.setAttribute("aria-pressed", "false");
+    });
+    if (enableSound) {
+      video.muted = false;
+      audioButton.textContent = "SOUND";
+      audioButton.setAttribute("aria-label", "Mute project video");
+      audioButton.setAttribute("aria-pressed", "true");
+      soundOn = false;
+      sessionStorage.setItem("gtai-sound", "off");
+      stopAmbient();
+    }
+  });
+
+  const enterFullscreen = () => {
+    if (media.requestFullscreen) {
+      media.requestFullscreen().catch(() => {});
+    } else if (video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen();
+    }
+  };
+
+  fullscreenButton.addEventListener("click", () => {
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else enterFullscreen();
+  });
+
+  video.addEventListener("dblclick", () => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else enterFullscreen();
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    const isFullscreen = document.fullscreenElement === media;
+    fullscreenButton.setAttribute("aria-label", `${isFullscreen ? "Exit" : "Enter"} fullscreen`);
+    card.classList.toggle("is-fullscreen", isFullscreen);
+  });
+
   video.addEventListener("play", updatePlayState);
   video.addEventListener("pause", updatePlayState);
   video.addEventListener("loadedmetadata", updateTimeline);
@@ -737,23 +793,6 @@ if (workVideos.length && "IntersectionObserver" in window) {
 } else {
   workVideos.forEach((video) => { video.dataset.inView = "true"; });
 }
-
-document.querySelectorAll(".work-audio-toggle").forEach((button) => {
-  button.addEventListener("click", () => {
-    const video = button.closest(".work-card")?.querySelector("video");
-    if (!video) return;
-    const enableSound = video.muted;
-    workVideos.forEach((item) => { item.muted = true; });
-    document.querySelectorAll(".work-audio-toggle").forEach((item) => { item.textContent = "SOUND OFF"; });
-    if (enableSound) {
-      video.muted = false;
-      button.textContent = "SOUND ON";
-      soundOn = false;
-      sessionStorage.setItem("gtai-sound", "off");
-      stopAmbient();
-    }
-  });
-});
 
 document.addEventListener("visibilitychange", syncWorkVideoPlayback);
 workMotionQuery.addEventListener?.("change", syncWorkVideoPlayback);
