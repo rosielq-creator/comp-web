@@ -1,0 +1,163 @@
+.profile-page .profile-header.profile-refreshed {
+  position: fixed;
+  z-index: 120;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 clamp(20px, 3.2vw, 56px);
+  color: #171813;
+  background: rgba(243, 248, 243, 0.9);
+  border-bottom: 1px solid rgba(23, 24, 19, 0.16);
+  backdrop-filter: blur(16px);
+}
+.profile-refreshed .profile-refresh-logo {
+  width: max-content;
+  color: inherit;
+  font: 600 25px/1 "DM Sans", sans-serif;
+  letter-spacing: -0.07em;
+  text-decoration: none;
+}
+.profile-refreshed .profile-refresh-logo span {
+  margin-left: 4px;
+  font-size: 8px;
+  letter-spacing: 0;
+  vertical-align: top;
+}
+.profile-refresh-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(22px, 2.5vw, 44px);
+}
+.profile-refresh-nav a {
+  position: relative;
+  padding: 28px 0;
+  color: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.profile-refresh-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 20px;
+  height: 1px;
+  background: currentColor;
+  transition: right 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.profile-refresh-nav a:hover::after,
+.profile-refresh-nav a.is-active::after { right: 0; }
+.profile-refresh-nav .profile-contact { color: #498c1e; }
+.profile-refresh-tools {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.profile-refresh-tools button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  color: inherit;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.profile-refresh-language {
+  font-family: "DM Sans", "Noto Sans TC", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.profile-refresh-menu { display: none; position: relative; }
+.profile-refresh-menu span {
+  position: absolute;
+  left: 9px;
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), top 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.profile-refresh-menu span:first-child { top: 17px; }
+.profile-refresh-menu span:last-child { top: 26px; }
+.profile-mobile-nav {
+  position: fixed;
+  inset: 64px 0 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  color: #f1efe8;
+  background: #171813;
+}
+.profile-mobile-nav a {
+  padding: 8px 0;
+  color: inherit;
+  border-bottom: 1px solid rgba(241, 239, 232, 0.25);
+  font: 400 clamp(50px, 16vw, 84px)/0.95 "Instrument Serif", serif;
+  text-decoration: none;
+}
+.profile-menu-open { overflow: hidden; }
+.profile-menu-open .profile-mobile-nav { display: flex; }
+.profile-menu-open .profile-refresh-menu span:first-child { top: 22px; transform: rotate(45deg); }
+.profile-menu-open .profile-refresh-menu span:last-child { top: 22px; transform: rotate(-45deg); }
+
+.profile-page .inquiry-section .section-marker span:last-child::after { content: " / ALL SERVICES"; }
+.profile-page .profile-service-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 8px 0 24px;
+}
+.profile-page .profile-service-options label { cursor: pointer; }
+.profile-page .profile-service-options input { position: absolute; opacity: 0; }
+.profile-page .profile-service-options span {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid rgba(23, 24, 19, 0.25);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+.profile-page .profile-service-options input:checked + span {
+  color: #171813;
+  border-color: #9eea50;
+  background: #9eea50;
+}
+.profile-page .profile-service-options input:focus-visible + span {
+  outline: 2px solid #498c1e;
+  outline-offset: 2px;
+}
+.profile-page .profile-form-note {
+  max-width: 420px;
+  margin: 0;
+  color: rgba(23, 24, 19, 0.58);
+  font-size: 10px;
+}
+
+@media (max-width: 800px) {
+  .profile-page .profile-header.profile-refreshed {
+    height: 64px;
+    grid-template-columns: 1fr auto;
+  }
+  .profile-refresh-nav { display: none; }
+  .profile-refresh-menu { display: block; }
+  .profile-page .profile-service-options { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-refreshed *, .profile-refreshed *::before, .profile-refreshed *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

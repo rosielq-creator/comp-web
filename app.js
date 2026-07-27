@@ -578,11 +578,6 @@ if (page === "home") {
       document.querySelector("#password").select();
     }
   });
-} else if (!unlocked) {
-  window.location.replace("index.html");
-} else if (soundOn) {
-  const resumeOnce = () => { startAmbient(); document.removeEventListener("pointerdown", resumeOnce); };
-  document.addEventListener("pointerdown", resumeOnce, { once: true });
 }
 
 /* Magazine page carousel. */
