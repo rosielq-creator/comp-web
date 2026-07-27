@@ -2,7 +2,7 @@ const artists = [
   {
     name: "Mario",
     role: "Lifestyle · Fashion · Sport",
-    image: "assets/featured/mario-commercial-v4.webp",
+    image: "assets/featured/mario-editorial-bw.webp",
     href: "mario.html",
     alt: "Mario, GTAI featured AI lifestyle and sport artist",
     position: "center center"
@@ -206,25 +206,153 @@ document.querySelector("#artistStage")?.addEventListener("touchend", (event) => 
   if (Math.abs(delta) > 45) setArtist((activeArtist + (delta < 0 ? 1 : -1) + artists.length) % artists.length);
 }, { passive: true });
 
-document.querySelectorAll(".case-media").forEach((button) => {
-  const video = button.querySelector("video");
-  if (!video) return;
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".case-media video").forEach((other) => {
-      if (other !== video) {
-        other.pause();
-        other.closest(".case-media")?.classList.remove("is-playing");
-      }
-    });
-    if (video.paused) {
-      video.play().then(() => button.classList.add("is-playing")).catch(() => {});
-    } else {
-      video.pause();
-      button.classList.remove("is-playing");
+const workCards = [...document.querySelectorAll("[data-work]")];
+const workVideos = workCards.map((card) => card.querySelector("video")).filter(Boolean);
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+let activeWorkVideo = null;
+
+function syncVideoControls(video) {
+  const media = video.closest(".case-media");
+  const play = media?.querySelector(".media-play");
+  const mute = media?.querySelector(".media-mute");
+  if (play) {
+    play.textContent = video.paused ? "▶" : "Ⅱ";
+    play.setAttribute("aria-label", video.paused ? "Play preview" : "Pause preview");
+  }
+  if (mute) {
+    mute.textContent = video.muted ? "MUTE" : "SOUND ON";
+    mute.setAttribute("aria-label", video.muted ? "Turn sound on" : "Mute video");
+  }
+}
+
+function playPreview(video) {
+  workVideos.forEach((other) => {
+    if (other !== video) {
+      other.pause();
+      other.muted = true;
+      syncVideoControls(other);
     }
   });
-  video.addEventListener("ended", () => button.classList.remove("is-playing"));
+  activeWorkVideo = video;
+  video.muted = true;
+  video.play().catch(() => {});
+  syncVideoControls(video);
+}
+
+workCards.forEach((card) => {
+  const media = card.querySelector(".case-media");
+  const video = media?.querySelector("video");
+  const play = media?.querySelector(".media-play");
+  const mute = media?.querySelector(".media-mute");
+  const fullscreen = media?.querySelector(".media-fullscreen");
+  if (!media || !video) return;
+
+  play?.addEventListener("click", () => {
+    if (video.paused) {
+      workVideos.forEach((other) => {
+        if (other !== video) other.pause();
+      });
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+    syncVideoControls(video);
+  });
+
+  mute?.addEventListener("click", () => {
+    workVideos.forEach((other) => {
+      if (other !== video) {
+        other.muted = true;
+        syncVideoControls(other);
+      }
+    });
+    video.muted = !video.muted;
+    if (video.paused) video.play().catch(() => {});
+    syncVideoControls(video);
+  });
+
+  fullscreen?.addEventListener("click", async () => {
+    try {
+      if (video.requestFullscreen) await video.requestFullscreen();
+      else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+      else if (media.requestFullscreen) await media.requestFullscreen();
+    } catch {
+      // Fullscreen availability is controlled by the browser/device.
+    }
+  });
+
+  video.addEventListener("play", () => syncVideoControls(video));
+  video.addEventListener("pause", () => syncVideoControls(video));
+  video.addEventListener("volumechange", () => syncVideoControls(video));
+  syncVideoControls(video);
 });
+
+if (workCards.length) {
+  const previewObserver = new IntersectionObserver((entries) => {
+    if (reduceMotion.matches) return;
+    const centered = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (centered?.intersectionRatio >= 0.52) {
+      const video = centered.target.querySelector("video");
+      if (video && video !== activeWorkVideo) playPreview(video);
+    }
+  }, { threshold: [0.25, 0.52, 0.72] });
+  workCards.forEach((card) => previewObserver.observe(card));
+}
+
+let workArcFrame = 0;
+function updateWorkArc() {
+  workArcFrame = 0;
+  if (!workCards.length || reduceMotion.matches) return;
+  const viewportCenter = window.innerHeight * 0.5;
+  let closestCard = null;
+  let closestDistance = Infinity;
+  const mobile = innerWidth <= 800;
+
+  workCards.forEach((card, index) => {
+    const bounds = card.getBoundingClientRect();
+    const center = bounds.top + bounds.height * 0.5;
+    const normalized = Math.max(-1.35, Math.min(1.35, (center - viewportCenter) / Math.max(innerHeight, 1)));
+    const distance = Math.abs(normalized);
+    const rotate = normalized * (mobile ? -4.5 : -13);
+    const depth = mobile ? 0 : -distance * 150;
+    const scale = 1 - Math.min(distance * (mobile ? 0.035 : 0.08), 0.1);
+    const yaw = mobile ? 0 : (index % 2 ? -1 : 1) * distance * 2.4;
+    card.style.setProperty("--arc-rotate", `${rotate.toFixed(2)}deg`);
+    card.style.setProperty("--arc-z", `${depth.toFixed(1)}px`);
+    card.style.setProperty("--arc-scale", scale.toFixed(3));
+    card.style.setProperty("--arc-y", `${yaw.toFixed(2)}deg`);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestCard = card;
+    }
+  });
+
+  workCards.forEach((card) => card.classList.toggle("is-center", card === closestCard && closestDistance < 0.42));
+}
+
+function requestWorkArc() {
+  if (!workArcFrame) workArcFrame = requestAnimationFrame(updateWorkArc);
+}
+
+window.addEventListener("scroll", requestWorkArc, { passive: true });
+window.addEventListener("resize", requestWorkArc, { passive: true });
+reduceMotion.addEventListener?.("change", requestWorkArc);
+updateWorkArc();
+
+const artistStage = document.querySelector("#artistStage");
+if (artistStage && !reduceMotion.matches && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  artistStage.addEventListener("pointermove", (event) => {
+    const bounds = artistStage.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    artistStage.style.transform = `perspective(1200px) rotateY(${(x * 5).toFixed(2)}deg) rotateX(${(-y * 3).toFixed(2)}deg)`;
+  }, { passive: true });
+  artistStage.addEventListener("pointerleave", () => {
+    artistStage.style.transform = "";
+  });
+}
 
 const form = document.querySelector("#projectForm");
 form?.addEventListener("submit", (event) => {
@@ -268,7 +396,7 @@ function initSignalField() {
       const radius = 90 + ring * 84 + Math.sin(frame * 0.008 + ring) * 12;
       context.beginPath();
       context.ellipse(centerX, centerY, radius * 1.35, radius * 0.56, -0.24, 0, Math.PI * 2);
-      context.strokeStyle = `rgba(158, 234, 80, ${0.18 - ring * 0.026})`;
+      context.strokeStyle = `rgba(91, 101, 116, ${0.16 - ring * 0.024})`;
       context.lineWidth = 1;
       context.stroke();
     }
@@ -277,7 +405,7 @@ function initSignalField() {
       const radius = 58 + (point % 9) * 48;
       const x = centerX + Math.cos(angle) * radius * 1.45;
       const y = centerY + Math.sin(angle) * radius * 0.58;
-      context.fillStyle = point % 5 === 0 ? "rgba(158,234,80,.72)" : "rgba(241,239,232,.25)";
+      context.fillStyle = point % 5 === 0 ? "rgba(102,112,126,.58)" : "rgba(41,40,37,.2)";
       context.fillRect(x, y, point % 5 === 0 ? 2 : 1, point % 5 === 0 ? 2 : 1);
     }
     frame += 1;

@@ -458,3 +458,550 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .signal-field, .artist-signal { display: none; }
   .artist-portrait img { transform: none !important; }
 }
+
+/* 2026 light editorial refresh */
+:root {
+  --ink: oklch(0.205 0.012 88);
+  --paper: oklch(0.975 0.012 88);
+  --paper-deep: oklch(0.935 0.016 88);
+  --signal: oklch(0.78 0.19 132);
+  --silver: oklch(0.82 0.012 245);
+  --silver-dark: oklch(0.52 0.018 245);
+  --line-dark: oklch(0.74 0.012 88 / 0.72);
+  --line-light: oklch(0.82 0.01 88 / 0.7);
+  --muted-dark: oklch(0.46 0.014 88);
+  --muted-light: oklch(0.46 0.014 88);
+}
+
+html,
+body {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.agency-header,
+.agency-header-light {
+  color: var(--ink);
+}
+
+.agency-header.is-scrolled,
+.agency-header-light.is-scrolled {
+  color: var(--ink);
+  background: oklch(0.975 0.012 88 / 0.88);
+  border-color: var(--line-dark);
+  backdrop-filter: blur(18px) saturate(1.2);
+}
+
+.desktop-nav .nav-contact { color: var(--ink); }
+.desktop-nav .nav-contact::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 8px 1px 0;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+.mobile-menu {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 78% 16%, oklch(0.82 0.012 245 / 0.45), transparent 28%),
+    var(--paper);
+}
+
+.mobile-menu a { border-color: var(--line-dark); }
+
+.hero {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 75% 34%, oklch(0.84 0.018 245 / 0.56), transparent 26%),
+    radial-gradient(circle at 38% 82%, oklch(0.92 0.025 110 / 0.7), transparent 32%),
+    linear-gradient(135deg, var(--paper) 0%, oklch(0.945 0.014 88) 100%);
+}
+
+.hero::before {
+  opacity: 0.22;
+  background-image:
+    linear-gradient(oklch(0.55 0.01 88 / 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.55 0.01 88 / 0.18) 1px, transparent 1px);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: min(42vw, 680px);
+  aspect-ratio: 1;
+  right: 7vw;
+  top: 8vh;
+  border: 1px solid oklch(0.62 0.02 245 / 0.25);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, oklch(0.99 0 0 / 0.86), transparent 18%),
+    radial-gradient(circle at 62% 65%, oklch(0.64 0.02 245 / 0.18), transparent 34%);
+  box-shadow:
+    inset 0 0 60px oklch(0.99 0 0 / 0.8),
+    0 28px 90px oklch(0.42 0.02 245 / 0.11);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.signal-field { opacity: 0.36; }
+.hero-grid,
+.hero-foot { z-index: 3; }
+.eyebrow { color: var(--muted-light); }
+.live-dot { background: var(--signal); }
+.hero h1 em { color: var(--silver-dark); }
+.hero-intro { color: var(--muted-light); }
+
+.button-primary {
+  color: var(--paper);
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.button-primary:hover {
+  color: var(--ink);
+  background: transparent;
+}
+
+.artist-stage {
+  transform-style: preserve-3d;
+  transition: transform 420ms var(--ease-move);
+}
+
+.stage-halo {
+  border-color: oklch(0.52 0.018 245 / 0.22);
+  box-shadow:
+    0 0 0 48px oklch(0.76 0.016 245 / 0.08),
+    0 0 0 96px oklch(0.76 0.016 245 / 0.045);
+}
+
+.artist-portrait {
+  width: min(34vw, 520px);
+  height: auto;
+  aspect-ratio: 3 / 4;
+  clip-path: none;
+  background: oklch(0.9 0.01 88);
+  box-shadow: 0 36px 90px oklch(0.3 0.015 88 / 0.2);
+}
+
+.artist-portrait::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: -30% auto -30% -35%;
+  width: 28%;
+  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.7), transparent);
+  transform: rotate(15deg);
+  transition: translate 560ms var(--ease-move);
+  pointer-events: none;
+}
+
+.artist-stage:hover .artist-portrait::before { translate: 620% 0; }
+
+.artist-portrait::after {
+  background:
+    linear-gradient(180deg, transparent 67%, oklch(0.16 0.01 88 / 0.22)),
+    linear-gradient(110deg, oklch(1 0 0 / 0.18), transparent 36%);
+  mix-blend-mode: normal;
+}
+
+.artist-portrait img {
+  object-fit: cover;
+  filter: saturate(0.62) contrast(1.035);
+}
+
+.artist-caption p,
+.artist-number { color: var(--muted-light); }
+.artist-caption h2 { text-shadow: 0 2px 18px oklch(0.98 0.01 88 / 0.5); }
+.artist-signal span { border-color: var(--silver-dark); }
+.artist-selector { border-color: var(--line-dark); }
+.artist-tab { color: var(--muted-light); border-color: var(--line-dark); }
+.artist-tab:hover,
+.artist-tab.is-active { color: var(--ink); }
+.artist-tab.is-active strong,
+.artist-tab:hover strong { color: var(--ink) !important; }
+.artist-tab.is-active::after {
+  content: "";
+  grid-column: 2;
+  width: 32px;
+  height: 2px;
+  margin-top: 6px;
+  background: var(--signal);
+}
+
+.hero-foot { border-color: var(--line-dark); }
+
+.marquee {
+  color: var(--ink);
+  border-block: 1px solid var(--line-dark);
+  background:
+    linear-gradient(110deg, oklch(0.9 0.015 245), oklch(0.98 0.006 88) 44%, oklch(0.82 0.02 245));
+}
+
+.work-section {
+  position: relative;
+  overflow: clip;
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, transparent 49.95%, oklch(0.7 0.012 88 / 0.22) 50%, transparent 50.05%),
+    var(--paper);
+}
+
+.section-heading h2 em,
+.about-grid h2 em,
+.roster-hero h1 em { color: var(--silver-dark); }
+
+.curved-work {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(110px, 15vw, 240px);
+  perspective: 1800px;
+  perspective-origin: 50% 48vh;
+}
+
+.case-card {
+  --arc-rotate: 0deg;
+  --arc-y: 0deg;
+  --arc-z: 0px;
+  --arc-scale: 1;
+  width: min(73vw, 1120px);
+  transform:
+    translate3d(0, 0, var(--arc-z))
+    rotateX(var(--arc-rotate))
+    rotateY(var(--arc-y))
+    scale(var(--arc-scale));
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.case-card-lead {
+  width: 100%;
+  align-self: center;
+}
+
+.case-card-portrait {
+  width: min(38vw, 530px);
+  margin-left: 13%;
+  align-self: flex-start;
+}
+
+.case-offset-right { align-self: flex-end; }
+.case-offset-left { align-self: flex-start; }
+
+.case-media {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: oklch(0.9 0.008 88);
+  box-shadow: 0 32px 86px oklch(0.25 0.015 88 / 0.12);
+}
+
+.case-landscape .case-media { aspect-ratio: 16 / 9; }
+.case-portrait .case-media { aspect-ratio: 9 / 16; }
+
+.case-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: oklch(0.9 0.008 88);
+  transition: filter 240ms ease;
+}
+
+.case-media::after {
+  background:
+    linear-gradient(180deg, oklch(0.08 0.01 88 / 0.05), transparent 24%, transparent 70%, oklch(0.08 0.01 88 / 0.36));
+}
+
+.case-card.is-center .case-media {
+  box-shadow:
+    0 44px 110px oklch(0.25 0.015 88 / 0.2),
+    0 0 0 1px oklch(0.99 0 0 / 0.72);
+}
+
+.case-media:hover video { transform: none; filter: brightness(0.94); }
+
+.case-counter {
+  position: absolute;
+  z-index: 3;
+  top: 16px;
+  left: 16px;
+  padding: 7px 9px;
+  color: var(--paper);
+  border: 1px solid oklch(0.98 0 0 / 0.42);
+  background: oklch(0.18 0.01 88 / 0.28);
+  backdrop-filter: blur(10px);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.media-controls {
+  position: absolute;
+  z-index: 4;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  translate: 0 8px;
+  transition: opacity 180ms ease, translate 220ms var(--ease-out);
+}
+
+.case-media:hover .media-controls,
+.case-card.is-center .media-controls,
+.media-controls:focus-within {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.media-controls button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  color: var(--paper);
+  border: 1px solid oklch(0.98 0 0 / 0.45);
+  border-radius: 999px;
+  background: oklch(0.16 0.01 88 / 0.58);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.media-controls button:hover {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.media-play {
+  width: 44px;
+  padding: 0 !important;
+}
+
+.case-meta {
+  padding-top: 18px;
+  border-color: var(--line-dark);
+  transform: translateZ(24px);
+}
+
+.case-meta h3 {
+  font-size: clamp(34px, 4vw, 66px);
+  letter-spacing: -0.035em;
+}
+
+.case-meta small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted-light);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.services-section,
+.about-section {
+  color: var(--ink);
+  background: var(--paper-deep);
+}
+
+.section-heading-light h2 em { color: var(--silver-dark); }
+.section-heading-light > div > p,
+.services-list p { color: var(--muted-light); }
+.services-list,
+.services-list article { border-color: var(--line-dark); }
+.services-list article > span { color: var(--silver-dark); }
+
+.labs-card {
+  color: var(--ink);
+  border: 1px solid oklch(0.64 0.018 245 / 0.35);
+  background:
+    radial-gradient(circle at 84% 18%, oklch(1 0 0 / 0.85), transparent 18%),
+    linear-gradient(120deg, oklch(0.77 0.02 245), oklch(0.96 0.008 88) 44%, oklch(0.73 0.018 245));
+}
+
+.labs-card .live-dot { background: var(--signal); }
+
+.contact-section,
+.roster-cta {
+  color: var(--ink);
+  border-color: var(--line-dark);
+  background:
+    radial-gradient(circle at 14% 70%, oklch(0.79 0.018 245 / 0.42), transparent 30%),
+    var(--paper);
+}
+
+.project-form input:not([type="checkbox"]),
+.project-form textarea {
+  color: var(--ink);
+  border-color: var(--line-dark);
+}
+
+.service-options span { border-color: var(--line-dark); }
+.service-options input:checked + span {
+  color: var(--paper);
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.button-light {
+  color: var(--paper);
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.button-light:hover {
+  color: var(--ink);
+  background: transparent;
+}
+
+.agency-footer,
+.agency-footer-light {
+  color: var(--ink);
+  border-color: var(--line-dark);
+  background: var(--paper);
+}
+
+.artists-page {
+  background:
+    radial-gradient(circle at 76% 14%, oklch(0.82 0.018 245 / 0.4), transparent 25%),
+    var(--paper);
+}
+
+.roster-grid {
+  gap: clamp(32px, 5vw, 84px);
+  perspective: 1800px;
+}
+
+.roster-card {
+  border: 1px solid var(--line-dark);
+  background: oklch(0.965 0.01 88);
+  transform: rotateY(-1.2deg);
+  transform-style: preserve-3d;
+  transition: transform 420ms var(--ease-move), box-shadow 240ms ease;
+}
+
+.roster-card:nth-child(even) {
+  border-right: 1px solid var(--line-dark);
+  transform: rotateY(1.2deg);
+}
+
+.roster-card:hover {
+  transform: translateZ(34px) rotateY(0);
+  box-shadow: 0 34px 90px oklch(0.24 0.015 88 / 0.15);
+}
+
+.roster-card:first-child {
+  grid-template-rows: auto auto;
+}
+
+.roster-card:first-child figure {
+  width: min(54vw, 720px);
+  aspect-ratio: 3 / 4;
+  justify-self: center;
+}
+
+.roster-card:first-child figure img {
+  object-fit: contain;
+  filter: saturate(0);
+}
+
+.roster-coming {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 80% 20%, oklch(0.99 0 0 / 0.85), transparent 18%),
+    linear-gradient(140deg, oklch(0.78 0.018 245), oklch(0.95 0.01 88));
+}
+
+.roster-coming > p:nth-of-type(2) { color: var(--muted-light); }
+.roster-coming a { color: var(--ink); }
+
+@media (max-width: 800px) {
+  .hero::after {
+    width: 90vw;
+    right: -32vw;
+    top: 28vh;
+  }
+
+  .artist-stage { inset: 225px -10% 98px 20%; }
+  .artist-portrait { aspect-ratio: 3 / 4; clip-path: none; }
+  .artist-caption { bottom: 5%; }
+
+  .curved-work { gap: 104px; perspective: none; }
+  .case-card,
+  .case-card-lead,
+  .case-card-portrait,
+  .case-offset-left,
+  .case-offset-right {
+    width: 100%;
+    margin-left: 0;
+    align-self: stretch;
+  }
+
+  .case-card {
+    transform: translate3d(0, 0, 0) rotateX(var(--arc-rotate)) scale(var(--arc-scale));
+  }
+
+  .case-portrait .case-media {
+    width: min(78vw, 430px);
+    margin-inline: auto;
+  }
+
+  .case-meta { display: flex; }
+  .case-meta > p { text-align: right; }
+  .media-controls { opacity: 1; translate: 0 0; }
+  .media-fullscreen { padding-inline: 12px !important; }
+
+  .services-section,
+  .about-section { background: var(--paper); }
+
+  .roster-card,
+  .roster-card:nth-child(even),
+  .roster-card:hover { transform: none; }
+
+  .roster-card:first-child figure {
+    width: 100%;
+    max-height: none;
+  }
+
+  .agency-header-light .mobile-menu { color: var(--ink); }
+}
+
+@media (max-width: 480px) {
+  .case-meta {
+    display: block;
+  }
+
+  .case-meta > p {
+    margin-top: 14px;
+    text-align: left;
+  }
+
+  .media-controls {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .media-controls button {
+    min-height: 40px;
+  }
+
+  .media-play { min-width: 40px !important; }
+  .media-fullscreen { margin-left: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-card,
+  .artist-stage,
+  .roster-card { transform: none !important; }
+  .case-media video { transform: none !important; }
+}
