@@ -200,6 +200,12 @@ const simplifyAppCopy = (value) => value
   .replaceAll("軟件", "软件")
   .replaceAll("數位", "数字")
   .replaceAll("讚好", "点赞")
+  .replaceAll("訊號", "信号")
+  .replaceAll("時程", "时间安排")
+  .replaceAll("企劃", "策划")
+  .replaceAll("聯絡", "联系")
+  .replaceAll("詢盤", "咨询")
+  .replaceAll("連結", "链接")
   .replace(/[^\x00-\x7F]/g, (character) => appSimplifiedMap[character] || character);
 translations["zh-hans"] = Object.fromEntries(Object.entries(translations.zh).map(([key, value]) => [
   key,

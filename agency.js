@@ -128,6 +128,10 @@ const toSimplified = (value) => value
   .replaceAll("軟件", "软件")
   .replaceAll("客製", "定制")
   .replaceAll("說故事", "讲故事")
+  .replaceAll("聯絡", "联系")
+  .replaceAll("搜尋", "搜索")
+  .replaceAll("詢盤", "咨询")
+  .replaceAll("連結", "链接")
   .replace(/[^\x00-\x7F]/g, (character) => agencySimplifiedMap[character] || character);
 copy["zh-hans"] = Object.fromEntries(Object.entries(copy.zh).map(([key, value]) => [
   key,

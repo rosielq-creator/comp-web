@@ -129,4 +129,4 @@ if (!profile) {
   window.addEventListener("gtai:languagechange", (event) => renderProfileLanguage(event.detail.language));
 }
 
-await import("./app.js?v=20260728-1");
+await import("./app.js?v=20260728-2");
