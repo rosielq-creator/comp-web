@@ -1,3 +1,8 @@
+.profile-page:lang(zh-Hans),
+html[lang="zh-Hans"] .profile-page {
+  font-family: "DM Sans", "Noto Sans SC", sans-serif;
+}
+
 .profile-page .profile-header.profile-refreshed {
   position: fixed;
   z-index: 120;
