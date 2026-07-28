@@ -931,9 +931,9 @@ body {
     top: 28vh;
   }
 
-  .artist-stage { inset: 225px -10% 98px 20%; }
+  .artist-stage { inset: 225px 5% 98px; }
   .artist-portrait { aspect-ratio: 3 / 4; clip-path: none; }
-  .artist-caption { bottom: 5%; }
+  .artist-caption { left: 0; bottom: 12%; }
 
   .curved-work { gap: 104px; perspective: none; }
   .case-card,
@@ -1303,9 +1303,9 @@ body {
 
 .work-categories button:hover,
 .work-categories button.is-active {
-  color: var(--paper-bright);
-  border-color: var(--ink);
-  background: var(--ink);
+  color: var(--ink);
+  border-color: var(--silver-dark);
+  background: var(--silver);
 }
 
 .work-categories button:focus-visible,

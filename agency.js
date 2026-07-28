@@ -240,8 +240,8 @@ const workBrands = [
   },
   {
     id: "octopus", name: "Octopus", category: "retail", industry: "Urban Lifestyle", year: "2026",
-    cover: "assets/work/takoyaki-poster.jpg",
-    projects: [["Octopus Film", "assets/work/video/octopus.mp4", "assets/work/takoyaki-poster.jpg"]]
+    cover: "assets/work/octopus-cover.jpg",
+    projects: [["Octopus Film", "assets/work/video/octopus.mp4", "assets/work/octopus-cover.jpg"]]
   },
   {
     id: "chillgood", name: "ChillGOOD × TV章魚燒", category: "entertainment", industry: "Entertainment", year: "2026",
