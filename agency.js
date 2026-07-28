@@ -1,43 +1,43 @@
 const artists = [
   {
-    name: "Mario",
-    role: "Lifestyle · Fashion · Sport",
-    image: "assets/featured/mario-editorial-bw.webp",
-    href: "mario.html",
-    alt: "Mario, GTAI featured AI lifestyle and sport artist",
-    position: "center center"
-  },
-  {
-    name: "Noah",
-    role: "Film · Fashion · Culture",
-    image: "assets/featured/noah-commercial-v1.webp",
-    href: "noah.html",
-    alt: "Noah, GTAI featured AI film and fashion artist",
-    position: "center 28%"
-  },
-  {
-    name: "Ooona",
-    role: "Beauty · Wellness · Digital Spirit",
-    image: "assets/featured/ooona-commercial-v1.webp",
-    href: "ooona.html",
-    alt: "Ooona, GTAI featured AI beauty and wellness artist",
-    position: "center center"
+    name: "Maya",
+    role: "Luxury Fashion · Art",
+    image: "assets/profiles/maya/pink-editorial.png",
+    href: "maya.html",
+    alt: "Maya, GTAI featured AI luxury fashion and art artist",
+    position: "center 24%"
   },
   {
     name: "Amber",
     role: "Music · Fashion · Creative Culture",
-    image: "assets/featured/amber-commercial-v1.webp",
+    image: "assets/profiles/amber/night-portrait.png",
     href: "amber.html",
     alt: "Amber, GTAI featured AI music and fashion artist",
     position: "center 30%"
   },
   {
-    name: "Maya",
-    role: "Art · Architecture · High Fashion",
-    image: "assets/featured/maya-commercial-v1.webp",
-    href: "maya.html",
-    alt: "Maya, GTAI featured AI art and high fashion artist",
-    position: "center 24%"
+    name: "Ooona",
+    role: "Beauty · Wellness · Digital Spirit",
+    image: "assets/profiles/ooona/hero.png",
+    href: "ooona.html",
+    alt: "Ooona, GTAI featured AI beauty and wellness artist",
+    position: "center center"
+  },
+  {
+    name: "Noah",
+    role: "Film · Fashion · Culture",
+    image: "assets/profiles/noah/black-portrait.png",
+    href: "noah.html",
+    alt: "Noah, GTAI featured AI film and fashion artist",
+    position: "center 28%"
+  },
+  {
+    name: "Mario",
+    role: "Lifestyle · Fashion · Sport",
+    image: "assets/mario-portrait.png",
+    href: "mario.html",
+    alt: "Mario, GTAI featured AI lifestyle and sport artist",
+    position: "center center"
   }
 ];
 
@@ -164,6 +164,7 @@ const name = document.querySelector("#artistName");
 const role = document.querySelector("#artistRole");
 const number = document.querySelector("#artistNumber");
 const profileLink = document.querySelector("#heroProfileLink");
+const artistStage = document.querySelector("#artistStage");
 const tabs = [...document.querySelectorAll(".artist-tab")];
 let activeArtist = 0;
 
@@ -180,6 +181,8 @@ function setArtist(index, focusTab = false) {
     role.textContent = artist.role;
     number.textContent = String(index + 1).padStart(2, "0");
     profileLink.href = artist.href;
+    artistStage.href = artist.href;
+    artistStage.setAttribute("aria-label", `View ${artist.name} profile`);
     image.dataset.ready = "true";
     image.classList.remove("is-switching");
   }, 170);
@@ -475,16 +478,16 @@ window.addEventListener("resize", requestWorkArc, { passive: true });
 reduceMotion.addEventListener?.("change", requestWorkArc);
 updateWorkArc();
 
-const artistStage = document.querySelector("#artistStage");
-if (artistStage && !reduceMotion.matches && matchMedia("(hover: hover) and (pointer: fine)").matches) {
-  artistStage.addEventListener("pointermove", (event) => {
-    const bounds = artistStage.getBoundingClientRect();
+const artistStageTilt = document.querySelector("#artistStage");
+if (artistStageTilt && !reduceMotion.matches && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  artistStageTilt.addEventListener("pointermove", (event) => {
+    const bounds = artistStageTilt.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width - 0.5;
     const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    artistStage.style.transform = `perspective(1200px) rotateY(${(x * 5).toFixed(2)}deg) rotateX(${(-y * 3).toFixed(2)}deg)`;
+    artistStageTilt.style.transform = `perspective(1200px) rotateY(${(x * 5).toFixed(2)}deg) rotateX(${(-y * 3).toFixed(2)}deg)`;
   }, { passive: true });
-  artistStage.addEventListener("pointerleave", () => {
-    artistStage.style.transform = "";
+  artistStageTilt.addEventListener("pointerleave", () => {
+    artistStageTilt.style.transform = "";
   });
 }
 

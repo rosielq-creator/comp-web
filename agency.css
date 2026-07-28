@@ -1228,13 +1228,11 @@ body {
 
 /* Industry-led work browser */
 .work-section {
-  --work-paper: oklch(0.965 0.014 145);
-  --work-muted: oklch(0.79 0.035 150);
-  --work-line: oklch(0.72 0.035 150 / 0.42);
-  color: var(--work-paper);
-  background:
-    radial-gradient(circle at 88% 4%, oklch(0.39 0.08 151 / 0.46), transparent 30%),
-    oklch(0.225 0.045 155);
+  --work-paper: var(--ink);
+  --work-muted: var(--muted-dark);
+  --work-line: var(--line-dark);
+  color: var(--ink);
+  background: var(--paper-deep);
 }
 
 .work-section .section-heading {
@@ -1243,7 +1241,7 @@ body {
 }
 
 .work-section .section-heading h2 em {
-  color: oklch(0.81 0.045 150);
+  color: var(--silver-dark);
 }
 
 .work-section .section-heading > div:nth-child(2) > p,
@@ -1258,7 +1256,7 @@ body {
 
 .work-views strong {
   display: block;
-  color: oklch(0.82 0.19 135);
+  color: var(--ink);
   font-family: "Instrument Serif", serif;
   font-size: clamp(66px, 7vw, 112px);
   font-weight: 400;
@@ -1305,15 +1303,15 @@ body {
 
 .work-categories button:hover,
 .work-categories button.is-active {
-  color: oklch(0.19 0.04 155);
-  border-color: oklch(0.82 0.19 135);
-  background: oklch(0.82 0.19 135);
+  color: var(--paper-bright);
+  border-color: var(--ink);
+  background: var(--ink);
 }
 
 .work-categories button:focus-visible,
 .brand-card:focus-visible,
 .brand-projects button:focus-visible {
-  outline: 3px solid oklch(0.82 0.19 135);
+  outline: 3px solid var(--signal);
   outline-offset: 3px;
 }
 
@@ -1344,8 +1342,8 @@ body {
   aspect-ratio: 16 / 10;
   margin: 0;
   overflow: hidden;
-  background: oklch(0.18 0.025 155);
-  box-shadow: 0 28px 72px oklch(0.1 0.025 155 / 0.38);
+  background: #dedbd2;
+  box-shadow: 0 24px 54px rgba(21, 20, 17, 0.14);
 }
 
 .brand-card img {
@@ -1389,7 +1387,7 @@ body {
 }
 
 .brand-card small {
-  color: oklch(0.82 0.19 135);
+  color: var(--ink);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -1431,7 +1429,7 @@ body {
 .brand-projects-head button {
   min-height: 44px;
   padding: 10px 14px;
-  color: var(--work-paper);
+  color: var(--ink);
   border: 1px solid var(--work-line);
   background: transparent;
   cursor: pointer;
@@ -1452,7 +1450,7 @@ body {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: contain;
-  background: oklch(0.12 0.02 155);
+  background: #111;
 }
 
 .project-item p {
@@ -1506,24 +1504,109 @@ body {
 }
 
 /* Complete artist directory */
+.artists-page {
+  background: #f7f3e9;
+}
+
+.artists-page .agency-header-light {
+  background: rgba(247, 243, 233, 0.94);
+}
+
+.artists-page .roster-hero {
+  position: relative;
+  min-height: 650px;
+  padding: clamp(150px, 17vw, 230px) var(--gutter) 72px;
+  border-bottom: 0;
+  background: #f7f3e9;
+}
+
+.artists-page .roster-hero::before,
+.artists-page .roster-hero::after {
+  display: none;
+}
+
+.artists-page .roster-kicker {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 76px;
+  margin: 0;
+  color: #52655d;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.artists-page .roster-hero h1 {
+  max-width: 760px;
+  margin: 0 auto;
+  color: #102d24;
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(96px, 11vw, 190px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+}
+
+.artists-page .roster-hero h1 span,
+.artists-page .roster-hero h1 em {
+  display: block;
+}
+
+.artists-page .roster-hero h1 em {
+  margin-left: 0.12em;
+  color: inherit;
+  font-style: normal;
+}
+
+.artists-page .roster-intro {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 72px;
+  display: block;
+  margin: 0;
+}
+
+.artists-page .roster-intro p {
+  margin: 0;
+  color: #52655d;
+  font-size: clamp(16px, 1.35vw, 22px);
+}
+
 .roster-tools {
   display: grid;
-  grid-template-columns: minmax(260px, 1.5fr) repeat(4, minmax(150px, 0.75fr));
-  gap: 8px;
-  padding: 0 var(--gutter) 32px;
+  grid-template-columns: repeat(4, max-content);
+  gap: 10px;
+  padding: 28px var(--gutter) 54px;
+  background: #f7f3e9;
+}
+
+.roster-search {
+  grid-column: 1 / -1;
+  width: min(760px, 100%);
+  margin-bottom: 8px;
 }
 
 .roster-tools input,
 .roster-tools select {
-  width: 100%;
-  min-height: 52px;
-  padding: 12px 14px;
+  width: auto;
+  min-height: 50px;
+  padding: 12px 20px;
   color: var(--ink);
-  border: 1px solid var(--line-dark);
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid #b8c5be;
+  border-radius: 999px;
+  background: transparent;
   font: inherit;
   font-size: 13px;
+}
+
+.roster-search input {
+  width: 100%;
+  min-height: 62px;
+  padding: 12px 2px;
+  border: 0;
+  border-bottom: 1px solid #102d24;
+  border-radius: 0;
+  font-size: 22px;
 }
 
 .roster-tools input:focus,
@@ -1611,8 +1694,24 @@ body {
 }
 
 @media (max-width: 700px) {
+  .artists-page .roster-hero {
+    min-height: 520px;
+    padding-top: 140px;
+  }
+  .artists-page .roster-hero h1 {
+    font-size: clamp(78px, 24vw, 120px);
+  }
+  .artists-page .roster-kicker,
+  .artists-page .roster-intro {
+    position: static;
+    margin-top: 36px;
+  }
   .roster-tools {
     grid-template-columns: 1fr 1fr;
+  }
+  .roster-tools select {
+    width: 100%;
+    padding-inline: 12px;
   }
 
   .artists-page .roster-grid {

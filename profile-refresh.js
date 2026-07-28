@@ -8,9 +8,9 @@ const profileRefreshData = {
     name: "Maya", role: "Luxury Fashion / Art", followers: "14.5K",
     image: "assets/profiles/maya/black-tailoring.png",
     angles: [
-      "v2-preview/assets/profiles/maya/angles/front.png?v=20260728-2",
-      "v2-preview/assets/profiles/maya/angles/side.png?v=20260728-2",
-      "v2-preview/assets/profiles/maya/angles/back.png?v=20260728-2"
+      "assets/profiles/maya/angles/front.png",
+      "assets/profiles/maya/angles/side.png",
+      "assets/profiles/maya/angles/back.png"
     ],
     facts: [["Height", "171 cm"], ["Weight", "48 kg"], ["Measurements", "85 / 63 / 89"], ["Shoe", "38"], ["Base", "Paris / New York / Seoul"], ["Languages", "English / Korean"], ["Talent type", "Luxury Fashion / High Fashion / Art"]],
     gallery: ["assets/profiles/maya/black-tailoring.png", "assets/profiles/maya/pink-editorial.png", "assets/profiles/maya/pink-closeup.png", "assets/profiles/maya/street-grey.png", "assets/profiles/maya/palais.png", "assets/profiles/maya/canal-01.jpg", "assets/profiles/maya/canal-02.jpg", "assets/profiles/maya/canal-03.jpg"]
@@ -31,9 +31,9 @@ const profileRefreshData = {
     name: "Mario", role: "Lifestyle / Fashion / Sport", followers: "13.5K",
     image: "assets/mario-hero.png",
     angles: [
-      "v2-preview/assets/profiles/mario/turnaround/front.webp",
-      "v2-preview/assets/profiles/mario/turnaround/side.webp",
-      "v2-preview/assets/profiles/mario/turnaround/back.webp"
+      "assets/profiles/mario/turnaround/front.webp",
+      "assets/profiles/mario/turnaround/side.webp",
+      "assets/profiles/mario/turnaround/back.webp"
     ],
     facts: [["Height", "185 cm"], ["Weight", "80 kg"], ["Measurements", "100 / 80 / 96"], ["Shoe", "44"], ["Base", "Guangdong"], ["Languages", "Mandarin / Cantonese / English"], ["Nationality", "China"], ["Birthday", "21 June 2000"], ["Zodiac", "Gemini"], ["Talent type", "Lifestyle / Fashion / Sport / Travel"]],
     gallery: ["assets/mario-hero.png", "assets/mario-editorial.png", "assets/mario-campaign.png", "assets/mario-portrait.png", "assets/profiles/mario/yotree-cover.png"]
@@ -135,6 +135,13 @@ if (activeProfile && profileShowcase) {
   `);
 
   const angleImage = document.querySelector("#profileAngleImage");
+  angleImage?.addEventListener("error", () => {
+    if (angleImage.src.endsWith(activeProfile.image)) return;
+    angleImage.src = activeProfile.image;
+  });
+  document.querySelectorAll(".profile-gallery-track img").forEach((galleryImage) => {
+    galleryImage.addEventListener("error", () => galleryImage.closest("figure")?.remove(), { once: true });
+  });
   document.querySelectorAll("[data-angle]").forEach((button) => button.addEventListener("click", () => {
     const index = Number(button.dataset.angle);
     angleImage.src = angleImages[index];
