@@ -16,7 +16,7 @@ const profileRefreshData = {
     gallery: ["assets/profiles/maya/black-tailoring.png", "assets/profiles/maya/pink-editorial.png", "assets/profiles/maya/pink-closeup.png", "assets/profiles/maya/street-grey.png"]
   },
   amber: {
-    name: "Amber", role: "Music Producer / Fashion", followers: "13.1K",
+    name: "Amber", role: "Music Producer / Fashion", followers: "13,094",
     image: "assets/profiles/amber/night-portrait.png",
     angles: [
       "assets/profiles/amber/angles/front.png",

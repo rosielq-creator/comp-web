@@ -132,7 +132,7 @@ export const artists = [
   {
     id: "amber", name: "Amber", role: "Music Producer / Fashion", gender: "Female",
     locations: ["Los Angeles", "Seoul"], languages: ["English", "Korean"],
-    types: ["Music", "Fashion", "City Culture"], followers: "13.1K",
+    types: ["Music", "Fashion", "City Culture"], followers: "13,094",
     stage: "assets/profiles/amber/night-portrait.png", poster: "assets/profiles/amber/night-portrait.png",
     hero: "assets/profiles/amber/night-portrait.png",
     availability: true, height: "175 cm", weight: "50 kg", measurements: "85 / 63 / 89", shoe: "38",
@@ -144,7 +144,7 @@ export const artists = [
       "assets/profiles/amber/night-portrait.png", "assets/profiles/amber/denim-editorial.png",
       "assets/profiles/amber/festival-stage.png", "assets/profiles/amber/festival-wheel.png"
     ],
-    platforms: [{ name: "Instagram", count: "13.1K" }]
+    platforms: [{ name: "Instagram", count: "13,094" }]
   },
   {
     id: "ooona", name: "Ooona", role: "Beauty / Wellness", gender: "Female",
