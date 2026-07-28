@@ -1,4 +1,4 @@
-import { artists, brands, i18n, services } from "./data.js?v=20260728-4";
+import { artists, brands, i18n, services } from "./data.js?v=20260728-5";
 
 const page = document.body.dataset.page;
 let language = "en";
@@ -286,7 +286,7 @@ function initProfile() {
   document.querySelector("#profileRole").textContent = artist.role;
   document.querySelector("#profileFollowers").textContent = artist.followers;
   const hero = document.querySelector("#profileHeroImage");
-  hero.src = artist.hero;
+  hero.src = artist.angles?.[0] || artist.hero;
   hero.alt = `${artist.name} full-length profile placeholder`;
   const bio = language === "zh-hant" ? artist.bioHant : language === "zh-hans" ? artist.bioHans : artist.bio;
   document.querySelector("#profileBio").textContent = bio;
@@ -318,7 +318,7 @@ function initProfile() {
     </${tag}>`;
   }).join("");
   renderSocialAnalytics(artist);
-  initAngleSwitcher();
+  initAngleSwitcher(artist, hero);
 }
 
 function renderSocialAnalytics(artist) {
@@ -361,12 +361,15 @@ function renderSocialAnalytics(artist) {
     </article>`;
 }
 
-function initAngleSwitcher() {
+function initAngleSwitcher(artist, hero) {
   const buttons = [...document.querySelectorAll("[data-angle]")];
   const dots = [...document.querySelectorAll(".angle-dots i")];
+  const angles = artist.angles || [artist.hero, artist.hero, artist.hero];
   let active = 0;
   const activate = (index) => {
     active = (index + buttons.length) % buttons.length;
+    hero.src = angles[active] || artist.hero;
+    hero.alt = `${artist.name} ${buttons[active].dataset.angle} view`;
     buttons.forEach((button, buttonIndex) => button.classList.toggle("is-active", buttonIndex === active));
     dots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
   };

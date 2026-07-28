@@ -107,6 +107,11 @@ export const artists = [
     types: ["Luxury Fashion", "High Fashion", "Art"], followers: "14.5K",
     stage: "assets/profiles/maya/black-tailoring.png", poster: "assets/profiles/maya/black-tailoring.png",
     hero: "assets/profiles/maya/black-tailoring.png",
+    angles: [
+      "assets/profiles/maya/angles/front.png",
+      "assets/profiles/maya/angles/side.png",
+      "assets/profiles/maya/angles/back.png"
+    ],
     availability: true, height: "171 cm", weight: "48 kg", measurements: "85 / 63 / 89", shoe: "38",
     base: "Paris / New York / Seoul", nationality: "", birthday: "", zodiac: "",
     bio: "Maya is a high-fashion and art-world digital talent defined by restrained elegance. Her visual world moves through galleries, architecture and quiet-luxury city spaces.",
