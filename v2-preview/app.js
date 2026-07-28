@@ -30,7 +30,7 @@ function renderHeader() {
         </div>
       </div>
       <button class="menu-button" type="button" aria-expanded="false" aria-label="Open menu">MENU</button>
-      <nav class="mobile-nav" aria-label="Mobile navigation">
+      <nav class="mobile-nav" aria-label="Mobile navigation" aria-hidden="true" inert>
         <a href="artists.html" data-i18n="navArtists"></a>
         <a href="${homePrefix}#work" data-i18n="navWork"></a>
         <a href="${homePrefix}#services" data-i18n="navServices"></a>
@@ -58,11 +58,15 @@ function renderHeader() {
     const open = mobileNav.classList.toggle("is-open");
     menuButton.setAttribute("aria-expanded", String(open));
     menuButton.textContent = open ? "CLOSE" : "MENU";
+    mobileNav.inert = !open;
+    mobileNav.setAttribute("aria-hidden", String(!open));
   });
   mobileNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
     mobileNav.classList.remove("is-open");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.textContent = "MENU";
+    mobileNav.inert = true;
+    mobileNav.setAttribute("aria-hidden", "true");
   }));
 }
 
