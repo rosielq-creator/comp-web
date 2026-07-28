@@ -1,4 +1,4 @@
-import { artists, brands, i18n, services } from "./data.js?v=20260728-5";
+import { artists, brands, i18n, services } from "./data.js?v=20260728-6";
 
 const page = document.body.dataset.page;
 let language = "en";

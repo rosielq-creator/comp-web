@@ -265,8 +265,8 @@ button { border: 0; }
 .digital-human { position: sticky; top: calc(var(--header) + 24px); }
 .model-status { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 .model-status span { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); box-shadow: 0 0 0 5px oklch(72% .11 145 / .15); }
-.model-placeholder { margin: 0; height: min(70vh, 760px); overflow: hidden; background: linear-gradient(145deg, oklch(100% 0 0), oklch(88% .035 72)); }
-.model-placeholder img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.model-placeholder { margin: 0; aspect-ratio: 3 / 4; overflow: hidden; background: linear-gradient(145deg, oklch(100% 0 0), oklch(88% .035 72)); }
+.model-placeholder img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .angle-switcher { display: flex; justify-content: center; margin-top: 14px; gap: 8px; }
 .angle-switcher button { min-width: 76px; min-height: 40px; background: transparent; border-bottom: 1px solid var(--line); cursor: pointer; font-size: 11px; }
 .angle-switcher button.is-active { border-color: var(--ink); }
@@ -288,14 +288,11 @@ button { border: 0; }
 .profile-facts dd { margin: 0; font-size: 13px; text-align: right; }
 .profile-enquire { width: 100%; }
 .profile-gallery-section, .social-section { padding-top: 100px; padding-bottom: 100px; }
-.editorial-gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; align-items: start; }
-.gallery-item { grid-column: span 4; background: var(--paper-deep); cursor: zoom-in; transition: grid-column 300ms var(--ease-out); }
-.gallery-item:nth-child(5n + 1) { grid-column: span 7; }
-.gallery-item:nth-child(5n + 2) { grid-column: span 5; margin-top: 80px; }
-.gallery-item:nth-child(5n + 4) { grid-column: 3 / span 5; }
-.gallery-item.is-expanded { grid-column: 1 / -1; margin-top: 0; cursor: zoom-out; }
-.gallery-item img { width: 100%; max-height: 84vh; object-fit: cover; }
-.gallery-item.is-expanded img { object-fit: contain; background: var(--paper-deep); }
+.editorial-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.gallery-item { aspect-ratio: 3 / 4; background: var(--paper-deep); cursor: zoom-in; overflow: hidden; transition: grid-column 300ms var(--ease-out); }
+.gallery-item.is-expanded { grid-column: 1 / -1; aspect-ratio: auto; cursor: zoom-out; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-item.is-expanded img { height: auto; max-height: 90vh; object-fit: contain; background: var(--paper-deep); }
 .platform-list { border-top: 1px solid var(--line); }
 .platform-row { display: flex; justify-content: space-between; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); color: inherit; }
 .platform-row h3 { margin: 0; font-family: "Instrument Serif", serif; font-size: 34px; font-weight: 400; }
@@ -366,7 +363,8 @@ button { border: 0; }
   .roster-grid { grid-template-columns: repeat(3, 1fr); }
   .profile-hero-grid { grid-template-columns: 1fr; }
   .digital-human { position: relative; top: 0; }
-  .model-placeholder { height: min(75vh, 720px); }
+  .model-placeholder { aspect-ratio: 3 / 4; }
+  .editorial-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .signal-metrics-grid { grid-template-columns: 1fr 1fr; }
   .signal-metric:nth-child(2) { border-right: 0; }
   .signal-metric:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
@@ -411,11 +409,11 @@ button { border: 0; }
   .profile-hero { padding-bottom: 48px; }
   .profile-summary { padding-top: 8px; }
   .profile-summary h1 { font-size: 92px; }
-  .model-placeholder { height: 68vh; }
+  .model-placeholder { aspect-ratio: 3 / 4; }
   .angle-switcher { display: none; }
   .angle-dots { display: flex; }
-  .editorial-gallery { display: block; }
-  .gallery-item, .gallery-item:nth-child(n) { margin: 0 0 12px; }
+  .editorial-gallery { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .gallery-item { margin: 0; }
   .gallery-item img { width: 100%; max-height: none; }
   .gallery-item.is-expanded img { max-height: 90vh; }
   .analytics-period { align-items: start; flex-direction: column; }

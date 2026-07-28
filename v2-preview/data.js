@@ -108,9 +108,9 @@ export const artists = [
     stage: "assets/profiles/maya/black-tailoring.png", poster: "assets/profiles/maya/black-tailoring.png",
     hero: "assets/profiles/maya/black-tailoring.png",
     angles: [
-      "assets/profiles/maya/angles/front.png",
-      "assets/profiles/maya/angles/side.png",
-      "assets/profiles/maya/angles/back.png"
+      "assets/profiles/maya/angles/front.png?v=20260728-2",
+      "assets/profiles/maya/angles/side.png?v=20260728-2",
+      "assets/profiles/maya/angles/back.png?v=20260728-2"
     ],
     availability: true, height: "171 cm", weight: "48 kg", measurements: "85 / 63 / 89", shoe: "38",
     base: "Paris / New York / Seoul", nationality: "", birthday: "", zodiac: "",
