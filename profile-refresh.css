@@ -220,10 +220,23 @@
 }
 
 .profile-angle-frame img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: 50% 50%;
   filter: none;
+}
+
+/* Amber's supplied 3:4 turnarounds should sit on the same visual axis. */
+.profile-page[data-artist="amber"] .profile-overview-media {
+  display: grid;
+  justify-items: center;
+}
+
+.profile-page[data-artist="amber"] .profile-angle-frame,
+.profile-page[data-artist="amber"] .profile-angle-controls {
+  width: min(100%, 576px);
 }
 
 .profile-angle-controls {

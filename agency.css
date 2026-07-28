@@ -610,7 +610,12 @@ body {
 
 .artist-portrait img {
   object-fit: cover;
-  filter: saturate(0.62) contrast(1.035);
+  filter: none;
+}
+
+/* Keep the supplied artist photography true to its original colour. */
+.artist-portrait::after {
+  background: linear-gradient(180deg, transparent 82%, oklch(0.16 0.01 88 / 0.1));
 }
 
 .artist-caption p,
