@@ -193,40 +193,17 @@ const translations = {
 };
 
 translations["zh-hant"] = translations.zh;
+const appTraditionalCharacters = "乾佈個們備僅內創劃動務員啟單國圍圖團場夥學實將專導師帳廣後從戶據擬攝數於時書東業構檔氣淨準溫為熱獎獨畫當發盤眾確碼節範簡紅細終組結絡統絲經總續義聯聲職與蓋藝虛號術製規視覺觀計訊記設訴評詢詳認說調論識讀變讓讚資質軟輕連進遊運達選錄長門開間陣隊際雲電頁項預領類風駐驗體鮮";
+const appSimplifiedCharacters = "干布个们备仅内创划动务员启单国围图团场伙学实将专导师帐广后从户据拟摄数于时书东业构档气净准温为热奖独画当发盘众确码节范简红细终组结络统丝经总续义联声职与盖艺虚号术制规视觉观计讯记设诉评询详认说调论识读变让赞资质软轻连进游运达选录长门开间阵队际云电页项预领类风驻验体鲜";
+const appSimplifiedMap = Object.fromEntries([...appTraditionalCharacters].map((character, index) => [character, appSimplifiedCharacters[index]]));
+const simplifyAppCopy = (value) => value
+  .replaceAll("軟件", "软件")
+  .replaceAll("數位", "数字")
+  .replaceAll("讚好", "点赞")
+  .replace(/[^\x00-\x7F]/g, (character) => appSimplifiedMap[character] || character);
 translations["zh-hans"] = Object.fromEntries(Object.entries(translations.zh).map(([key, value]) => [
   key,
-  value
-    .replaceAll("藝人", "艺人").replaceAll("首頁", "首页").replaceAll("服務", "服务")
-    .replaceAll("關於", "关于").replaceAll("聯絡", "联系").replaceAll("團隊", "团队")
-    .replaceAll("檔案", "档案").replaceAll("數字", "数字").replaceAll("構想", "构想")
-    .replaceAll("為", "为").replaceAll("動", "动").replaceAll("獨立", "独立")
-    .replaceAll("陣容", "阵容").replaceAll("時尚", "时尚").replaceAll("視覺", "视觉")
-    .replaceAll("時代", "时代").replaceAll("創意", "创意").replaceAll("指導", "指导")
-    .replaceAll("製作", "制作").replaceAll("長期", "长期").replaceAll("發佈", "发布")
-    .replaceAll("持續", "持续").replaceAll("規模", "规模").replaceAll("軟件", "软件")
-    .replaceAll("數據", "数据").replaceAll("連接", "连接").replaceAll("客戶", "客户")
-    .replaceAll("夥伴", "伙伴").replaceAll("項目", "项目").replaceAll("專業", "专业")
-    .replaceAll("獎項", "奖项").replaceAll("帳號", "账号").replaceAll("密碼", "密码")
-    .replaceAll("進入", "进入").replaceAll("啟動", "启动").replaceAll("錯誤", "错误")
-    .replaceAll("攝影師", "摄影师").replaceAll("記錄", "记录").replaceAll("輕奢", "轻奢")
-    .replaceAll("當代", "当代").replaceAll("數位", "数字").replaceAll("氣質", "气质")
-    .replaceAll("確認", "确认").replaceAll("查看", "查看").replaceAll("創作者", "创作者")
-    .replaceAll("個人", "个人").replaceAll("場", "场").replaceAll("這", "这")
-    .replaceAll("畫", "画").replaceAll("義", "义").replaceAll("常駐", "常驻")
-    .replaceAll("內容", "内容").replaceAll("領域", "领域").replaceAll("旅遊", "旅游")
-    .replaceAll("社交數據", "社交数据").replaceAll("訊號", "信号").replaceAll("變", "变")
-    .replaceAll("資料", "资料").replaceAll("即時", "实时").replaceAll("公開", "公开")
-    .replaceAll("帳戶", "账户").replaceAll("粉絲", "粉丝").replaceAll("過去", "过去")
-    .replaceAll("觀看", "观看").replaceAll("互動", "互动").replaceAll("淨增長", "净增长")
-    .replaceAll("讚好", "点赞").replaceAll("評論", "评论").replaceAll("收藏", "收藏")
-    .replaceAll("分享", "分享").replaceAll("熱門", "热门").replaceAll("原帖", "原帖")
-    .replaceAll("選定", "选定").replaceAll("影像", "影像").replaceAll("合作", "合作")
-    .replaceAll("諮詢", "咨询").replaceAll("告訴", "告诉").replaceAll("企劃", "企划")
-    .replaceAll("時程", "时间").replaceAll("聯絡人", "联系人").replaceAll("類型", "类型")
-    .replaceAll("預算", "预算").replaceAll("範圍", "范围").replaceAll("雲端", "云端")
-    .replaceAll("連結", "链接").replaceAll("說明", "说明").replaceAll("同意", "同意")
-    .replaceAll("商務", "商务").replaceAll("發送", "发送").replaceAll("詢盤", "咨询")
-    .replaceAll("訊息", "消息")
+  simplifyAppCopy(value)
 ]));
 
 const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether", "servicesHeadline", "workHeadline", "crewHeadline"]);

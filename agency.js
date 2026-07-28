@@ -121,30 +121,17 @@ const copy = {
 };
 
 copy["zh-hant"] = copy.zh;
+const agencyTraditionalCharacters = "亞佈個們備儲內別創劃動務區問圍圖團場夥娛實將尋導從擁擇擬擴數於時會業樂標機檔準瀏為無獨產發盤眾礎紀結絡給統經線總繞續聯聲與興萬藝虛術裝裡製見規視覺覽觀計討設訴詢認語說請論謝識讓資這連進過選長開間關陣隊階靈項預類驗體鮮";
+const agencySimplifiedCharacters = "亚布个们备储内别创划动务区问围图团场伙娱实将寻导从拥择拟扩数于时会业乐标机档准浏为无独产发盘众础纪结络给统经线总绕续联声与兴万艺虚术装里制见规视觉览观计讨设诉询认语说请论谢识让资这连进过选长开间关阵队阶灵项预类验体鲜";
+const agencySimplifiedMap = Object.fromEntries([...agencyTraditionalCharacters].map((character, index) => [character, agencySimplifiedCharacters[index]]));
+const toSimplified = (value) => value
+  .replaceAll("軟件", "软件")
+  .replaceAll("客製", "定制")
+  .replaceAll("說故事", "讲故事")
+  .replace(/[^\x00-\x7F]/g, (character) => agencySimplifiedMap[character] || character);
 copy["zh-hans"] = Object.fromEntries(Object.entries(copy.zh).map(([key, value]) => [
   key,
-  value
-    .replaceAll("藝人", "艺人").replaceAll("服務", "服务").replaceAll("關於", "关于")
-    .replaceAll("聯絡", "联系").replaceAll("數字", "数字").replaceAll("鮮明", "鲜明")
-    .replaceAll("原創", "原创").replaceAll("與", "与").replaceAll("進", "进")
-    .replaceAll("檔案", "档案").replaceAll("精選", "精选").replaceAll("觀看", "观看")
-    .replaceAll("萬", "万").replaceAll("項目", "项目").replaceAll("為", "为")
-    .replaceAll("製作", "制作").replaceAll("團隊", "团队").replaceAll("創意", "创意")
-    .replaceAll("指導", "指导").replaceAll("長期", "长期").replaceAll("發佈", "发布")
-    .replaceAll("社交平台", "社交平台").replaceAll("持續", "持续").replaceAll("規模", "规模")
-    .replaceAll("客製", "定制").replaceAll("體驗", "体验").replaceAll("智能", "智能")
-    .replaceAll("關", "关").replaceAll("設施", "设施").replaceAll("擁有", "拥有")
-    .replaceAll("跨平台", "跨平台").replaceAll("市場", "市场").replaceAll("格式", "格式")
-    .replaceAll("從", "从").replaceAll("一個", "一个").replaceAll("說故事", "讲故事")
-    .replaceAll("認識", "认识").replaceAll("陣容", "阵容").replaceAll("獨一無二", "独一无二")
-    .replaceAll("靈魂", "灵魂").replaceAll("興趣", "兴趣").replaceAll("擴展", "扩展")
-    .replaceAll("將", "将").replaceAll("這裡", "这里").replaceAll("選擇", "选择")
-    .replaceAll("類型", "类型").replaceAll("搜尋", "搜索").replaceAll("地區", "地区")
-    .replaceAll("發送", "发送").replaceAll("詢盤", "咨询").replaceAll("資料", "资料")
-    .replaceAll("儲存", "存储").replaceAll("請", "请").replaceAll("欄位", "字段")
-    .replaceAll("謝謝", "谢谢").replaceAll("準備", "准备").replaceAll("連結", "链接")
-    .replaceAll("雲端", "云端").replaceAll("預算", "预算").replaceAll("時程", "时间")
-    .replaceAll("諮詢", "咨询").replaceAll("對", "对").replaceAll("應", "应")
+  toSimplified(value)
 ]));
 
 const storedLanguage = localStorage.getItem("gtai-language");
