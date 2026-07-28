@@ -122,6 +122,18 @@
 .profile-menu-open .profile-refresh-menu span:first-child { top: 22px; transform: rotate(45deg); }
 .profile-menu-open .profile-refresh-menu span:last-child { top: 22px; transform: rotate(-45deg); }
 
+.profile-page {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.profile-page .profile-shell,
+.profile-page main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 .profile-page .inquiry-section .section-marker span:last-child::after { content: " / ALL SERVICES"; }
 .profile-page .profile-service-options {
   display: grid;
@@ -130,7 +142,17 @@
   margin: 8px 0 24px;
 }
 .profile-page .profile-service-options label { cursor: pointer; }
-.profile-page .profile-service-options input { position: absolute; opacity: 0; }
+.profile-page .profile-service-options input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  opacity: 0;
+  white-space: nowrap;
+}
 .profile-page .profile-service-options span {
   min-height: 52px;
   display: flex;
