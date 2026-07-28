@@ -105,17 +105,15 @@ export const artists = [
     id: "maya", name: "Maya", role: "Luxury Fashion / Art", gender: "Female",
     locations: ["Paris", "New York", "Seoul"], languages: ["English", "Korean"],
     types: ["Luxury Fashion", "High Fashion", "Art"], followers: "14.5K",
-    stage: "assets/profiles/maya/palais.png", poster: "assets/profiles/maya/black-tailoring.png",
-    hero: "assets/profiles/maya/palais.png",
+    stage: "assets/profiles/maya/black-tailoring.png", poster: "assets/profiles/maya/black-tailoring.png",
+    hero: "assets/profiles/maya/black-tailoring.png",
     availability: true, height: "171 cm", weight: "48 kg", measurements: "85 / 63 / 89", shoe: "38",
     base: "Paris / New York / Seoul", nationality: "", birthday: "", zodiac: "",
     bio: "Maya is a high-fashion and art-world digital talent defined by restrained elegance. Her visual world moves through galleries, architecture and quiet-luxury city spaces.",
     bioHant: "Maya 是一位以克制優雅為核心的高級時尚與藝術數字藝人，穿梭於畫廊、建築與靜奢城市空間。",
     bioHans: "Maya 是一位以克制优雅为核心的高级时尚与艺术数字艺人，穿梭于画廊、建筑与静奢城市空间。",
     gallery: [
-      "assets/profiles/maya/palais.png", "assets/profiles/maya/pink-editorial.png",
-      "assets/profiles/maya/black-tailoring.png", "assets/profiles/maya/canal-01.jpg",
-      "assets/profiles/maya/canal-02.jpg", "assets/profiles/maya/canal-03.jpg",
+      "assets/profiles/maya/black-tailoring.png", "assets/profiles/maya/pink-editorial.png",
       "assets/profiles/maya/pink-closeup.png", "assets/profiles/maya/street-grey.png"
     ],
     platforms: [{ name: "Instagram", count: "14.5K" }]
@@ -124,18 +122,16 @@ export const artists = [
     id: "amber", name: "Amber", role: "Music Producer / Fashion", gender: "Female",
     locations: ["Los Angeles", "Seoul"], languages: ["English", "Korean"],
     types: ["Music", "Fashion", "City Culture"], followers: "13.1K",
-    stage: "assets/profiles/amber/street.png", poster: "assets/profiles/amber/denim-editorial.png",
-    hero: "assets/profiles/amber/street.png",
+    stage: "assets/profiles/amber/night-portrait.png", poster: "assets/profiles/amber/night-portrait.png",
+    hero: "assets/profiles/amber/night-portrait.png",
     availability: true, height: "175 cm", weight: "50 kg", measurements: "85 / 63 / 89", shoe: "38",
     base: "Los Angeles / Seoul", nationality: "Korean-American", birthday: "", zodiac: "",
     bio: "Amber is a Korean-American music producer whose identity brings together genre-defying sound, fashion-forward restraint and the rhythm of city culture.",
     bioHant: "Amber 是韓裔美國音樂製作人，融合跨越類型的聲音、前衛而克制的時尚與城市文化節奏。",
     bioHans: "Amber 是韩裔美国音乐制作人，融合跨越类型的声音、前卫而克制的时尚与城市文化节奏。",
     gallery: [
-      "assets/profiles/amber/street.png", "assets/profiles/amber/sofa.png",
-      "assets/profiles/amber/denim-editorial.png", "assets/profiles/amber/festival-stage.png",
-      "assets/profiles/amber/car.jpg", "assets/profiles/amber/gallery.jpg",
-      "assets/profiles/amber/night-portrait.png", "assets/profiles/amber/festival-wheel.png"
+      "assets/profiles/amber/night-portrait.png", "assets/profiles/amber/denim-editorial.png",
+      "assets/profiles/amber/festival-stage.png", "assets/profiles/amber/festival-wheel.png"
     ],
     platforms: [{ name: "Instagram", count: "13.1K" }]
   },
@@ -143,16 +139,16 @@ export const artists = [
     id: "ooona", name: "Ooona", role: "Beauty / Wellness", gender: "Female",
     locations: ["Seoul"], languages: ["Korean", "English"],
     types: ["Beauty", "Wellness", "Lifestyle"], followers: "15.1K",
-    stage: "assets/profiles/ooona/hero.png", poster: "assets/profiles/ooona/yoga.png",
-    hero: "assets/profiles/ooona/hero.png",
+    stage: "assets/profiles/ooona/mirror.png", poster: "assets/profiles/ooona/mirror.png",
+    hero: "assets/profiles/ooona/mirror.png",
     availability: true, height: "165 cm", weight: "45 kg", measurements: "82 / 60 / 86", shoe: "38",
     base: "Seoul", nationality: "", birthday: "", zodiac: "",
     bio: "Ooona is a beauty, wellness and lifestyle talent. Her world combines yoga, clean beauty and a gentle Seoul sensibility that feels light and approachable.",
     bioHant: "Ooona 是美妝、健康與生活風格藝人，結合瑜伽、純淨美學與溫柔的首爾氣質。",
     bioHans: "Ooona 是美妆、健康与生活风格艺人，结合瑜伽、纯净美学与温柔的首尔气质。",
     gallery: [
-      "assets/profiles/ooona/hero.png", "assets/profiles/ooona/yoga.png",
-      "assets/profiles/ooona/laundry.jpg", "assets/profiles/ooona/umbrella.jpg"
+      "assets/profiles/ooona/mirror.png", "assets/profiles/ooona/stairs.png",
+      "assets/profiles/ooona/sport.png", "assets/profiles/ooona/hero.png"
     ],
     platforms: [{ name: "Instagram / Xiaohongshu / Threads", count: "15.1K combined" }]
   },
@@ -161,16 +157,15 @@ export const artists = [
     locations: ["Guangdong"], languages: ["Mandarin", "Cantonese", "English"],
     types: ["Lifestyle", "Fashion", "Sport", "Travel"], followers: "13.5K",
     stage: "assets/mario-hero.png", poster: "assets/mario-portrait.png",
-    hero: "assets/mario-editorial.png",
+    hero: "assets/mario-hero.png",
     availability: true, height: "185 cm", weight: "80 kg", measurements: "100 / 80 / 96", shoe: "44",
     base: "Guangdong", nationality: "China", birthday: "21 June 2000", zodiac: "Gemini",
     bio: "Mario is a Chinese lifestyle creator and independent photographer. His world moves between city streets, sport, travel and the quiet details of everyday life.",
     bioHant: "Mario 是中國生活風格創作者與獨立攝影師，穿梭於城市、運動、旅行與日常細節之間。",
     bioHans: "Mario 是中国生活风格创作者与独立摄影师，穿梭于城市、运动、旅行与日常细节之间。",
     gallery: [
-      "assets/mario-editorial.png", "assets/mario-campaign.png",
-      "assets/mario-portrait.png", "assets/mario-hero.png",
-      "assets/profiles/mario/yotree-cover.png"
+      "assets/mario-hero.png", "assets/mario-editorial.png",
+      "assets/mario-campaign.png", "assets/mario-portrait.png"
     ],
     platforms: [
       { name: "Instagram", count: "8,383", href: "https://www.instagram.com/marrrio._.m/" },
@@ -188,7 +183,7 @@ export const artists = [
       topContent: {
         platform: "Xiaohongshu",
         date: "2026.06.25",
-        cover: "assets/profiles/mario/yotree-cover.png",
+        cover: null,
         href: "https://www.xiaohongshu.com/discovery/item/6a3cc5340000000008025203?source=webshare&xhsshare=pc_web&xsec_token=AB7tZ59wDZR0OLvAj3Y5bo1EepBemmBUZh5f5whfZkzXg=&xsec_source=pc_share",
         stats: [
           { label: "impressions", value: "32,492" },

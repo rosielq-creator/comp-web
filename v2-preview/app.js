@@ -1,4 +1,4 @@
-import { artists, brands, i18n, services } from "./data.js?v=20260728-3";
+import { artists, brands, i18n, services } from "./data.js?v=20260728-4";
 
 const page = document.body.dataset.page;
 let language = "en";
@@ -337,6 +337,9 @@ function renderSocialAnalytics(artist) {
   const content = analytics.topContent;
   const stats = content.stats.map((stat) => `
     <div><span>${copy(stat.label)}</span><strong>${stat.value}</strong></div>`).join("");
+  const contentVisual = content.cover
+    ? `<figure><img src="${content.cover}" alt="${artist.name} top-performing Xiaohongshu content"></figure>`
+    : "";
   root.innerHTML = `
     <div class="analytics-period">
       <div><span>${copy("last30Days")}</span><small>${analytics.period}</small></div>
@@ -347,8 +350,8 @@ function renderSocialAnalytics(artist) {
       <p>${copy("topPerformingContent")}</p>
       <h3>${copy("mostEngaged")}</h3>
     </div>
-    <article class="top-content-card">
-      <figure><img src="${content.cover}" alt="${artist.name} top-performing Xiaohongshu content"></figure>
+    <article class="top-content-card${content.cover ? "" : " no-image"}">
+      ${contentVisual}
       <div class="top-content-body">
         <div class="top-content-meta"><span>${content.platform}</span><span>${content.date}</span></div>
         <div class="top-content-stats">${stats}</div>

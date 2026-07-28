@@ -314,6 +314,7 @@ button { border: 0; }
 .top-content-heading p { margin: 0; color: var(--muted); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
 .top-content-heading h3 { margin: 0; font-family: "Instrument Serif", serif; font-size: clamp(42px, 5vw, 70px); font-weight: 400; }
 .top-content-card { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr); background: var(--paper-deep); }
+.top-content-card.no-image { grid-template-columns: 1fr; }
 .top-content-card figure { margin: 0; min-height: 520px; }
 .top-content-card figure img { width: 100%; height: 100%; object-fit: cover; }
 .top-content-body { display: flex; flex-direction: column; padding: clamp(28px, 4vw, 64px); }
