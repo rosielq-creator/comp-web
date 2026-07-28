@@ -1006,6 +1006,136 @@ body {
   .case-media video { transform: none !important; }
 }
 
+/* Mobile artist hero: keep copy, controls and imagery in separate flow regions. */
+@media (max-width: 800px) {
+  .hero {
+    min-height: auto;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    min-height: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding: 100px var(--gutter) 38px;
+  }
+
+  .hero-copy {
+    position: static;
+    display: grid;
+    gap: 0;
+  }
+
+  .hero-intro {
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    position: static;
+    margin-top: 26px;
+  }
+
+  .artist-stage {
+    position: relative;
+    inset: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "portrait portrait"
+      "caption number";
+    align-items: end;
+    gap: 18px 16px;
+    width: 100%;
+  }
+
+  .artist-portrait {
+    grid-area: portrait;
+    width: min(100%, 520px);
+    height: auto;
+    aspect-ratio: 3 / 4;
+    justify-self: center;
+    opacity: 1;
+    clip-path: none;
+  }
+
+  .artist-portrait img {
+    object-position: center;
+  }
+
+  .stage-halo {
+    grid-area: portrait;
+    align-self: center;
+    justify-self: center;
+    width: min(108vw, 560px);
+    pointer-events: none;
+  }
+
+  .artist-caption {
+    position: static;
+    grid-area: caption;
+    min-width: 0;
+    transform: none;
+  }
+
+  .artist-caption p {
+    margin: 0 0 8px;
+  }
+
+  .artist-caption h2 {
+    font-size: clamp(68px, 22vw, 104px);
+    line-height: 0.78;
+  }
+
+  .artist-number {
+    position: static;
+    grid-area: number;
+    align-self: end;
+    margin: 0 0 8px;
+  }
+
+  .artist-signal {
+    display: none;
+  }
+
+  .artist-selector {
+    position: static;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .artist-tab {
+    min-width: 44px;
+    min-height: 48px;
+  }
+
+  .artist-tab strong {
+    font-size: 9px;
+  }
+
+  .hero-foot {
+    position: static;
+    display: flex;
+    margin: 0 var(--gutter);
+    padding: 18px 0 20px;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-grid {
+    gap: 28px;
+  }
+
+  .artist-caption h2 {
+    font-size: clamp(64px, 21vw, 90px);
+  }
+}
+
 /* 2026 roster-first homepage */
 .company-logo {
   display: inline-flex;

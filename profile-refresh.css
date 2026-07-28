@@ -286,11 +286,16 @@
 }
 
 .profile-role {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: auto;
   margin: 28px 0 36px;
   color: rgba(23, 24, 19, 0.62);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.1em;
+  text-align: left;
   text-transform: uppercase;
 }
 
@@ -469,7 +474,13 @@
 
   .profile-overview {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 48px;
+  }
+
+  .profile-overview-media,
+  .profile-overview-copy {
+    position: static;
+    min-width: 0;
   }
 
   .profile-angle-frame {
@@ -481,6 +492,23 @@
     width: min(100%, 520px);
     margin-inline: auto;
     margin-top: 12px;
+  }
+
+  .profile-overview-copy {
+    padding-top: 0;
+  }
+
+  .profile-role {
+    position: static;
+    inset: auto;
+    width: auto;
+    margin: 22px 0 30px;
+  }
+
+  .profile-enquire-button {
+    position: static;
+    width: 100%;
+    margin-top: 32px;
   }
 
   .profile-overview-copy h1 {
