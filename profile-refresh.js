@@ -19,9 +19,9 @@ const profileRefreshData = {
     name: "Amber", role: "Music Producer / Fashion", followers: "13,094",
     image: "assets/profiles/amber/night-portrait.png",
     angles: [
-      "assets/profiles/amber/angles/front.png",
-      "assets/profiles/amber/angles/side.png",
-      "assets/profiles/amber/angles/back.png"
+      "assets/profiles/amber/angles/front.png?v=amber-centered-20260728",
+      "assets/profiles/amber/angles/side.png?v=amber-centered-20260728",
+      "assets/profiles/amber/angles/back.png?v=amber-centered-20260728"
     ],
     facts: [["Height", "175 cm"], ["Weight", "50 kg"], ["Measurements", "85 / 63 / 89"], ["Shoe", "38"], ["Base", "Los Angeles / Seoul"], ["Languages", "English / Korean"], ["Nationality", "Korean-American"], ["Talent type", "Music / Fashion / City Culture"]],
     gallery: ["assets/profiles/amber/night-portrait.png", "assets/profiles/amber/denim-editorial.png", "assets/profiles/amber/festival-stage.png", "assets/profiles/amber/festival-wheel.png"]
@@ -99,6 +99,10 @@ if (activeProfile && profileShowcase) {
     : { available: "Available for Global Campaigns", followers: "Total followers", enquiry: "Enquire About This Talent", gallery: "Selected images", viewAll: "View all", collapse: "Collapse", front: "Front", side: "Side", back: "Back" };
   const facts = activeProfile.facts.map(([key, value]) => `<div><dt>${key}</dt><dd>${value}</dd></div>`).join("");
   const angleImages = activeProfile.angles || [activeProfile.image];
+  angleImages.forEach((src) => {
+    const preload = new Image();
+    preload.src = src;
+  });
   profileShowcase.innerHTML = `
     <div class="profile-overview">
       <div class="profile-overview-media">
@@ -140,10 +144,6 @@ if (activeProfile && profileShowcase) {
   `);
 
   const angleImage = document.querySelector("#profileAngleImage");
-  angleImage?.addEventListener("error", () => {
-    if (angleImage.src.endsWith(activeProfile.image)) return;
-    angleImage.src = activeProfile.image;
-  });
   document.querySelectorAll(".profile-gallery-track img").forEach((galleryImage) => {
     galleryImage.addEventListener("error", () => galleryImage.closest("figure")?.remove(), { once: true });
   });
