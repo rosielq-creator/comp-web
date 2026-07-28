@@ -33,6 +33,11 @@ const profileRefreshData = {
   ooona: {
     name: "Ooona", role: "Beauty / Wellness", followers: "15.1K",
     image: "assets/profiles/ooona/hero.png",
+    angles: [
+      "assets/profiles/ooona/angles/front.png",
+      "assets/profiles/ooona/angles/side.png",
+      "assets/profiles/ooona/angles/back.png"
+    ],
     facts: [["Height", "165 cm"], ["Weight", "45 kg"], ["Measurements", "82 / 60 / 86"], ["Shoe", "38"], ["Base", "Seoul"], ["Languages", "Korean / English"], ["Talent type", "Beauty / Wellness / Lifestyle"]],
     gallery: ["assets/profiles/ooona/hero.png", "assets/profiles/ooona/mirror.png", "assets/profiles/ooona/stairs.png", "assets/profiles/ooona/sport.png"]
   },
