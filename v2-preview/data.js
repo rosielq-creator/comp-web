@@ -169,6 +169,11 @@ export const artists = [
     types: ["Lifestyle", "Fashion", "Sport", "Travel"], followers: "13.5K",
     stage: "assets/mario-hero.png", poster: "assets/mario-portrait.png",
     hero: "assets/mario-hero.png",
+    angles: [
+      "assets/profiles/mario/turnaround/front.webp",
+      "assets/profiles/mario/turnaround/side.webp",
+      "assets/profiles/mario/turnaround/back.webp"
+    ],
     availability: true, height: "185 cm", weight: "80 kg", measurements: "100 / 80 / 96", shoe: "44",
     base: "Guangdong", nationality: "China", birthday: "21 June 2000", zodiac: "Gemini",
     bio: "Mario is a Chinese lifestyle creator and independent photographer. His world moves between city streets, sport, travel and the quiet details of everyday life.",
