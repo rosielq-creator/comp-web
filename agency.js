@@ -571,6 +571,7 @@ initSignalField();
 const artistSearch = document.querySelector("#artistSearch");
 const artistFilters = [...document.querySelectorAll("[data-artist-filter]")];
 const rosterCards = [...document.querySelectorAll("[data-artist-card]")];
+const rosterGrid = document.querySelector(".artists-page .roster-grid");
 const rosterEmpty = document.querySelector("#rosterEmpty");
 
 function filterArtistRoster() {
@@ -587,14 +588,25 @@ function filterArtistRoster() {
     card.hidden = !show;
     if (show) visible += 1;
   });
-  if (rosterEmpty) rosterEmpty.hidden = visible > 0;
+  const isEmpty = visible === 0;
+  rosterGrid?.classList.toggle("is-filter-empty", isEmpty);
+  if (rosterEmpty) rosterEmpty.hidden = !isEmpty;
 }
 
 artistSearch?.addEventListener("input", filterArtistRoster);
 artistFilters.forEach((select) => select.addEventListener("change", filterArtistRoster));
-document.querySelector("#clearArtistFilters")?.addEventListener("click", () => {
+
+function resetArtistRoster() {
   if (artistSearch) artistSearch.value = "";
-  artistFilters.forEach((select) => { select.value = ""; });
+  artistFilters.forEach((select) => {
+    select.selectedIndex = 0;
+    select.value = "";
+  });
   filterArtistRoster();
   artistSearch?.focus();
+}
+
+document.querySelector("#clearArtistFilters")?.addEventListener("click", (event) => {
+  event.preventDefault();
+  resetArtistRoster();
 });
