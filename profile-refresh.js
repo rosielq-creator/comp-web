@@ -102,7 +102,7 @@ if (activeProfile && profileShowcase) {
   profileShowcase.innerHTML = `
     <div class="profile-overview">
       <div class="profile-overview-media">
-        <div class="profile-angle-frame">
+        <div class="profile-angle-frame" data-angle-index="0">
           <img id="profileAngleImage" src="${angleImages[0]}" alt="${activeProfile.name} full-length view">
         </div>
         ${activeProfile.angles ? `
@@ -150,6 +150,7 @@ if (activeProfile && profileShowcase) {
   document.querySelectorAll("[data-angle]").forEach((button) => button.addEventListener("click", () => {
     const index = Number(button.dataset.angle);
     angleImage.src = angleImages[index];
+    angleImage.closest(".profile-angle-frame")?.setAttribute("data-angle-index", String(index));
     document.querySelectorAll("[data-angle]").forEach((item) => item.classList.toggle("is-active", item === button));
   }));
 

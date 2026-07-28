@@ -261,6 +261,29 @@
   width: min(100%, 576px);
 }
 
+/* Amber's supplied views have different subject axes inside each source image. */
+.profile-page[data-artist="amber"] .profile-angle-frame {
+  background: #b9bbc0;
+}
+
+.profile-page[data-artist="amber"] .profile-angle-frame img {
+  width: 114%;
+  max-width: none;
+  transition: none;
+}
+
+.profile-page[data-artist="amber"] .profile-angle-frame[data-angle-index="0"] img {
+  transform: translateX(-8%);
+}
+
+.profile-page[data-artist="amber"] .profile-angle-frame[data-angle-index="1"] img {
+  transform: translateX(-6%);
+}
+
+.profile-page[data-artist="amber"] .profile-angle-frame[data-angle-index="2"] img {
+  transform: translateX(1%);
+}
+
 .profile-angle-controls {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
