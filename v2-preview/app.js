@@ -1,4 +1,4 @@
-import { artists, brands, i18n, services } from "./data.js?v=20260728-6";
+import { artists, brands, i18n, services } from "./data.js?v=20260728-7";
 
 const page = document.body.dataset.page;
 let language = "en";
@@ -13,7 +13,9 @@ function renderHeader() {
   const homePrefix = page === "home" ? "" : "index.html";
   root.innerHTML = `
     <div class="header-inner">
-      <a class="logo" href="index.html" aria-label="GTAI home">GTAI<sup>®</sup></a>
+      <a class="logo" href="index.html" aria-label="GreenTomato home">
+        <img src="assets/brand/greentomato-official.svg" alt="GreenTomato">
+      </a>
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="artists.html" data-i18n="navArtists"></a>
         <a href="${homePrefix}#work" data-i18n="navWork"></a>
@@ -73,7 +75,7 @@ function renderHeader() {
 function renderFooter() {
   const footer = document.querySelector("[data-footer]");
   if (!footer) return;
-  footer.innerHTML = `<a class="footer-logo" href="index.html">GTAI</a><p data-i18n="footerLine"></p><p>© 2026 / PREVIEW</p>`;
+  footer.innerHTML = `<a class="footer-logo" href="index.html" aria-label="GreenTomato home"><img src="assets/brand/greentomato-official.svg" alt="GreenTomato"></a><p data-i18n="footerLine"></p><p>© 2026 / PREVIEW</p>`;
 }
 
 function applyLanguage() {
