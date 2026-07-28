@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="description" content="GTAI represents next-generation AI talent and creates AI-native work for brands.">
+  <meta name="theme-color" content="#f5f0e7">
+  <title>GTAI — Next-Generation AI Talents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header></header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="hero-intro shell">
+        <p class="eyebrow" data-i18n="heroEyebrow"></p>
+        <h1 data-i18n="heroTitle"></h1>
+        <p class="hero-lede" data-i18n="heroCopy"></p>
+      </div>
+
+      <div class="stage-wrap shell">
+        <div class="stage-heading">
+          <p><span data-i18n="featured"></span> <b>01—05</b></p>
+          <div class="stage-active-copy" aria-live="polite">
+            <strong id="stageName">Maya</strong><span id="stageRole">Luxury Fashion / Art</span>
+          </div>
+        </div>
+        <div class="turntable-stage" id="turntableStage" aria-label="Featured artists"></div>
+        <div class="stage-floor" aria-hidden="true"></div>
+        <p class="stage-help">Click an artist to bring them centre. Click the centre artist again to view profile.</p>
+      </div>
+    </section>
+
+    <section class="roster-preview shell" aria-labelledby="rosterTitle">
+      <header class="section-head compact-head">
+        <div><p class="section-index">ARTISTS / 01</p><h2 id="rosterTitle" data-i18n="rosterTitle"></h2></div>
+        <a class="arrow-link" href="artists.html"><span data-i18n="fullRoster"></span><b>↗</b></a>
+      </header>
+      <div class="poster-grid" id="homeRoster"></div>
+    </section>
+
+    <section class="work-section" id="work" aria-labelledby="workTitle">
+      <div class="shell">
+        <header class="section-head work-head">
+          <div>
+            <p class="section-index" data-i18n="workEyebrow"></p>
+            <h2 id="workTitle" data-i18n="workTitle"></h2>
+            <p class="section-copy" data-i18n="workCopy"></p>
+          </div>
+          <div class="views-stat"><strong>1.2M+</strong><span data-i18n="viewsLabel"></span></div>
+        </header>
+        <nav class="category-tabs" id="workTabs" aria-label="Work categories"></nav>
+        <div class="brand-track" id="brandTrack"></div>
+        <div class="brand-detail" id="brandDetail" hidden></div>
+      </div>
+    </section>
+
+    <section class="services-section" id="services" aria-labelledby="servicesTitle">
+      <div class="shell">
+        <header class="section-head"><p class="section-index">SERVICES / 02</p><h2 id="servicesTitle" data-i18n="servicesTitle"></h2></header>
+        <div class="services-list" id="servicesList"></div>
+        <article class="labs">
+          <p>GTAI LABS / EXPLORATORY</p>
+          <h3>AI Experiences &amp; Prototyping</h3>
+          <p>Experimental interactive experiences, agents and custom prototypes developed with selected partners.</p>
+          <a href="#contact">Discuss an experiment ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-section" id="about" aria-labelledby="aboutTitle">
+      <div class="shell about-grid">
+        <p class="section-index">ABOUT / 03</p>
+        <h2 id="aboutTitle" data-i18n="aboutTitle"></h2>
+        <div class="about-copy">
+          <p>GTAI is a Hong Kong AI artist agency and production studio. We develop ownable digital personalities and the visual systems that let them perform across channels, markets and formats.</p>
+          <p>Our work combines human creative direction with AI-native production—from a single brand film to an artist built for years of storytelling.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contactTitle">
+      <div class="shell contact-grid">
+        <div>
+          <p class="section-index">CONTACT / 04</p>
+          <h2 id="contactTitle" data-i18n="contactTitle"></h2>
+          <p data-i18n="contactCopy"></p>
+        </div>
+        <form class="inquiry-form" data-inquiry-form>
+          <input type="hidden" name="sourceArtist" value="">
+          <label><span data-i18n="name"></span><input name="name" autocomplete="name" required></label>
+          <label><span data-i18n="company"></span><input name="company" autocomplete="organization" required></label>
+          <label><span data-i18n="email"></span><input type="email" name="email" autocomplete="email" required></label>
+          <label class="field-wide"><span data-i18n="request"></span><textarea name="request" rows="5" required></textarea></label>
+          <div class="form-end field-wide">
+            <p data-i18n="privacy"></p>
+            <button class="primary-button" type="submit"><span data-i18n="send"></span><b>↗</b></button>
+          </div>
+          <p class="form-status field-wide" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-footer></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

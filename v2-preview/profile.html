@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#f5f0e7">
+  <title>Artist Profile — GTAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="profile">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header></header>
+  <main id="main" class="profile-page">
+    <section class="profile-hero shell">
+      <a class="back-link" href="artists.html">← <span data-i18n="backArtists"></span></a>
+      <div class="profile-hero-grid">
+        <div class="digital-human">
+          <div class="model-status"><span></span><p data-i18n="modelStatus"></p></div>
+          <figure class="model-placeholder"><img id="profileHeroImage" alt=""></figure>
+          <div class="angle-switcher" aria-label="Digital human angles">
+            <button class="is-active" type="button" data-angle="front" data-i18n="front"></button>
+            <button type="button" data-angle="side" data-i18n="side"></button>
+            <button type="button" data-angle="back" data-i18n="back"></button>
+          </div>
+          <div class="angle-dots" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
+        </div>
+        <div class="profile-summary">
+          <p class="profile-kicker" id="profileRole"></p>
+          <h1 id="profileName"></h1>
+          <p class="availability"><i></i><span data-i18n="profileAvailability"></span></p>
+          <p class="profile-bio" id="profileBio"></p>
+          <div class="follower-total"><strong id="profileFollowers"></strong><span data-i18n="totalFollowers"></span></div>
+          <dl class="profile-facts" id="profileFacts"></dl>
+          <a class="primary-button profile-enquire" href="#inquiry"><span data-i18n="enquire"></span><b>↓</b></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-gallery-section shell" aria-labelledby="galleryTitle">
+      <header class="section-head compact-head"><div><p class="section-index">IMAGES / 01</p><h2 id="galleryTitle" data-i18n="allImages"></h2></div><p data-i18n="gallery"></p></header>
+      <div class="editorial-gallery" id="profileGallery"></div>
+    </section>
+
+    <section class="social-section shell" aria-labelledby="socialTitle">
+      <header class="section-head compact-head"><div><p class="section-index">SIGNAL / 02</p><h2 id="socialTitle" data-i18n="socialData"></h2></div><p data-i18n="currentPlatforms"></p></header>
+      <div class="platform-list" id="platformList"></div>
+    </section>
+
+    <section class="contact-section profile-contact-section" id="inquiry" aria-labelledby="contactTitle">
+      <div class="shell contact-grid">
+        <div>
+          <p class="section-index">INQUIRY / 03</p>
+          <h2 id="contactTitle" data-i18n="contactTitle"></h2>
+          <p data-i18n="contactCopy"></p>
+        </div>
+        <form class="inquiry-form" data-inquiry-form>
+          <input type="hidden" name="sourceArtist" id="sourceArtist">
+          <label><span data-i18n="name"></span><input name="name" autocomplete="name" required></label>
+          <label><span data-i18n="company"></span><input name="company" autocomplete="organization" required></label>
+          <label><span data-i18n="email"></span><input type="email" name="email" autocomplete="email" required></label>
+          <label class="field-wide"><span data-i18n="request"></span><textarea name="request" rows="5" required></textarea></label>
+          <div class="form-end field-wide"><p data-i18n="privacy"></p><button class="primary-button" type="submit"><span data-i18n="send"></span><b>↗</b></button></div>
+          <p class="form-status field-wide" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" data-footer></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
