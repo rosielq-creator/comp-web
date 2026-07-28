@@ -314,8 +314,12 @@ function initProfile() {
   document.querySelector("#platformList").innerHTML = artist.platforms.map((platform) => {
     const tag = platform.href ? "a" : "article";
     const attrs = platform.href ? ` href="${platform.href}" target="_blank" rel="noreferrer"` : "";
-    return `<${tag} class="platform-row"${attrs}>
-      <div><h3>${platform.name}${platform.href ? " ↗" : ""}</h3><small>${copy("currentFollowers")}</small></div>
+    const preview = platform.preview
+      ? `<figure class="platform-preview"><img src="${platform.preview}" alt="${artist.name} ${platform.name} profile" loading="lazy"></figure>`
+      : "";
+    return `<${tag} class="platform-row${platform.preview ? " has-preview" : ""}"${attrs}>
+      ${preview}
+      <div class="platform-copy"><h3>${platform.name}${platform.href ? " ↗" : ""}</h3><small>${copy("currentFollowers")}</small></div>
       <strong>${platform.count}</strong>
     </${tag}>`;
   }).join("");
@@ -348,19 +352,21 @@ function renderSocialAnalytics(artist) {
       <p>${copy("updated")} ${analytics.updated}</p>
     </div>
     <div class="signal-metrics-grid">${metrics}</div>
-    <div class="top-content-heading">
-      <p>${copy("topPerformingContent")}</p>
-      <h3>${copy("mostEngaged")}</h3>
-    </div>
-    <article class="top-content-card${content.cover ? "" : " no-image"}">
-      ${contentVisual}
-      <div class="top-content-body">
-        <div class="top-content-meta"><span>${content.platform}</span><span>${content.date}</span></div>
-        <div class="top-content-stats">${stats}</div>
-        <div class="engagement-rate"><span>${copy("engagementRate")}</span><strong>${content.engagementRate}</strong><small>${copy("byViews")}</small></div>
-        <a class="text-link" href="${content.href}" target="_blank" rel="noreferrer">${copy("openOriginalPost")}</a>
+    <section class="top-content-feature">
+      <div class="top-content-heading">
+        <p>${copy("topPerformingContent")}</p>
+        <h3>${copy("mostEngaged")}</h3>
       </div>
-    </article>`;
+      <article class="top-content-card${content.cover ? "" : " no-image"}">
+        ${contentVisual}
+        <div class="top-content-body">
+          <div class="top-content-meta"><span>${content.platform} ↗</span><span>${content.date}</span></div>
+          <div class="top-content-stats">${stats}</div>
+          <div class="engagement-rate"><span>${copy("engagementRate")}</span><strong>${content.engagementRate}</strong><small>${copy("byViews")}</small></div>
+          <a class="text-link" href="${content.href}" target="_blank" rel="noreferrer">${copy("openOriginalPost")}</a>
+        </div>
+      </article>
+    </section>`;
 }
 
 function initAngleSwitcher(artist, hero) {

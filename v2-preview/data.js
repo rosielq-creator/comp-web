@@ -179,8 +179,18 @@ export const artists = [
       "assets/mario-campaign.png", "assets/mario-portrait.png"
     ],
     platforms: [
-      { name: "Instagram", count: "8,383", href: "https://www.instagram.com/marrrio._.m/" },
-      { name: "Xiaohongshu", count: "5,206", href: "https://www.xiaohongshu.com/user/profile/6712310b000000001d022632" }
+      {
+        name: "Instagram",
+        count: "8,383",
+        href: "https://www.instagram.com/marrrio._.m/",
+        preview: "assets/social/mario/instagram-profile.jpg"
+      },
+      {
+        name: "Xiaohongshu",
+        count: "5,206",
+        href: "https://www.xiaohongshu.com/user/profile/6712310b000000001d022632",
+        preview: "assets/social/mario/xiaohongshu-profile.jpg"
+      }
     ],
     socialAnalytics: {
       updated: "2026.07.22",
@@ -194,7 +204,7 @@ export const artists = [
       topContent: {
         platform: "Xiaohongshu",
         date: "2026.06.25",
-        cover: null,
+        cover: "assets/social/mario/most-engaged-post.jpg",
         href: "https://www.xiaohongshu.com/discovery/item/6a3cc5340000000008025203?source=webshare&xhsshare=pc_web&xsec_token=AB7tZ59wDZR0OLvAj3Y5bo1EepBemmBUZh5f5whfZkzXg=&xsec_source=pc_share",
         stats: [
           { label: "impressions", value: "32,492" },
