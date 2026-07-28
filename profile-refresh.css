@@ -1,6 +1,11 @@
 .profile-page:lang(zh-Hans),
 html[lang="zh-Hans"] .profile-page {
-  font-family: "DM Sans", "Noto Sans SC", sans-serif;
+  font-family: "Noto Sans SC", "DM Sans", sans-serif;
+}
+
+.profile-page:lang(zh-Hant),
+html[lang="zh-Hant"] .profile-page {
+  font-family: "Noto Sans TC", "DM Sans", sans-serif;
 }
 
 .profile-page .profile-header.profile-refreshed {
@@ -97,15 +102,23 @@ html[lang="zh-Hans"] .profile-page {
   border-radius: 999px;
 }
 .profile-refresh-tools .profile-language-switcher button {
-  min-width: 30px;
-  min-height: 30px;
-  height: 30px;
-  padding: 0 8px;
+  min-width: 44px;
+  min-height: 44px;
+  height: 44px;
+  padding: 0 10px;
   border-radius: 999px;
   font-family: "DM Sans", "Noto Sans TC", sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.06em;
+}
+
+.profile-refresh-tools .profile-language-switcher button[data-language="zh-hant"] {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+.profile-refresh-tools .profile-language-switcher button[data-language="zh-hans"] {
+  font-family: "Noto Sans SC", sans-serif;
 }
 .profile-language-switcher button.is-active {
   color: #f1efe8;

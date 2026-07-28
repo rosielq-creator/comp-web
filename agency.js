@@ -51,7 +51,7 @@ const copy = {
     workTitleOne: "Selected work,", workTitleTwo: "made to be seen.",
     workIntro: "Browse published work by industry. Open a brand to see every project in one place.",
     totalViews: "Over 1.2 Million Views", hospitality: "Hospitality", retail: "Retail", entertainment: "Entertainment", fashion: "Fashion & Lifestyle",
-    projectsFor: "Projects for", closeProjects: "Close projects", works: "Works", published: "Published",
+    projectsFor: "Projects for", closeProjects: "Close projects", works: "Works", published: "Published", workBrowseHint: "Drag or swipe to browse brands",
     fullProduction: "Full video & image production by GTAI",
     servicesTitleOne: "One team.", servicesTitleTwo: "New creative systems.",
     servicesIntro: "We unite character, direction, production and technology around the needs of each brand.",
@@ -89,7 +89,7 @@ const copy = {
     workTitleOne: "精選作品，", workTitleTwo: "為被看見而製作。",
     workIntro: "按行業瀏覽已上線作品；展開品牌即可在同一位置查看旗下全部項目。",
     totalViews: "總觀看量超過 120 萬", hospitality: "酒店及款待", retail: "零售", entertainment: "娛樂", fashion: "時裝及生活",
-    projectsFor: "為以下品牌製作", closeProjects: "收起作品", works: "項作品", published: "已上線",
+    projectsFor: "為以下品牌製作", closeProjects: "收起作品", works: "項作品", published: "已上線", workBrowseHint: "左右滑動瀏覽更多品牌",
     fullProduction: "全部影片及圖片由 GTAI 製作",
     servicesTitleOne: "一個團隊。", servicesTitleTwo: "全新的創意系統。",
     servicesIntro: "我們圍繞品牌需求，整合人物、創意指導、製作與技術。",
@@ -125,6 +125,8 @@ const agencyTraditionalCharacters = "亞佈個們備儲內別創劃動務區問�
 const agencySimplifiedCharacters = "亚布个们备储内别创划动务区问围图团场伙娱实将寻导从拥择拟扩数于时会业乐标机档准浏为无独产发盘众础纪结络给统经线总绕续联声与兴万艺虚术装里制见规视觉览观计讨设诉询认语说请论谢识让资这连进过选长开间关阵队阶灵项预类验体鲜";
 const agencySimplifiedMap = Object.fromEntries([...agencyTraditionalCharacters].map((character, index) => [character, agencySimplifiedCharacters[index]]));
 const toSimplified = (value) => value
+  .replaceAll("獨具風格", "独具风格")
+  .replaceAll("匯聚", "汇聚")
   .replaceAll("軟件", "软件")
   .replaceAll("客製", "定制")
   .replaceAll("說故事", "讲故事")
@@ -635,6 +637,13 @@ function filterArtistRoster() {
     if (show) visible += 1;
   });
   const isEmpty = visible === 0;
+  if (rosterGrid) {
+    const cardCount = visible + (isEmpty ? 0 : 1);
+    const columnCount = cardCount > 0 && cardCount % 4 === 0 ? 4
+      : cardCount > 0 && cardCount % 3 === 0 ? 3
+      : Math.min(4, Math.max(2, cardCount));
+    rosterGrid.style.setProperty("--roster-columns", String(columnCount));
+  }
   rosterGrid?.classList.toggle("is-filter-empty", isEmpty);
   if (rosterEmpty) rosterEmpty.hidden = !isEmpty;
 }
@@ -656,3 +665,4 @@ document.querySelector("#clearArtistFilters")?.addEventListener("click", (event)
   event.preventDefault();
   resetArtistRoster();
 });
+filterArtistRoster();

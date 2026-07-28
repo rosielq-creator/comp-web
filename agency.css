@@ -24,7 +24,8 @@ body {
   line-height: 1.5;
   text-rendering: optimizeLegibility;
 }
-html[lang="zh-Hans"] body { font-family: "DM Sans", "Noto Sans SC", sans-serif; }
+html[lang="zh-Hant"] body { font-family: "Noto Sans TC", "DM Sans", sans-serif; }
+html[lang="zh-Hans"] body { font-family: "Noto Sans SC", "DM Sans", sans-serif; }
 body.menu-open { overflow: hidden; }
 a { color: inherit; text-decoration: none; }
 button, input, textarea { font: inherit; }
@@ -83,10 +84,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border: 1px solid currentColor; border-radius: 999px;
 }
 .language-switcher button {
-  min-width: 30px; height: 30px; padding: 0 8px; border: 0; border-radius: 999px;
+  min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 999px;
   color: inherit; background: transparent; cursor: pointer;
-  font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
 }
+.language-switcher button[data-language="zh-hant"] { font-family: "Noto Sans TC", sans-serif; }
+.language-switcher button[data-language="zh-hans"] { font-family: "Noto Sans SC", sans-serif; }
 .language-switcher button.is-active {
   color: var(--ink); background: var(--paper);
 }
@@ -1438,6 +1441,26 @@ body {
   display: none;
 }
 
+.work-browse-hint {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 0 0 4px;
+  color: var(--work-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-browse-hint b {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 400;
+}
+
 .work-categories button {
   flex: 0 0 auto;
   min-height: 48px;
@@ -1785,7 +1808,7 @@ body {
 }
 
 .artists-page .roster-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--roster-columns, 3), minmax(0, 1fr));
   gap: 24px;
   padding-inline: var(--gutter);
 }
@@ -1881,6 +1904,22 @@ body {
     font-size: clamp(42px, 12vw, 58px);
     line-height: 0.9;
   }
+  html[lang="zh-Hant"] .artists-page .roster-hero h1,
+  html[lang="zh-Hans"] .artists-page .roster-hero h1 {
+    font-family: "Noto Sans TC", "Noto Sans SC", sans-serif;
+    font-size: clamp(32px, 9vw, 42px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+  }
+  html[lang="zh-Hant"] .artists-page .roster-hero h1 span,
+  html[lang="zh-Hant"] .artists-page .roster-hero h1 em,
+  html[lang="zh-Hans"] .artists-page .roster-hero h1 span,
+  html[lang="zh-Hans"] .artists-page .roster-hero h1 em {
+    font-family: inherit;
+    font-weight: inherit;
+    white-space: normal;
+  }
   .artists-page .roster-kicker,
   .artists-page .roster-intro {
     position: static;
@@ -1918,6 +1957,47 @@ body {
   }
 
   .artists-page .roster-card p {
-    font-size: 9px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 620px) {
+  html[lang="zh-Hant"] .roster-home h1,
+  html[lang="zh-Hans"] .roster-home h1 {
+    max-width: 9ch;
+    font-family: "Noto Sans TC", "Noto Sans SC", sans-serif;
+    font-size: clamp(38px, 11vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+  }
+
+  html[lang="zh-Hant"] .roster-home h1 span,
+  html[lang="zh-Hant"] .roster-home h1 em,
+  html[lang="zh-Hans"] .roster-home h1 span,
+  html[lang="zh-Hans"] .roster-home h1 em {
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  .work-browse-hint {
+    justify-content: space-between;
+    margin-top: 2px;
+    font-size: 11px;
+  }
+
+  .text-link,
+  .brand-projects-head button,
+  .roster-empty button,
+  .media-controls button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .roster-empty button {
+    margin-top: 12px;
+    margin-left: 0;
   }
 }
