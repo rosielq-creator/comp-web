@@ -24,9 +24,9 @@ const profiles = {
     label: "Ooona",
     images: [
       ["assets/profiles/ooona/hero.png", "Ooona soft beauty portrait"],
-      ["assets/profiles/ooona/yoga.png", "Ooona practising yoga by the sea"],
-      ["assets/profiles/ooona/laundry.jpg", "Ooona in a sunlit everyday setting"],
-      ["assets/profiles/ooona/umbrella.jpg", "Ooona under a blue umbrella"]
+      ["assets/profiles/ooona/mirror.png", "Ooona mirror portrait"],
+      ["assets/profiles/ooona/stairs.png", "Ooona on a stairway"],
+      ["assets/profiles/ooona/sport.png", "Ooona sport portrait"]
     ],
     headline: "Soft energy,<br><em>shaped by movement.</em>",
     bio: "Ooona is a Korea-based beauty, wellness and lifestyle talent. Her world combines yoga, playful daily rituals, clean beauty and a gentle Seoul sensibility that feels light, healthy and approachable.",

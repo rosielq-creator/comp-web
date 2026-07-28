@@ -13,19 +13,19 @@ const profileRefreshData = {
       "assets/profiles/maya/angles/back.png"
     ],
     facts: [["Height", "171 cm"], ["Weight", "48 kg"], ["Measurements", "85 / 63 / 89"], ["Shoe", "38"], ["Base", "Paris / New York / Seoul"], ["Languages", "English / Korean"], ["Talent type", "Luxury Fashion / High Fashion / Art"]],
-    gallery: ["assets/profiles/maya/black-tailoring.png", "assets/profiles/maya/pink-editorial.png", "assets/profiles/maya/pink-closeup.png", "assets/profiles/maya/street-grey.png", "assets/profiles/maya/palais.png", "assets/profiles/maya/canal-01.jpg", "assets/profiles/maya/canal-02.jpg", "assets/profiles/maya/canal-03.jpg"]
+    gallery: ["assets/profiles/maya/black-tailoring.png", "assets/profiles/maya/pink-editorial.png", "assets/profiles/maya/pink-closeup.png", "assets/profiles/maya/street-grey.png"]
   },
   amber: {
     name: "Amber", role: "Music Producer / Fashion", followers: "13.1K",
     image: "assets/profiles/amber/night-portrait.png",
     facts: [["Height", "175 cm"], ["Weight", "50 kg"], ["Measurements", "85 / 63 / 89"], ["Shoe", "38"], ["Base", "Los Angeles / Seoul"], ["Languages", "English / Korean"], ["Nationality", "Korean-American"], ["Talent type", "Music / Fashion / City Culture"]],
-    gallery: ["assets/profiles/amber/night-portrait.png", "assets/profiles/amber/denim-editorial.png", "assets/profiles/amber/festival-stage.png", "assets/profiles/amber/festival-wheel.png", "assets/profiles/amber/car.jpg", "assets/profiles/amber/gallery.jpg", "assets/profiles/amber/sofa.png", "assets/profiles/amber/street.png"]
+    gallery: ["assets/profiles/amber/night-portrait.png", "assets/profiles/amber/denim-editorial.png", "assets/profiles/amber/festival-stage.png", "assets/profiles/amber/festival-wheel.png"]
   },
   ooona: {
     name: "Ooona", role: "Beauty / Wellness", followers: "15.1K",
     image: "assets/profiles/ooona/hero.png",
     facts: [["Height", "165 cm"], ["Weight", "45 kg"], ["Measurements", "82 / 60 / 86"], ["Shoe", "38"], ["Base", "Seoul"], ["Languages", "Korean / English"], ["Talent type", "Beauty / Wellness / Lifestyle"]],
-    gallery: ["assets/profiles/ooona/hero.png", "assets/profiles/ooona/yoga.png", "assets/profiles/ooona/laundry.jpg", "assets/profiles/ooona/umbrella.jpg"]
+    gallery: ["assets/profiles/ooona/hero.png", "assets/profiles/ooona/mirror.png", "assets/profiles/ooona/stairs.png", "assets/profiles/ooona/sport.png"]
   },
   mario: {
     name: "Mario", role: "Lifestyle / Fashion / Sport", followers: "13.5K",
@@ -42,7 +42,7 @@ const profileRefreshData = {
     name: "Noah", role: "Film / Fashion / Photography", followers: "11.9K",
     image: "assets/profiles/noah/hero.png",
     facts: [["Height", "183 cm"], ["Weight", "70 kg"], ["Measurements", "88 / 77 / 91"], ["Shoe", "43"], ["Base", "Hong Kong / Seoul / Tokyo"], ["Languages", "Cantonese / Mandarin / English"], ["Birthday", "7 November 2001"], ["Zodiac", "Scorpio"], ["Talent type", "Film / Fashion / Photography"]],
-    gallery: ["assets/profiles/noah/hero.png", "assets/profiles/noah/black-portrait.png", "assets/profiles/noah/cafe-portrait.png", "assets/profiles/noah/apple-portrait.jpg", "assets/profiles/noah/toy.png"]
+    gallery: ["assets/profiles/noah/hero.png", "assets/profiles/noah/black-portrait.png", "assets/profiles/noah/cafe-portrait.png", "assets/profiles/noah/apple-portrait.jpg"]
   }
 };
 
