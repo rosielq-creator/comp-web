@@ -200,26 +200,13 @@ function openBrand(id) {
     <div class="project-mosaic">
       ${brand.projects.map((project) => `
         <article class="project-piece">
-          <video muted loop playsinline autoplay preload="metadata" poster="${project.poster}">
+          <video muted loop playsinline autoplay controls preload="metadata" poster="${project.poster}">
             <source src="${project.src}" type="video/mp4">
           </video>
-          <button class="video-sound" type="button">SOUND ON</button>
           <p>${project.title} · ${copy("published")}</p>
         </article>`).join("")}
     </div>`;
   detail.querySelector(".brand-close").addEventListener("click", () => openBrand(id));
-  detail.querySelectorAll(".project-piece").forEach((piece) => {
-    const video = piece.querySelector("video");
-    const sound = piece.querySelector(".video-sound");
-    const toggleSound = () => {
-      video.muted = !video.muted;
-      sound.textContent = video.muted ? "SOUND ON" : "MUTE";
-      if (!video.paused) return;
-      video.play().catch(() => {});
-    };
-    sound.addEventListener("click", (event) => { event.stopPropagation(); toggleSound(); });
-    video.addEventListener("click", toggleSound);
-  });
   observeVideos(detail);
   renderWork();
   requestAnimationFrame(() => detail.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
