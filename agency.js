@@ -249,45 +249,45 @@ const workBrands = [
     id: "mgm", name: "Macau MGM", category: "hospitality", industry: "Hospitality", year: "2026",
     cover: "assets/work/mgm-01-poster.jpg",
     projects: [
-      ["MGM Film 01", "assets/work/video/mgm-01.mp4", "assets/work/mgm-01-poster.jpg"],
-      ["MGM Film 02", "assets/work/video/mgm-02.mp4", "assets/work/mgm-02-poster.jpg"],
-      ["MGM Film 03", "assets/work/video/mgm-03.mp4", "assets/work/mgm-03-poster.jpg"]
+      ["MGM Film 01", "assets/work/web-video/mgm-01.web.mp4", "assets/work/mgm-01-poster.jpg"],
+      ["MGM Film 02", "assets/work/web-video/mgm-02.web.mp4", "assets/work/mgm-02-poster.jpg"],
+      ["MGM Film 03", "assets/work/web-video/mgm-03.web.mp4", "assets/work/mgm-03-poster.jpg"]
     ]
   },
   {
     id: "peninsula", name: "The Peninsula Hong Kong", category: "hospitality", industry: "Luxury Hospitality", year: "2026",
     cover: "assets/work/peninsula/peninsula-fathers-day-key-visual.jpg",
-    projects: [["Father's Day", "assets/work/peninsula/peninsula-fathers-day.mp4", "assets/work/peninsula/peninsula-fathers-day-key-visual.jpg"]]
+    projects: [["Father's Day", "assets/work/web-video/peninsula.web.mp4", "assets/work/peninsula/peninsula-fathers-day-key-visual.jpg"]]
   },
   {
     id: "parknshop", name: "PARKnSHOP", category: "retail", industry: "Retail", year: "2026",
     cover: "assets/work/parknshop/parknshop-weekly-offer-cover.jpg",
-    projects: [["Weekly Offer", "assets/work/parknshop/parknshop-weekly-offer.mp4", "assets/work/parknshop/parknshop-weekly-offer-cover.jpg"]]
+    projects: [["Weekly Offer", "assets/work/web-video/parknshop.web.mp4", "assets/work/parknshop/parknshop-weekly-offer-cover.jpg"]]
   },
   {
     id: "octopus", name: "Octopus", category: "retail", industry: "Urban Lifestyle", year: "2026",
     cover: "assets/work/octopus-cover.jpg",
-    projects: [["Octopus Film", "assets/work/video/octopus.mp4", "assets/work/octopus-cover.jpg"]]
+    projects: [["Octopus Film", "assets/work/web-video/octopus.web.mp4", "assets/work/octopus-cover.jpg"]]
   },
   {
     id: "chillgood", name: "ChillGOOD × TV章魚燒", category: "entertainment", industry: "Entertainment", year: "2026",
     cover: "assets/work/takoyaki-poster.jpg",
-    projects: [["Music Video", "assets/work/video/takoyaki.mp4", "assets/work/takoyaki-poster.jpg"]]
+    projects: [["Music Video", "assets/work/web-video/takoyaki.web.mp4", "assets/work/takoyaki-poster.jpg"]]
   },
   {
     id: "grams", name: "GRAMS", category: "fashion", industry: "Fashion & Lifestyle", year: "2026",
     cover: "assets/work/grams-color.jpg",
     projects: [
-      ["Color", "assets/work/video/grams-color.mp4", "assets/work/grams-color.jpg"],
-      ["Black & White", "assets/work/video/grams-bw.mp4", "assets/work/grams-color.jpg"]
+      ["Color", "assets/work/web-video/grams-color.web.mp4", "assets/work/grams-color.jpg"],
+      ["Black & White", "assets/work/web-video/grams-bw.web.mp4", "assets/work/grams-color.jpg"]
     ]
   },
   {
     id: "koisea", name: "KOISEA", category: "fashion", industry: "Fashion & Lifestyle", year: "2026",
     cover: "assets/work/koisea.png",
     projects: [
-      ["Landscape Cut", "assets/work/video/koisea-landscape.mp4", "assets/work/koisea.png"],
-      ["Underground Cut", "assets/work/video/koisea-underground.mp4", "assets/work/koisea-underground.jpg"]
+      ["Landscape Cut", "assets/work/web-video/koisea-landscape.web.mp4", "assets/work/koisea.png"],
+      ["Underground Cut", "assets/work/web-video/koisea-underground.web.mp4", "assets/work/koisea-underground.jpg"]
     ]
   }
 ];
@@ -344,9 +344,9 @@ function renderBrandWork() {
         <button type="button" data-close-brand>${copy[language].closeProjects} ×</button>
       </header>
       <div class="project-grid">
-        ${brand.projects.map(([title, src, poster]) => `
+        ${brand.projects.map(([title, src, poster], index) => `
           <article class="project-item">
-            <video muted loop playsinline controls preload="metadata" poster="${poster}">
+            <video muted loop playsinline controls preload="${index === 0 ? "auto" : "none"}" poster="${poster}">
               <source src="${src}" type="video/mp4">
             </video>
             <p>${title} · ${copy[language].published}</p>
@@ -355,9 +355,31 @@ function renderBrandWork() {
       </div>
     `;
     detail.querySelector("[data-close-brand]")?.addEventListener("click", () => {
+      detail.querySelectorAll("video").forEach((video) => {
+        video.pause();
+        video.removeAttribute("src");
+        video.querySelectorAll("source").forEach((source) => source.removeAttribute("src"));
+        video.load();
+      });
       openWorkBrand = null;
       detail.hidden = true;
       renderBrandWork();
+    });
+    const projectVideos = [...detail.querySelectorAll("video")];
+    projectVideos.forEach((video) => {
+      const prepareVideo = () => {
+        if (video.preload === "auto") return;
+        video.preload = "auto";
+        video.load();
+      };
+      video.addEventListener("pointerenter", prepareVideo, { once: true, passive: true });
+      video.addEventListener("touchstart", prepareVideo, { once: true, passive: true });
+      video.addEventListener("focus", prepareVideo, { once: true });
+      video.addEventListener("play", () => {
+        projectVideos.forEach((other) => {
+          if (other !== video) other.pause();
+        });
+      });
     });
     renderBrandWork();
     requestAnimationFrame(() => detail.scrollIntoView({
