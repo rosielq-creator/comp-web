@@ -45,11 +45,13 @@ const copy = {
   en: {
     navArtists: "Artists", navWork: "Work", navServices: "Services", navAbout: "About", navContact: "Contact",
     heroEyebrow: "Independent AI artist agency · Hong Kong",
-    heroLineOne: "AI artists.", heroLineTwo: "Built for brands.",
+    heroLineOne: "Meet our", heroLineTwo: "digital talents.",
     heroIntro: "Distinct digital personalities, original worlds and production built to move at the speed of culture.",
-    exploreProfile: "Explore profile", viewRoster: "View full roster", featuredArtists: "Featured artists · 2026", scrollToWork: "Selected work",
+    exploreProfile: "Explore profile", viewRoster: "View all artists", featuredArtists: "Featured artists · 2026", scrollToWork: "Selected work",
     workTitleOne: "Selected work,", workTitleTwo: "made to be seen.",
-    workIntro: "Film and image production for hospitality, entertainment and retail brands across Asia.",
+    workIntro: "Browse published work by industry. Open a brand to see every project in one place.",
+    totalViews: "Over 1.2 Million Views", hospitality: "Hospitality", retail: "Retail", entertainment: "Entertainment", fashion: "Fashion & Lifestyle",
+    projectsFor: "Projects for", closeProjects: "Close projects", works: "Works", published: "Published",
     fullProduction: "Full video & image production by GTAI",
     servicesTitleOne: "One team.", servicesTitleTwo: "New creative systems.",
     servicesIntro: "We unite character, direction, production and technology around the needs of each brand.",
@@ -74,16 +76,20 @@ const copy = {
     rosterIntro: "Five flagship artists. Distinct identities, interests and creative worlds—built to grow into a wider next-generation roster.",
     currentRoster: "CURRENT FLAGSHIP ARTISTS", moreArtists: "More artists are taking shape.",
     moreArtistsCopy: "The roster is designed to grow. New identities will appear here without changing the flagship five.",
-    buildArtist: "Build an artist with us", rosterCtaOne: "Need an artist", rosterCtaTwo: "who does not exist yet?", startProject: "Start a project"
+    buildArtist: "Build an artist with us", rosterCtaOne: "Need an artist", rosterCtaTwo: "who does not exist yet?", startProject: "Start a project",
+    searchArtists: "Search artists", gender: "Gender", location: "Location", language: "Language", talentType: "Talent type",
+    allGenders: "All genders", allLocations: "All locations", allLanguages: "All languages", allTypes: "All talent types"
   },
   zh: {
     navArtists: "藝人", navWork: "作品", navServices: "服務", navAbout: "關於", navContact: "聯絡",
     heroEyebrow: "香港獨立 AI 藝人經紀公司",
-    heroLineOne: "AI 藝人。", heroLineTwo: "為品牌而生。",
+    heroLineOne: "認識我們的", heroLineTwo: "數字藝人。",
     heroIntro: "鮮明的數字人個性、原創世界觀，以及能與文化同步前進的製作能力。",
-    exploreProfile: "探索藝人檔案", viewRoster: "查看完整陣容", featuredArtists: "招牌藝人 · 2026", scrollToWork: "精選作品",
+    exploreProfile: "探索藝人檔案", viewRoster: "查看全部藝人", featuredArtists: "招牌藝人 · 2026", scrollToWork: "精選作品",
     workTitleOne: "精選作品，", workTitleTwo: "為被看見而製作。",
-    workIntro: "為亞洲酒店、娛樂與零售品牌提供影片及圖片製作。",
+    workIntro: "按行業瀏覽已上線作品；展開品牌即可在同一位置查看旗下全部項目。",
+    totalViews: "總觀看量超過 120 萬", hospitality: "酒店及款待", retail: "零售", entertainment: "娛樂", fashion: "時裝及生活",
+    projectsFor: "為以下品牌製作", closeProjects: "收起作品", works: "項作品", published: "已上線",
     fullProduction: "全部影片及圖片由 GTAI 製作",
     servicesTitleOne: "一個團隊。", servicesTitleTwo: "全新的創意系統。",
     servicesIntro: "我們圍繞品牌需求，整合人物、創意指導、製作與技術。",
@@ -108,7 +114,9 @@ const copy = {
     rosterIntro: "五位招牌藝人，各自擁有鮮明身份、興趣與創意世界；陣容將持續擴展。",
     currentRoster: "目前招牌藝人", moreArtists: "更多藝人正在成形。",
     moreArtistsCopy: "這個陣容會持續成長；新身份將加入這裡，同時保留目前五位招牌藝人。",
-    buildArtist: "與我們建立新藝人", rosterCtaOne: "需要一位", rosterCtaTwo: "尚未存在的藝人？", startProject: "開始項目"
+    buildArtist: "與我們建立新藝人", rosterCtaOne: "需要一位", rosterCtaTwo: "尚未存在的藝人？", startProject: "開始項目",
+    searchArtists: "搜尋藝人", gender: "性別", location: "地區", language: "語言", talentType: "藝人類型",
+    allGenders: "所有性別", allLocations: "所有地區", allLanguages: "所有語言", allTypes: "所有藝人類型"
   }
 };
 
@@ -132,6 +140,7 @@ function applyLanguage() {
 document.querySelector("#languageToggle")?.addEventListener("click", () => {
   language = language === "en" ? "zh" : "en";
   applyLanguage();
+  renderBrandWork();
 });
 applyLanguage();
 
@@ -205,6 +214,131 @@ document.querySelector("#artistStage")?.addEventListener("touchend", (event) => 
   const delta = event.changedTouches[0].clientX - touchStart;
   if (Math.abs(delta) > 45) setArtist((activeArtist + (delta < 0 ? 1 : -1) + artists.length) % artists.length);
 }, { passive: true });
+
+const workBrands = [
+  {
+    id: "mgm", name: "Macau MGM", category: "hospitality", industry: "Hospitality", year: "2026",
+    cover: "assets/work/mgm-01-poster.jpg",
+    projects: [
+      ["MGM Film 01", "assets/work/video/mgm-01.mp4", "assets/work/mgm-01-poster.jpg"],
+      ["MGM Film 02", "assets/work/video/mgm-02.mp4", "assets/work/mgm-02-poster.jpg"],
+      ["MGM Film 03", "assets/work/video/mgm-03.mp4", "assets/work/mgm-03-poster.jpg"]
+    ]
+  },
+  {
+    id: "peninsula", name: "The Peninsula Hong Kong", category: "hospitality", industry: "Luxury Hospitality", year: "2026",
+    cover: "assets/work/peninsula/peninsula-fathers-day-key-visual.jpg",
+    projects: [["Father's Day", "assets/work/peninsula/peninsula-fathers-day.mp4", "assets/work/peninsula/peninsula-fathers-day-key-visual.jpg"]]
+  },
+  {
+    id: "parknshop", name: "PARKnSHOP", category: "retail", industry: "Retail", year: "2026",
+    cover: "assets/work/parknshop/parknshop-weekly-offer-cover.jpg",
+    projects: [["Weekly Offer", "assets/work/parknshop/parknshop-weekly-offer.mp4", "assets/work/parknshop/parknshop-weekly-offer-cover.jpg"]]
+  },
+  {
+    id: "octopus", name: "Octopus", category: "retail", industry: "Urban Lifestyle", year: "2026",
+    cover: "assets/work/takoyaki-poster.jpg",
+    projects: [["Octopus Film", "assets/work/video/octopus.mp4", "assets/work/takoyaki-poster.jpg"]]
+  },
+  {
+    id: "chillgood", name: "ChillGOOD × TV章魚燒", category: "entertainment", industry: "Entertainment", year: "2026",
+    cover: "assets/work/takoyaki-poster.jpg",
+    projects: [["Music Video", "assets/work/video/takoyaki.mp4", "assets/work/takoyaki-poster.jpg"]]
+  },
+  {
+    id: "grams", name: "GRAMS", category: "fashion", industry: "Fashion & Lifestyle", year: "2026",
+    cover: "assets/work/grams-color.jpg",
+    projects: [
+      ["Color", "assets/work/video/grams-color.mp4", "assets/work/grams-color.jpg"],
+      ["Black & White", "assets/work/video/grams-bw.mp4", "assets/work/grams-color.jpg"]
+    ]
+  },
+  {
+    id: "koisea", name: "KOISEA", category: "fashion", industry: "Fashion & Lifestyle", year: "2026",
+    cover: "assets/work/koisea.png",
+    projects: [
+      ["Landscape Cut", "assets/work/video/koisea-landscape.mp4", "assets/work/koisea.png"],
+      ["Underground Cut", "assets/work/video/koisea-underground.mp4", "assets/work/koisea-underground.jpg"]
+    ]
+  }
+];
+
+const workCategoryKeys = ["hospitality", "retail", "entertainment", "fashion"];
+let activeWorkCategory = "hospitality";
+let openWorkBrand = null;
+
+function renderBrandWork() {
+  const tabsRoot = document.querySelector("#workCategories");
+  const track = document.querySelector("#curvedWork");
+  const detail = document.querySelector("#brandProjects");
+  if (!tabsRoot || !track || !detail) return;
+
+  track.className = "brand-track";
+  tabsRoot.innerHTML = workCategoryKeys.map((key) => `
+    <button type="button" class="${key === activeWorkCategory ? "is-active" : ""}" data-work-category="${key}" aria-pressed="${key === activeWorkCategory}">
+      ${copy[language][key]}
+    </button>
+  `).join("");
+
+  tabsRoot.querySelectorAll("[data-work-category]").forEach((button) => button.addEventListener("click", () => {
+    activeWorkCategory = button.dataset.workCategory;
+    openWorkBrand = null;
+    detail.hidden = true;
+    renderBrandWork();
+  }));
+
+  const brands = workBrands.filter((brand) => brand.category === activeWorkCategory);
+  track.innerHTML = brands.map((brand) => `
+    <button class="brand-card" type="button" data-work-brand="${brand.id}" aria-expanded="${openWorkBrand === brand.id}">
+      <figure><img src="${brand.cover}" alt="${brand.name}" loading="lazy"></figure>
+      <div class="brand-card-meta">
+        <div><h3>${brand.name}</h3><p>${brand.industry} · ${brand.year}</p></div>
+        <small>${brand.projects.length} ${copy[language].works} ↘</small>
+      </div>
+    </button>
+  `).join("");
+
+  track.querySelectorAll("[data-work-brand]").forEach((button) => button.addEventListener("click", () => {
+    const id = button.dataset.workBrand;
+    openWorkBrand = openWorkBrand === id ? null : id;
+    if (!openWorkBrand) {
+      detail.hidden = true;
+      renderBrandWork();
+      return;
+    }
+
+    const brand = workBrands.find((item) => item.id === id);
+    detail.hidden = false;
+    detail.innerHTML = `
+      <header class="brand-projects-head">
+        <div><p>${copy[language].projectsFor}</p><h3>${brand.name}</h3></div>
+        <button type="button" data-close-brand>${copy[language].closeProjects} ×</button>
+      </header>
+      <div class="project-grid">
+        ${brand.projects.map(([title, src, poster]) => `
+          <article class="project-item">
+            <video muted loop playsinline controls preload="metadata" poster="${poster}">
+              <source src="${src}" type="video/mp4">
+            </video>
+            <p>${title} · ${copy[language].published}</p>
+          </article>
+        `).join("")}
+      </div>
+    `;
+    detail.querySelector("[data-close-brand]")?.addEventListener("click", () => {
+      openWorkBrand = null;
+      detail.hidden = true;
+      renderBrandWork();
+    });
+    renderBrandWork();
+    requestAnimationFrame(() => detail.scrollIntoView({
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "nearest"
+    }));
+  }));
+}
+
+renderBrandWork();
 
 const workCards = [...document.querySelectorAll("[data-work]")];
 const workVideos = workCards.map((card) => card.querySelector("video")).filter(Boolean);
@@ -428,3 +562,34 @@ function initSignalField() {
   draw();
 }
 initSignalField();
+
+const artistSearch = document.querySelector("#artistSearch");
+const artistFilters = [...document.querySelectorAll("[data-artist-filter]")];
+const rosterCards = [...document.querySelectorAll("[data-artist-card]")];
+const rosterEmpty = document.querySelector("#rosterEmpty");
+
+function filterArtistRoster() {
+  if (!rosterCards.length) return;
+  const query = artistSearch?.value.trim().toLowerCase() || "";
+  let visible = 0;
+  rosterCards.forEach((card) => {
+    const matchesSearch = !query || card.dataset.name.includes(query);
+    const matchesFilters = artistFilters.every((select) => {
+      const value = select.value.toLowerCase();
+      return !value || card.dataset[select.dataset.artistFilter]?.includes(value);
+    });
+    const show = matchesSearch && matchesFilters;
+    card.hidden = !show;
+    if (show) visible += 1;
+  });
+  if (rosterEmpty) rosterEmpty.hidden = visible > 0;
+}
+
+artistSearch?.addEventListener("input", filterArtistRoster);
+artistFilters.forEach((select) => select.addEventListener("change", filterArtistRoster));
+document.querySelector("#clearArtistFilters")?.addEventListener("click", () => {
+  if (artistSearch) artistSearch.value = "";
+  artistFilters.forEach((select) => { select.value = ""; });
+  filterArtistRoster();
+  artistSearch?.focus();
+});

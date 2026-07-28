@@ -487,7 +487,7 @@ body {
 .agency-header.is-scrolled,
 .agency-header-light.is-scrolled {
   color: var(--ink);
-  background: oklch(0.975 0.012 88 / 0.88);
+  background-color: rgba(250, 248, 242, 0.94);
   border-color: var(--line-dark);
   backdrop-filter: blur(18px) saturate(1.2);
 }
@@ -1004,4 +1004,633 @@ body {
   .artist-stage,
   .roster-card { transform: none !important; }
   .case-media video { transform: none !important; }
+}
+
+/* 2026 roster-first homepage */
+.company-logo {
+  display: inline-flex;
+  width: clamp(126px, 11vw, 148px);
+  height: 25px;
+  align-items: center;
+}
+
+.company-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.roster-home {
+  min-height: 100svh;
+  padding: clamp(136px, 15vh, 184px) var(--gutter) clamp(64px, 8vw, 112px);
+  background: var(--paper);
+}
+
+.roster-home::before,
+.roster-home::after {
+  display: none;
+}
+
+.roster-home-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+  gap: clamp(48px, 8vw, 128px);
+  align-items: end;
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+
+.roster-home h1 {
+  max-width: 11ch;
+  margin-top: 20px;
+  font-size: clamp(58px, 7.7vw, 132px);
+  line-height: 0.84;
+}
+
+.roster-home h1 span,
+.roster-home h1 em {
+  display: block;
+}
+
+.roster-home h1 em {
+  color: var(--silver-dark);
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+}
+
+.roster-home .hero-intro {
+  max-width: 42ch;
+  margin: 0;
+  padding-bottom: 6px;
+  font-size: clamp(16px, 1.25vw, 20px);
+}
+
+.home-artist-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--line-dark);
+  border-left: 1px solid var(--line-dark);
+}
+
+.home-artist-card {
+  position: relative;
+  min-width: 0;
+  color: var(--ink);
+  border-right: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+  background: var(--paper);
+  text-decoration: none;
+}
+
+.home-artist-card figure {
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+
+.home-artist-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+  transition: transform 420ms var(--ease-move);
+}
+
+.home-artist-card:hover img {
+  transform: scale(1.025);
+}
+
+.home-artist-card > div {
+  min-height: 132px;
+  padding: 18px 16px 20px;
+}
+
+.home-artist-card h2 {
+  margin: 0;
+  font-size: clamp(28px, 2.2vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.home-artist-card p {
+  min-height: 34px;
+  margin: 10px 0 16px;
+  color: var(--muted-dark);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.home-artist-card span {
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-artist-card:focus-visible {
+  z-index: 2;
+  outline: 3px solid var(--signal);
+  outline-offset: -3px;
+}
+
+.roster-home-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding-top: 28px;
+}
+
+.roster-home-footer p {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+}
+
+.roster-home-footer p span {
+  font-family: "Instrument Serif", serif;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.roster-home-footer p small {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.roster-view-all {
+  min-width: min(100%, 220px);
+  justify-content: space-between;
+}
+
+.roster-grid img {
+  filter: none !important;
+}
+
+@media (max-width: 980px) {
+  .roster-home-heading {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .home-artist-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .company-logo {
+    width: 124px;
+  }
+
+  .roster-home {
+    padding-top: 112px;
+  }
+
+  .roster-home h1 {
+    font-size: clamp(52px, 17vw, 80px);
+  }
+
+  .home-artist-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-artist-card > div {
+    min-height: 118px;
+    padding: 14px 12px 18px;
+  }
+
+  .home-artist-card h2 {
+    font-size: 28px;
+  }
+
+  .home-artist-card p {
+    min-height: 42px;
+    font-size: 9px;
+  }
+
+  .roster-home-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .roster-view-all {
+    width: 100%;
+  }
+}
+
+/* Industry-led work browser */
+.work-section {
+  --work-paper: oklch(0.965 0.014 145);
+  --work-muted: oklch(0.79 0.035 150);
+  --work-line: oklch(0.72 0.035 150 / 0.42);
+  color: var(--work-paper);
+  background:
+    radial-gradient(circle at 88% 4%, oklch(0.39 0.08 151 / 0.46), transparent 30%),
+    oklch(0.225 0.045 155);
+}
+
+.work-section .section-heading {
+  grid-template-columns: 0.38fr 1.35fr 0.62fr;
+  align-items: end;
+}
+
+.work-section .section-heading h2 em {
+  color: oklch(0.81 0.045 150);
+}
+
+.work-section .section-heading > div:nth-child(2) > p,
+.work-section .section-index {
+  color: var(--work-muted);
+}
+
+.work-views {
+  align-self: end;
+  text-align: right;
+}
+
+.work-views strong {
+  display: block;
+  color: oklch(0.82 0.19 135);
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(66px, 7vw, 112px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.8;
+}
+
+.work-views span {
+  display: block;
+  margin-top: 14px;
+  color: var(--work-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.work-categories {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-top: 56px;
+  padding-bottom: 18px;
+  scrollbar-width: none;
+}
+
+.work-categories::-webkit-scrollbar {
+  display: none;
+}
+
+.work-categories button {
+  flex: 0 0 auto;
+  min-height: 48px;
+  padding: 12px 20px;
+  color: var(--work-paper);
+  border: 1px solid var(--work-line);
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.work-categories button:hover,
+.work-categories button.is-active {
+  color: oklch(0.19 0.04 155);
+  border-color: oklch(0.82 0.19 135);
+  background: oklch(0.82 0.19 135);
+}
+
+.work-categories button:focus-visible,
+.brand-card:focus-visible,
+.brand-projects button:focus-visible {
+  outline: 3px solid oklch(0.82 0.19 135);
+  outline-offset: 3px;
+}
+
+.brand-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(430px, 46%);
+  gap: 24px;
+  overflow-x: auto;
+  padding: 12px 0 32px;
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--work-muted) transparent;
+  scrollbar-width: thin;
+}
+
+.brand-card {
+  min-width: 0;
+  padding: 0;
+  color: inherit;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  scroll-snap-align: start;
+  text-align: left;
+}
+
+.brand-card figure {
+  aspect-ratio: 16 / 10;
+  margin: 0;
+  overflow: hidden;
+  background: oklch(0.18 0.025 155);
+  box-shadow: 0 28px 72px oklch(0.1 0.025 155 / 0.38);
+}
+
+.brand-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+  transition: transform 350ms var(--ease-move);
+}
+
+.brand-card:hover img {
+  transform: scale(1.025);
+}
+
+.brand-card-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: end;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--work-line);
+}
+
+.brand-card h3,
+.brand-projects h3 {
+  margin: 0;
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(40px, 3.5vw, 60px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+}
+
+.brand-card p {
+  margin: 12px 0 0;
+  color: var(--work-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-card small {
+  color: oklch(0.82 0.19 135);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.brand-projects {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--work-line);
+}
+
+.brand-projects[hidden] {
+  display: none;
+}
+
+.brand-projects-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.brand-projects-head p {
+  margin: 0 0 10px;
+  color: var(--work-muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.brand-projects-head h3 {
+  font-size: clamp(52px, 6vw, 88px);
+}
+
+.brand-projects-head button {
+  min-height: 44px;
+  padding: 10px 14px;
+  color: var(--work-paper);
+  border: 1px solid var(--work-line);
+  background: transparent;
+  cursor: pointer;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+
+.project-item {
+  min-width: 0;
+}
+
+.project-item video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: oklch(0.12 0.02 155);
+}
+
+.project-item p {
+  margin: 12px 0 0;
+  color: var(--work-muted);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 900px) {
+  .work-section .section-heading {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .work-views {
+    text-align: left;
+  }
+
+  .brand-track {
+    grid-auto-columns: minmax(320px, 78%);
+  }
+}
+
+@media (max-width: 620px) {
+  .work-categories {
+    margin-top: 40px;
+  }
+
+  .brand-track {
+    grid-auto-columns: 88%;
+    gap: 16px;
+  }
+
+  .brand-card h3 {
+    font-size: 38px;
+  }
+
+  .brand-card small {
+    font-size: 12px;
+  }
+
+  .brand-projects-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Complete artist directory */
+.roster-tools {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.5fr) repeat(4, minmax(150px, 0.75fr));
+  gap: 8px;
+  padding: 0 var(--gutter) 32px;
+}
+
+.roster-tools input,
+.roster-tools select {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  color: var(--ink);
+  border: 1px solid var(--line-dark);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.28);
+  font: inherit;
+  font-size: 13px;
+}
+
+.roster-tools input:focus,
+.roster-tools select:focus {
+  border-color: var(--ink);
+  outline: 2px solid var(--signal);
+  outline-offset: 1px;
+}
+
+.artists-page .roster-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  padding-inline: var(--gutter);
+}
+
+.artists-page .roster-card,
+.artists-page .roster-card:nth-child(even),
+.artists-page .roster-card:hover {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  border: 1px solid var(--line-dark);
+  transform: none;
+}
+
+.artists-page [data-artist-card][hidden] {
+  display: none !important;
+}
+
+.artists-page .roster-card:first-child figure,
+.artists-page .roster-card figure {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: none;
+}
+
+.artists-page .roster-card figure img,
+.artists-page .roster-card:first-child figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+}
+
+.artists-page .roster-card > div {
+  min-height: 164px;
+  padding: 18px 16px;
+}
+
+.artists-page .roster-card h2 {
+  font-size: clamp(34px, 3vw, 50px);
+}
+
+.artists-page .roster-coming {
+  min-height: 100%;
+}
+
+.roster-empty {
+  margin: -80px var(--gutter) 120px;
+  padding: 48px;
+  border: 1px solid var(--line-dark);
+  text-align: center;
+}
+
+.roster-empty button {
+  margin-left: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+  .roster-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .roster-search {
+    grid-column: 1 / -1;
+  }
+
+  .artists-page .roster-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .roster-tools {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .artists-page .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .artists-page .roster-card > div {
+    min-height: 148px;
+    padding: 14px 12px;
+  }
+
+  .artists-page .roster-card h2 {
+    font-size: 30px;
+  }
+
+  .artists-page .roster-card p {
+    font-size: 9px;
+  }
 }

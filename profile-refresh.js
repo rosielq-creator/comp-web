@@ -3,10 +3,53 @@ const isChinese = savedLanguage === "zh";
 const artistName = document.body.dataset.artist || "mario";
 const header = document.querySelector(".profile-header");
 
+const profileRefreshData = {
+  maya: {
+    name: "Maya", role: "Luxury Fashion / Art", followers: "14.5K",
+    image: "assets/profiles/maya/black-tailoring.png",
+    angles: [
+      "v2-preview/assets/profiles/maya/angles/front.png?v=20260728-2",
+      "v2-preview/assets/profiles/maya/angles/side.png?v=20260728-2",
+      "v2-preview/assets/profiles/maya/angles/back.png?v=20260728-2"
+    ],
+    facts: [["Height", "171 cm"], ["Weight", "48 kg"], ["Measurements", "85 / 63 / 89"], ["Shoe", "38"], ["Base", "Paris / New York / Seoul"], ["Languages", "English / Korean"], ["Talent type", "Luxury Fashion / High Fashion / Art"]],
+    gallery: ["assets/profiles/maya/black-tailoring.png", "assets/profiles/maya/pink-editorial.png", "assets/profiles/maya/pink-closeup.png", "assets/profiles/maya/street-grey.png", "assets/profiles/maya/palais.png", "assets/profiles/maya/canal-01.jpg", "assets/profiles/maya/canal-02.jpg", "assets/profiles/maya/canal-03.jpg"]
+  },
+  amber: {
+    name: "Amber", role: "Music Producer / Fashion", followers: "13.1K",
+    image: "assets/profiles/amber/night-portrait.png",
+    facts: [["Height", "175 cm"], ["Weight", "50 kg"], ["Measurements", "85 / 63 / 89"], ["Shoe", "38"], ["Base", "Los Angeles / Seoul"], ["Languages", "English / Korean"], ["Nationality", "Korean-American"], ["Talent type", "Music / Fashion / City Culture"]],
+    gallery: ["assets/profiles/amber/night-portrait.png", "assets/profiles/amber/denim-editorial.png", "assets/profiles/amber/festival-stage.png", "assets/profiles/amber/festival-wheel.png", "assets/profiles/amber/car.jpg", "assets/profiles/amber/gallery.jpg", "assets/profiles/amber/sofa.png", "assets/profiles/amber/street.png"]
+  },
+  ooona: {
+    name: "Ooona", role: "Beauty / Wellness", followers: "15.1K",
+    image: "assets/profiles/ooona/hero.png",
+    facts: [["Height", "165 cm"], ["Weight", "45 kg"], ["Measurements", "82 / 60 / 86"], ["Shoe", "38"], ["Base", "Seoul"], ["Languages", "Korean / English"], ["Talent type", "Beauty / Wellness / Lifestyle"]],
+    gallery: ["assets/profiles/ooona/hero.png", "assets/profiles/ooona/yoga.png", "assets/profiles/ooona/laundry.jpg", "assets/profiles/ooona/umbrella.jpg"]
+  },
+  mario: {
+    name: "Mario", role: "Lifestyle / Fashion / Sport", followers: "13.5K",
+    image: "assets/mario-hero.png",
+    angles: [
+      "v2-preview/assets/profiles/mario/turnaround/front.webp",
+      "v2-preview/assets/profiles/mario/turnaround/side.webp",
+      "v2-preview/assets/profiles/mario/turnaround/back.webp"
+    ],
+    facts: [["Height", "185 cm"], ["Weight", "80 kg"], ["Measurements", "100 / 80 / 96"], ["Shoe", "44"], ["Base", "Guangdong"], ["Languages", "Mandarin / Cantonese / English"], ["Nationality", "China"], ["Birthday", "21 June 2000"], ["Zodiac", "Gemini"], ["Talent type", "Lifestyle / Fashion / Sport / Travel"]],
+    gallery: ["assets/mario-hero.png", "assets/mario-editorial.png", "assets/mario-campaign.png", "assets/mario-portrait.png", "assets/profiles/mario/yotree-cover.png"]
+  },
+  noah: {
+    name: "Noah", role: "Film / Fashion / Photography", followers: "11.9K",
+    image: "assets/profiles/noah/hero.png",
+    facts: [["Height", "183 cm"], ["Weight", "70 kg"], ["Measurements", "88 / 77 / 91"], ["Shoe", "43"], ["Base", "Hong Kong / Seoul / Tokyo"], ["Languages", "Cantonese / Mandarin / English"], ["Birthday", "7 November 2001"], ["Zodiac", "Scorpio"], ["Talent type", "Film / Fashion / Photography"]],
+    gallery: ["assets/profiles/noah/hero.png", "assets/profiles/noah/black-portrait.png", "assets/profiles/noah/cafe-portrait.png", "assets/profiles/noah/apple-portrait.jpg", "assets/profiles/noah/toy.png"]
+  }
+};
+
 if (header) {
   header.classList.add("profile-refreshed");
   header.innerHTML = `
-    <a class="profile-refresh-logo" href="index.html" aria-label="GTAI home">GTAI<span>®</span></a>
+    <a class="profile-refresh-logo company-logo" href="index.html" aria-label="GreenTomato home"><img src="https://gtomato.com/_next/static/media/logo-gt-color.fd039543.svg" alt="GreenTomato"></a>
     <nav class="profile-refresh-nav" aria-label="Primary navigation">
       <a class="is-active" href="artists.html">${isChinese ? "藝人" : "Artists"}</a>
       <a href="index.html#work">${isChinese ? "作品" : "Work"}</a>
@@ -40,6 +83,74 @@ if (header) {
     document.body.classList.remove("profile-menu-open");
     document.querySelector("#profileMenuToggle")?.setAttribute("aria-expanded", "false");
   }));
+}
+
+const activeProfile = profileRefreshData[artistName];
+const profileShowcase = document.querySelector(".profile-showcase");
+const introduction = document.querySelector(".intro-section");
+if (activeProfile && profileShowcase) {
+  const labels = isChinese
+    ? { available: "可接全球品牌合作", followers: "總粉絲數", enquiry: "諮詢這位藝人", gallery: "人物影像", viewAll: "查看全部", collapse: "收起全部", front: "正面", side: "側面", back: "背面" }
+    : { available: "Available for Global Campaigns", followers: "Total followers", enquiry: "Enquire About This Talent", gallery: "Selected images", viewAll: "View all", collapse: "Collapse", front: "Front", side: "Side", back: "Back" };
+  const facts = activeProfile.facts.map(([key, value]) => `<div><dt>${key}</dt><dd>${value}</dd></div>`).join("");
+  const angleImages = activeProfile.angles || [activeProfile.image];
+  profileShowcase.innerHTML = `
+    <div class="profile-overview">
+      <div class="profile-overview-media">
+        <div class="profile-angle-frame">
+          <img id="profileAngleImage" src="${angleImages[0]}" alt="${activeProfile.name} full-length view">
+        </div>
+        ${activeProfile.angles ? `
+          <div class="profile-angle-controls" role="tablist" aria-label="${activeProfile.name} views">
+            <button class="is-active" type="button" data-angle="0">${labels.front}</button>
+            <button type="button" data-angle="1">${labels.side}</button>
+            <button type="button" data-angle="2">${labels.back}</button>
+          </div>` : ""}
+      </div>
+      <div class="profile-overview-copy">
+        <p class="profile-availability"><span></span>${labels.available}</p>
+        <h1>${activeProfile.name}</h1>
+        <p class="profile-role">${activeProfile.role}</p>
+        <div class="profile-followers"><strong>${activeProfile.followers}</strong><span>${labels.followers}</span></div>
+        <dl class="profile-facts">${facts}</dl>
+        <a class="profile-enquire-button" href="#inquiry">${labels.enquiry}<b>↘</b></a>
+      </div>
+    </div>
+  `;
+
+  profileShowcase.insertAdjacentHTML("afterend", `
+    <section class="profile-gallery" id="profileGallery">
+      <header>
+        <div><p>PORTFOLIO</p><h2>${labels.gallery}</h2></div>
+        <div class="profile-gallery-actions">
+          <button type="button" data-gallery-prev aria-label="Previous images">←</button>
+          <button type="button" data-gallery-next aria-label="Next images">→</button>
+          <button type="button" data-gallery-toggle>${labels.viewAll}</button>
+        </div>
+      </header>
+      <div class="profile-gallery-track">
+        ${activeProfile.gallery.map((src, index) => `<figure><img src="${src}" alt="${activeProfile.name} portfolio image ${index + 1}" loading="${index < 2 ? "eager" : "lazy"}"></figure>`).join("")}
+      </div>
+    </section>
+  `);
+
+  const angleImage = document.querySelector("#profileAngleImage");
+  document.querySelectorAll("[data-angle]").forEach((button) => button.addEventListener("click", () => {
+    const index = Number(button.dataset.angle);
+    angleImage.src = angleImages[index];
+    document.querySelectorAll("[data-angle]").forEach((item) => item.classList.toggle("is-active", item === button));
+  }));
+
+  const gallery = document.querySelector("#profileGallery");
+  const track = gallery.querySelector(".profile-gallery-track");
+  gallery.querySelector("[data-gallery-prev]")?.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth * 0.75, behavior: "smooth" }));
+  gallery.querySelector("[data-gallery-next]")?.addEventListener("click", () => track.scrollBy({ left: track.clientWidth * 0.75, behavior: "smooth" }));
+  gallery.querySelector("[data-gallery-toggle]")?.addEventListener("click", (event) => {
+    const expanded = gallery.classList.toggle("is-expanded");
+    event.currentTarget.textContent = expanded ? labels.collapse : labels.viewAll;
+  });
+
+  if (introduction) introduction.hidden = true;
 }
 
 const inquiry = document.querySelector(".inquiry-section");
@@ -88,3 +199,9 @@ if (inquiry && form) {
     form.querySelector('input[name="services"]')?.focus();
   }, true);
 }
+
+document.querySelectorAll(".site-footer > a:first-child").forEach((logo) => {
+  logo.className = "profile-footer-logo";
+  logo.setAttribute("aria-label", "GreenTomato home");
+  logo.innerHTML = '<img src="https://gtomato.com/_next/static/media/logo-gt-color.fd039543.svg" alt="GreenTomato">';
+});

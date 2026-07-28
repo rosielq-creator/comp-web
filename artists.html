@@ -9,12 +9,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="agency.css?v=20260728-1">
+  <link rel="stylesheet" href="agency.css?v=20260728-2">
 </head>
 <body data-page="artists" class="artists-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="agency-header agency-header-light" id="siteHeader">
-    <a class="agency-logo" href="index.html" aria-label="GTAI home">GTAI<span>®</span></a>
+    <a class="agency-logo company-logo" href="index.html" aria-label="GreenTomato home"><img src="https://gtomato.com/_next/static/media/logo-gt-color.fd039543.svg" alt="GreenTomato"></a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       <a class="is-active" href="artists.html" data-copy="navArtists">Artists</a>
       <a href="index.html#work" data-copy="navWork">Work</a>
@@ -45,26 +45,37 @@
       </div>
     </section>
 
+    <section class="roster-tools" aria-label="Find an artist">
+      <label class="roster-search">
+        <span class="sr-only" data-copy="searchArtists">Search artists</span>
+        <input id="artistSearch" type="search" placeholder="Search artists" data-copy-placeholder="searchArtists">
+      </label>
+      <label><span class="sr-only" data-copy="gender">Gender</span><select data-artist-filter="gender"><option value="" data-copy="allGenders">All genders</option><option>Female</option><option>Male</option></select></label>
+      <label><span class="sr-only" data-copy="location">Location</span><select data-artist-filter="location"><option value="" data-copy="allLocations">All locations</option><option>Paris</option><option>Los Angeles</option><option>Seoul</option><option>Guangdong</option><option>Hong Kong</option></select></label>
+      <label><span class="sr-only" data-copy="language">Language</span><select data-artist-filter="language"><option value="" data-copy="allLanguages">All languages</option><option>English</option><option>Korean</option><option>Mandarin</option><option>Cantonese</option></select></label>
+      <label><span class="sr-only" data-copy="talentType">Talent type</span><select data-artist-filter="type"><option value="" data-copy="allTypes">All talent types</option><option>Fashion</option><option>Beauty</option><option>Music</option><option>Lifestyle</option><option>Film</option></select></label>
+    </section>
+
     <section class="roster-grid" aria-label="GTAI artist roster">
-      <a class="roster-card roster-card-featured" href="mario.html" style="--card-accent:#9eea50">
-        <figure><img src="assets/featured/mario-editorial-bw.webp" alt="Mario, AI lifestyle and sport artist" fetchpriority="high"></figure>
-        <div><span>01</span><h2>Mario</h2><p>Lifestyle · Fashion · Sport · Travel</p><b>VIEW PROFILE ↗</b></div>
+      <a class="roster-card" href="maya.html" data-artist-card data-name="maya" data-gender="female" data-location="paris new york seoul" data-language="english korean" data-type="fashion art">
+        <figure><img src="assets/profiles/maya/black-tailoring.png" alt="Maya, luxury fashion and art digital talent" fetchpriority="high"></figure>
+        <div><span>01</span><h2>Maya</h2><p>Luxury Fashion · Art</p><b>VIEW PROFILE ↗</b></div>
       </a>
-      <a class="roster-card" href="noah.html" style="--card-accent:#75a7ff">
-        <figure><img src="assets/featured/noah-commercial-v1.webp" alt="Noah, AI film and fashion artist" loading="lazy"></figure>
-        <div><span>02</span><h2>Noah</h2><p>Film · Fashion · Contemporary Culture</p><b>VIEW PROFILE ↗</b></div>
+      <a class="roster-card" href="amber.html" data-artist-card data-name="amber" data-gender="female" data-location="los angeles seoul" data-language="english korean" data-type="music fashion">
+        <figure><img src="assets/profiles/amber/night-portrait.png" alt="Amber, music and fashion digital talent" loading="lazy"></figure>
+        <div><span>02</span><h2>Amber</h2><p>Music · Fashion · Creative Culture</p><b>VIEW PROFILE ↗</b></div>
       </a>
-      <a class="roster-card" href="ooona.html" style="--card-accent:#e9a7ce">
-        <figure><img src="assets/featured/ooona-commercial-v1.webp" alt="Ooona, AI beauty and wellness artist" loading="lazy"></figure>
-        <div><span>03</span><h2>Ooona</h2><p>Beauty · Wellness · Digital Spirit</p><b>VIEW PROFILE ↗</b></div>
+      <a class="roster-card" href="ooona.html" data-artist-card data-name="ooona" data-gender="female" data-location="seoul" data-language="korean english" data-type="beauty lifestyle">
+        <figure><img src="assets/profiles/ooona/hero.png" alt="Ooona, beauty and wellness digital talent" loading="lazy"></figure>
+        <div><span>03</span><h2>Ooona</h2><p>Beauty · Wellness · Lifestyle</p><b>VIEW PROFILE ↗</b></div>
       </a>
-      <a class="roster-card" href="amber.html" style="--card-accent:#65d3b4">
-        <figure><img src="assets/featured/amber-commercial-v1.webp" alt="Amber, AI music and fashion artist" loading="lazy"></figure>
-        <div><span>04</span><h2>Amber</h2><p>Music · Fashion · Creative Culture</p><b>VIEW PROFILE ↗</b></div>
+      <a class="roster-card" href="mario.html" data-artist-card data-name="mario" data-gender="male" data-location="guangdong" data-language="mandarin cantonese english" data-type="lifestyle fashion">
+        <figure><img src="assets/mario-portrait.png" alt="Mario, lifestyle and sport digital talent" loading="lazy"></figure>
+        <div><span>04</span><h2>Mario</h2><p>Lifestyle · Fashion · Sport · Travel</p><b>VIEW PROFILE ↗</b></div>
       </a>
-      <a class="roster-card roster-card-featured" href="maya.html" style="--card-accent:#ffd34d">
-        <figure><img src="assets/featured/maya-commercial-v1.webp" alt="Maya, AI art and high fashion artist" loading="lazy"></figure>
-        <div><span>05</span><h2>Maya</h2><p>Art · Architecture · High Fashion</p><b>VIEW PROFILE ↗</b></div>
+      <a class="roster-card" href="noah.html" data-artist-card data-name="noah" data-gender="male" data-location="hong kong seoul tokyo" data-language="cantonese mandarin english" data-type="film fashion">
+        <figure><img src="assets/profiles/noah/black-portrait.png" alt="Noah, film and fashion digital talent" loading="lazy"></figure>
+        <div><span>05</span><h2>Noah</h2><p>Film · Fashion · Photography</p><b>VIEW PROFILE ↗</b></div>
       </a>
       <article class="roster-card roster-coming">
         <p>GTAI / ROSTER 006+</p>
@@ -73,6 +84,7 @@
         <a href="index.html#contact"><span data-copy="buildArtist">Build an artist with us</span> ↗</a>
       </article>
     </section>
+    <p class="roster-empty" id="rosterEmpty" hidden>No artists match these filters. <button type="button" id="clearArtistFilters">Clear filters</button></p>
 
     <section class="roster-cta">
       <p class="section-index">ARTIST / BRAND / WORLD</p>
@@ -82,10 +94,10 @@
   </main>
 
   <footer class="agency-footer agency-footer-light">
-    <a class="agency-logo" href="index.html">GTAI<span>®</span></a>
+    <a class="agency-logo company-logo" href="index.html" aria-label="GreenTomato home"><img src="https://gtomato.com/_next/static/media/logo-gt-color.fd039543.svg" alt="GreenTomato"></a>
     <p data-copy="footerLine">Next-generation AI artists and production for brands.</p>
     <p>HONG KONG / ASIA · © 2026</p>
   </footer>
-  <script type="module" src="agency.js?v=20260728-1"></script>
+  <script type="module" src="agency.js?v=20260728-2"></script>
 </body>
 </html>
