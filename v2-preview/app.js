@@ -1,4 +1,4 @@
-import { artists, brands, i18n, services } from "./data.js";
+import { artists, brands, i18n, services } from "./data.js?v=20260728-3";
 
 const page = document.body.dataset.page;
 let language = "en";
@@ -309,9 +309,53 @@ function initProfile() {
     item.classList.toggle("is-expanded", opening);
     if (opening) requestAnimationFrame(() => item.scrollIntoView({ behavior: "smooth", block: "center" }));
   }));
-  document.querySelector("#platformList").innerHTML = artist.platforms.map((platform) => `
-    <article class="platform-row"><h3>${platform.name}</h3><strong>${platform.count}</strong></article>`).join("");
+  document.querySelector("#platformList").innerHTML = artist.platforms.map((platform) => {
+    const tag = platform.href ? "a" : "article";
+    const attrs = platform.href ? ` href="${platform.href}" target="_blank" rel="noreferrer"` : "";
+    return `<${tag} class="platform-row"${attrs}>
+      <div><h3>${platform.name}${platform.href ? " ↗" : ""}</h3><small>${copy("currentFollowers")}</small></div>
+      <strong>${platform.count}</strong>
+    </${tag}>`;
+  }).join("");
+  renderSocialAnalytics(artist);
   initAngleSwitcher();
+}
+
+function renderSocialAnalytics(artist) {
+  const root = document.querySelector("#platformAnalytics");
+  const analytics = artist.socialAnalytics;
+  if (!root || !analytics) {
+    if (root) root.innerHTML = "";
+    return;
+  }
+  const metrics = analytics.metrics.map((metric) => `
+    <article class="signal-metric">
+      <span>${copy(metric.label)}</span>
+      <strong>${metric.value}</strong>
+      <small>${metric.note ? copy(metric.note) : copy("last30Days")}</small>
+    </article>`).join("");
+  const content = analytics.topContent;
+  const stats = content.stats.map((stat) => `
+    <div><span>${copy(stat.label)}</span><strong>${stat.value}</strong></div>`).join("");
+  root.innerHTML = `
+    <div class="analytics-period">
+      <div><span>${copy("last30Days")}</span><small>${analytics.period}</small></div>
+      <p>${copy("updated")} ${analytics.updated}</p>
+    </div>
+    <div class="signal-metrics-grid">${metrics}</div>
+    <div class="top-content-heading">
+      <p>${copy("topPerformingContent")}</p>
+      <h3>${copy("mostEngaged")}</h3>
+    </div>
+    <article class="top-content-card">
+      <figure><img src="${content.cover}" alt="${artist.name} top-performing Xiaohongshu content"></figure>
+      <div class="top-content-body">
+        <div class="top-content-meta"><span>${content.platform}</span><span>${content.date}</span></div>
+        <div class="top-content-stats">${stats}</div>
+        <div class="engagement-rate"><span>${copy("engagementRate")}</span><strong>${content.engagementRate}</strong><small>${copy("byViews")}</small></div>
+        <a class="text-link" href="${content.href}" target="_blank" rel="noreferrer">${copy("openOriginalPost")}</a>
+      </div>
+    </article>`;
 }
 
 function initAngleSwitcher() {

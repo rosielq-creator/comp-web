@@ -24,6 +24,12 @@ export const i18n = {
     modelLoading: "Preparing digital human", gallery: "Selected images", socialData: "Social data",
     collaborations: "Brand collaborations", backArtists: "All artists", front: "Front", side: "Side", back: "Back",
     allImages: "All images", currentPlatforms: "Current platforms", workCount: "works", published: "Published",
+    currentFollowers: "Current followers", last30Days: "Last 30 days", impressions: "Impressions",
+    views: "Views", engagements: "Engagements", netGrowth: "Net growth",
+    engagementBreakdown: "Likes + comments + saves + shares", topPerformingContent: "Top performing content",
+    mostEngaged: "Most engaged.", openOriginalPost: "Open original post ↗", likes: "Likes",
+    comments: "Comments", saves: "Saves", shares: "Shares", engagementRate: "Engagement rate",
+    byViews: "By views", updated: "Updated",
     footerLine: "Next-Generation AI Talents · A GreenTomato creative venture"
   },
   "zh-hant": {
@@ -51,6 +57,12 @@ export const i18n = {
     modelLoading: "正在準備數字人", gallery: "人物影像", socialData: "社交數據",
     collaborations: "品牌合作", backArtists: "全部藝人", front: "正面", side: "側面", back: "背面",
     allImages: "全部圖片", currentPlatforms: "目前平台", workCount: "項作品", published: "已上線",
+    currentFollowers: "目前粉絲數", last30Days: "過去 30 天", impressions: "曝光",
+    views: "觀看", engagements: "互動", netGrowth: "淨增長",
+    engagementBreakdown: "讚好＋留言＋收藏＋分享", topPerformingContent: "最高表現內容",
+    mostEngaged: "互動最高。", openOriginalPost: "查看原帖 ↗", likes: "讚好",
+    comments: "留言", saves: "收藏", shares: "分享", engagementRate: "互動率",
+    byViews: "按觀看量計算", updated: "更新",
     footerLine: "新一代 AI 藝人 · GreenTomato 創意項目"
   },
   "zh-hans": {
@@ -78,6 +90,12 @@ export const i18n = {
     modelLoading: "正在准备数字人", gallery: "人物影像", socialData: "社交数据",
     collaborations: "品牌合作", backArtists: "全部艺人", front: "正面", side: "侧面", back: "背面",
     allImages: "全部图片", currentPlatforms: "目前平台", workCount: "项作品", published: "已上线",
+    currentFollowers: "目前粉丝数", last30Days: "过去 30 天", impressions: "曝光",
+    views: "观看", engagements: "互动", netGrowth: "净增长",
+    engagementBreakdown: "点赞＋评论＋收藏＋分享", topPerformingContent: "最高表现内容",
+    mostEngaged: "互动最高。", openOriginalPost: "查看原帖 ↗", likes: "点赞",
+    comments: "评论", saves: "收藏", shares: "分享", engagementRate: "互动率",
+    byViews: "按观看量计算", updated: "更新",
     footerLine: "新一代 AI 艺人 · GreenTomato 创意项目"
   }
 };
@@ -154,7 +172,35 @@ export const artists = [
       "assets/mario-portrait.png", "assets/mario-hero.png",
       "assets/profiles/mario/yotree-cover.png"
     ],
-    platforms: [{ name: "Instagram", count: "8.3K" }, { name: "Xiaohongshu", count: "5.2K" }]
+    platforms: [
+      { name: "Instagram", count: "8,383", href: "https://www.instagram.com/marrrio._.m/" },
+      { name: "Xiaohongshu", count: "5,206", href: "https://www.xiaohongshu.com/user/profile/6712310b000000001d022632" }
+    ],
+    socialAnalytics: {
+      updated: "2026.07.22",
+      period: "2026.06.22—07.21 · XIAOHONGSHU",
+      metrics: [
+        { label: "impressions", value: "89K" },
+        { label: "views", value: "12K" },
+        { label: "engagements", value: "1,344", note: "engagementBreakdown" },
+        { label: "netGrowth", value: "+410" }
+      ],
+      topContent: {
+        platform: "Xiaohongshu",
+        date: "2026.06.25",
+        cover: "assets/profiles/mario/yotree-cover.png",
+        href: "https://www.xiaohongshu.com/discovery/item/6a3cc5340000000008025203?source=webshare&xhsshare=pc_web&xsec_token=AB7tZ59wDZR0OLvAj3Y5bo1EepBemmBUZh5f5whfZkzXg=&xsec_source=pc_share",
+        stats: [
+          { label: "impressions", value: "32,492" },
+          { label: "views", value: "4,586" },
+          { label: "likes", value: "697" },
+          { label: "comments", value: "28" },
+          { label: "saves", value: "76" },
+          { label: "shares", value: "19" }
+        ],
+        engagementRate: "17.88%"
+      }
+    }
   },
   {
     id: "noah", name: "Noah", role: "Film / Fashion / Photography", gender: "Male",
