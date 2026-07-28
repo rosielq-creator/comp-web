@@ -18,6 +18,11 @@ const profileRefreshData = {
   amber: {
     name: "Amber", role: "Music Producer / Fashion", followers: "13.1K",
     image: "assets/profiles/amber/night-portrait.png",
+    angles: [
+      "assets/profiles/amber/angles/front.png",
+      "assets/profiles/amber/angles/side.png",
+      "assets/profiles/amber/angles/back.png"
+    ],
     facts: [["Height", "175 cm"], ["Weight", "50 kg"], ["Measurements", "85 / 63 / 89"], ["Shoe", "38"], ["Base", "Los Angeles / Seoul"], ["Languages", "English / Korean"], ["Nationality", "Korean-American"], ["Talent type", "Music / Fashion / City Culture"]],
     gallery: ["assets/profiles/amber/night-portrait.png", "assets/profiles/amber/denim-editorial.png", "assets/profiles/amber/festival-stage.png", "assets/profiles/amber/festival-wheel.png"]
   },
