@@ -1,5 +1,9 @@
-const savedLanguage = localStorage.getItem("gtai-language") || "en";
-const isChinese = savedLanguage === "zh";
+const storedProfileLanguage = localStorage.getItem("gtai-language");
+const savedLanguage = storedProfileLanguage === "zh" ? "zh-hant" : (storedProfileLanguage || "en");
+const isTraditional = savedLanguage === "zh-hant";
+const isSimplified = savedLanguage === "zh-hans";
+const isChinese = isTraditional || isSimplified;
+const localize = (english, traditional, simplified) => isTraditional ? traditional : isSimplified ? simplified : english;
 const artistName = document.body.dataset.artist || "mario";
 const header = document.querySelector(".profile-header");
 
@@ -56,28 +60,35 @@ if (header) {
   header.innerHTML = `
     <a class="profile-refresh-logo company-logo" href="index.html" aria-label="GreenTomato home"><img src="https://gtomato.com/_next/static/media/logo-gt-color.fd039543.svg" alt="GreenTomato"></a>
     <nav class="profile-refresh-nav" aria-label="Primary navigation">
-      <a class="is-active" href="artists.html">${isChinese ? "藝人" : "Artists"}</a>
-      <a href="index.html#work">${isChinese ? "作品" : "Work"}</a>
-      <a href="index.html#services">${isChinese ? "服務" : "Services"}</a>
-      <a href="index.html#about">${isChinese ? "關於" : "About"}</a>
-      <a class="profile-contact" href="#inquiry">${isChinese ? "聯絡" : "Contact"}</a>
+      <a class="is-active" href="artists.html">${localize("Artists", "藝人", "艺人")}</a>
+      <a href="index.html#work">${localize("Work", "作品", "作品")}</a>
+      <a href="index.html#services">${localize("Services", "服務", "服务")}</a>
+      <a href="index.html#about">${localize("About", "關於", "关于")}</a>
+      <a class="profile-contact" href="#inquiry">${localize("Contact", "聯絡", "联系")}</a>
     </nav>
     <div class="profile-refresh-tools">
-      <button class="profile-refresh-language" id="profileLanguageToggle" type="button" aria-label="Switch language">${isChinese ? "EN" : "繁中"}</button>
+      <div class="profile-language-switcher" id="profileLanguageSwitcher" role="group" aria-label="Language">
+        <button type="button" data-language="en" class="${savedLanguage === "en" ? "is-active" : ""}">EN</button>
+        <button type="button" data-language="zh-hant" class="${isTraditional ? "is-active" : ""}">繁</button>
+        <button type="button" data-language="zh-hans" class="${isSimplified ? "is-active" : ""}">简</button>
+      </div>
       <button class="profile-refresh-menu" id="profileMenuToggle" type="button" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
     </div>
     <nav class="profile-mobile-nav" id="profileMobileNav" aria-label="Mobile navigation">
-      <a href="artists.html">${isChinese ? "藝人" : "Artists"}</a>
-      <a href="index.html#work">${isChinese ? "作品" : "Work"}</a>
-      <a href="index.html#services">${isChinese ? "服務" : "Services"}</a>
-      <a href="index.html#about">${isChinese ? "關於" : "About"}</a>
-      <a href="#inquiry">${isChinese ? "聯絡" : "Contact"}</a>
+      <a href="artists.html">${localize("Artists", "藝人", "艺人")}</a>
+      <a href="index.html#work">${localize("Work", "作品", "作品")}</a>
+      <a href="index.html#services">${localize("Services", "服務", "服务")}</a>
+      <a href="index.html#about">${localize("About", "關於", "关于")}</a>
+      <a href="#inquiry">${localize("Contact", "聯絡", "联系")}</a>
     </nav>
   `;
 
-  document.querySelector("#profileLanguageToggle")?.addEventListener("click", () => {
-    localStorage.setItem("gtai-language", isChinese ? "en" : "zh");
-    location.reload();
+  document.querySelectorAll("#profileLanguageSwitcher [data-language]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.language === savedLanguage));
+    button.addEventListener("click", () => {
+      localStorage.setItem("gtai-language", button.dataset.language);
+      location.reload();
+    });
   });
   document.querySelector("#profileMenuToggle")?.addEventListener("click", (event) => {
     const open = !document.body.classList.contains("profile-menu-open");
@@ -94,10 +105,30 @@ const activeProfile = profileRefreshData[artistName];
 const profileShowcase = document.querySelector(".profile-showcase");
 const introduction = document.querySelector(".intro-section");
 if (activeProfile && profileShowcase) {
-  const labels = isChinese
-    ? { available: "可接全球品牌合作", followers: "總粉絲數", enquiry: "諮詢這位藝人", gallery: "人物影像", viewAll: "查看全部", collapse: "收起全部", front: "正面", side: "側面", back: "背面" }
-    : { available: "Available for Global Campaigns", followers: "Total followers", enquiry: "Enquire About This Talent", gallery: "Selected images", viewAll: "View all", collapse: "Collapse", front: "Front", side: "Side", back: "Back" };
-  const facts = activeProfile.facts.map(([key, value]) => `<div><dt>${key}</dt><dd>${value}</dd></div>`).join("");
+  const labels = {
+    available: localize("Available for Global Campaigns", "可接全球品牌合作", "可接全球品牌合作"),
+    followers: localize("Total followers", "總粉絲數", "总粉丝数"),
+    enquiry: localize("Enquire About This Talent", "諮詢這位藝人", "咨询这位艺人"),
+    gallery: localize("Selected images", "人物影像", "人物影像"),
+    viewAll: localize("View all", "查看全部", "查看全部"),
+    collapse: localize("Collapse", "收起全部", "收起全部"),
+    front: localize("Front", "正面", "正面"),
+    side: localize("Side", "側面", "侧面"),
+    back: localize("Back", "背面", "背面")
+  };
+  const factLabels = {
+    Height: localize("Height", "身高", "身高"),
+    Weight: localize("Weight", "體重", "体重"),
+    Measurements: localize("Measurements", "三圍", "三围"),
+    Shoe: localize("Shoe", "鞋碼", "鞋码"),
+    Base: localize("Base", "常駐地", "常驻地"),
+    Languages: localize("Languages", "語言", "语言"),
+    Nationality: localize("Nationality", "國籍", "国籍"),
+    Birthday: localize("Birthday", "生日", "生日"),
+    Zodiac: localize("Zodiac", "星座", "星座"),
+    "Talent type": localize("Talent type", "人物類型", "人物类型")
+  };
+  const facts = activeProfile.facts.map(([key, value]) => `<div><dt>${factLabels[key] || key}</dt><dd>${value}</dd></div>`).join("");
   const angleImages = activeProfile.angles || [activeProfile.image];
   angleImages.forEach((src) => {
     const preload = new Image();
@@ -171,23 +202,29 @@ const form = document.querySelector("#inquiryForm");
 if (inquiry && form) {
   const title = inquiry.querySelector(".inquiry-copy h2");
   const intro = inquiry.querySelector(".inquiry-copy > p:last-child");
-  if (title) title.innerHTML = isChinese ? "告訴我們需求，<br><em>我們建立整個世界。</em>" : "Bring us the brief.<br><em>We’ll build the world.</em>";
-  if (intro) intro.textContent = isChinese
-    ? "所有服務均可詢問，無需選擇目前正在查看的藝人。"
-    : "Inquire about any GTAI service. Selecting the artist you are viewing is optional.";
+  if (title) title.innerHTML = localize(
+    "Bring us the brief.<br><em>We’ll build the world.</em>",
+    "告訴我們需求，<br><em>我們建立整個世界。</em>",
+    "告诉我们需求，<br><em>我们建立整个世界。</em>"
+  );
+  if (intro) intro.textContent = localize(
+    "Inquire about any GTAI service. Selecting the artist you are viewing is optional.",
+    "所有服務均可詢問，無需選擇目前正在查看的藝人。",
+    "所有服务均可咨询，无需选择目前正在查看的艺人。"
+  );
 
   form.innerHTML = `
     <input type="hidden" name="sourceArtist" value="${artistName}">
     <div class="form-row">
-      <label><span>${isChinese ? "聯絡人姓名" : "Contact name"}</span><input required name="name" autocomplete="name"></label>
-      <label><span>${isChinese ? "公司／品牌" : "Company / brand"}</span><input required name="company" autocomplete="organization"></label>
+      <label><span>${localize("Contact name", "聯絡人姓名", "联系人姓名")}</span><input required name="name" autocomplete="name"></label>
+      <label><span>${localize("Company / brand", "公司／品牌", "公司／品牌")}</span><input required name="company" autocomplete="organization"></label>
     </div>
     <div class="form-row">
       <label><span>Email</span><input required type="email" name="email" autocomplete="email"></label>
-      <label><span>${isChinese ? "預計推出時間" : "Target launch"}</span><input name="timeline" placeholder="${isChinese ? "例如：2026 Q4" : "e.g. Q4 2026"}"></label>
+      <label><span>${localize("Target launch", "預計推出時間", "预计推出时间")}</span><input name="timeline" placeholder="${localize("e.g. Q4 2026", "例如：2026 Q4", "例如：2026 Q4")}"></label>
     </div>
     <fieldset>
-      <legend>${isChinese ? "需要哪些服務？*" : "What can we help with? *"}</legend>
+      <legend>${localize("What can we help with? *", "需要哪些服務？*", "需要哪些服务？*")}</legend>
       <div class="profile-service-options">
         <label><input type="checkbox" name="services" value="AI Video Production"><span>AI Video Production</span></label>
         <label><input type="checkbox" name="services" value="Digital Human Creation"><span>Digital Human Creation</span></label>
@@ -195,10 +232,10 @@ if (inquiry && form) {
         <label><input type="checkbox" name="services" value="AI Experiences / Custom Project"><span>AI Experiences / Custom Project</span></label>
       </div>
     </fieldset>
-    <label><span>${isChinese ? "項目說明" : "Project brief"}</span><textarea required name="message" rows="5"></textarea></label>
+    <label><span>${localize("Project brief", "項目說明", "项目说明")}</span><textarea required name="message" rows="5"></textarea></label>
     <div class="form-submit-row">
-      <p class="profile-form-note">${isChinese ? "WhatsApp 發送將在下一階段接通；目前預覽不會儲存資料。" : "WhatsApp delivery will be connected next. This preview stores no data."}</p>
-      <button class="submit-button" type="submit"><span>${isChinese ? "發送詢盤" : "Send inquiry"}</span><b>↗</b></button>
+      <p class="profile-form-note">${localize("WhatsApp delivery will be connected next. This preview stores no data.", "WhatsApp 發送將在下一階段接通；目前預覽不會儲存資料。", "WhatsApp 发送将在下一阶段接通；目前预览不会存储资料。")}</p>
+      <button class="submit-button" type="submit"><span>${localize("Send inquiry", "發送詢盤", "发送咨询")}</span><b>↗</b></button>
     </div>
     <p class="form-status" id="formStatus" aria-live="polite"></p>
   `;
@@ -208,7 +245,7 @@ if (inquiry && form) {
     event.preventDefault();
     event.stopImmediatePropagation();
     const status = form.querySelector("#formStatus");
-    status.textContent = isChinese ? "請至少選擇一項服務。" : "Select at least one service.";
+    status.textContent = localize("Select at least one service.", "請至少選擇一項服務。", "请至少选择一项服务。");
     form.querySelector('input[name="services"]')?.focus();
   }, true);
 }

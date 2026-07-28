@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="agency.css?v=20260728-6">
+  <link rel="stylesheet" href="agency.css?v=20260728-7">
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -24,7 +24,11 @@
       <a class="nav-contact" href="#contact" data-copy="navContact">Contact</a>
     </nav>
     <div class="header-actions">
-      <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">繁中</button>
+      <div class="language-switcher" id="languageSwitcher" role="group" aria-label="Language">
+        <button type="button" data-language="en">EN</button>
+        <button type="button" data-language="zh-hant">繁</button>
+        <button type="button" data-language="zh-hans">简</button>
+      </div>
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span class="sr-only">Menu</span>
       </button>
@@ -352,6 +356,6 @@
     <p>HONG KONG / ASIA · © 2026</p>
   </footer>
 
-  <script type="module" src="agency.js?v=20260728-4"></script>
+  <script type="module" src="agency.js?v=20260728-5"></script>
 </body>
 </html>

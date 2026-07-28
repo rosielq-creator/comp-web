@@ -192,11 +192,57 @@ const translations = {
   }
 };
 
+translations["zh-hant"] = translations.zh;
+translations["zh-hans"] = Object.fromEntries(Object.entries(translations.zh).map(([key, value]) => [
+  key,
+  value
+    .replaceAll("藝人", "艺人").replaceAll("首頁", "首页").replaceAll("服務", "服务")
+    .replaceAll("關於", "关于").replaceAll("聯絡", "联系").replaceAll("團隊", "团队")
+    .replaceAll("檔案", "档案").replaceAll("數字", "数字").replaceAll("構想", "构想")
+    .replaceAll("為", "为").replaceAll("動", "动").replaceAll("獨立", "独立")
+    .replaceAll("陣容", "阵容").replaceAll("時尚", "时尚").replaceAll("視覺", "视觉")
+    .replaceAll("時代", "时代").replaceAll("創意", "创意").replaceAll("指導", "指导")
+    .replaceAll("製作", "制作").replaceAll("長期", "长期").replaceAll("發佈", "发布")
+    .replaceAll("持續", "持续").replaceAll("規模", "规模").replaceAll("軟件", "软件")
+    .replaceAll("數據", "数据").replaceAll("連接", "连接").replaceAll("客戶", "客户")
+    .replaceAll("夥伴", "伙伴").replaceAll("項目", "项目").replaceAll("專業", "专业")
+    .replaceAll("獎項", "奖项").replaceAll("帳號", "账号").replaceAll("密碼", "密码")
+    .replaceAll("進入", "进入").replaceAll("啟動", "启动").replaceAll("錯誤", "错误")
+    .replaceAll("攝影師", "摄影师").replaceAll("記錄", "记录").replaceAll("輕奢", "轻奢")
+    .replaceAll("當代", "当代").replaceAll("數位", "数字").replaceAll("氣質", "气质")
+    .replaceAll("確認", "确认").replaceAll("查看", "查看").replaceAll("創作者", "创作者")
+    .replaceAll("個人", "个人").replaceAll("場", "场").replaceAll("這", "这")
+    .replaceAll("畫", "画").replaceAll("義", "义").replaceAll("常駐", "常驻")
+    .replaceAll("內容", "内容").replaceAll("領域", "领域").replaceAll("旅遊", "旅游")
+    .replaceAll("社交數據", "社交数据").replaceAll("訊號", "信号").replaceAll("變", "变")
+    .replaceAll("資料", "资料").replaceAll("即時", "实时").replaceAll("公開", "公开")
+    .replaceAll("帳戶", "账户").replaceAll("粉絲", "粉丝").replaceAll("過去", "过去")
+    .replaceAll("觀看", "观看").replaceAll("互動", "互动").replaceAll("淨增長", "净增长")
+    .replaceAll("讚好", "点赞").replaceAll("評論", "评论").replaceAll("收藏", "收藏")
+    .replaceAll("分享", "分享").replaceAll("熱門", "热门").replaceAll("原帖", "原帖")
+    .replaceAll("選定", "选定").replaceAll("影像", "影像").replaceAll("合作", "合作")
+    .replaceAll("諮詢", "咨询").replaceAll("告訴", "告诉").replaceAll("企劃", "企划")
+    .replaceAll("時程", "时间").replaceAll("聯絡人", "联系人").replaceAll("類型", "类型")
+    .replaceAll("預算", "预算").replaceAll("範圍", "范围").replaceAll("雲端", "云端")
+    .replaceAll("連結", "链接").replaceAll("說明", "说明").replaceAll("同意", "同意")
+    .replaceAll("商務", "商务").replaceAll("發送", "发送").replaceAll("詢盤", "咨询")
+    .replaceAll("訊息", "消息")
+]));
+
 const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether", "servicesHeadline", "workHeadline", "crewHeadline"]);
-let language = localStorage.getItem("gtai-language") || (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
+const storedLanguage = localStorage.getItem("gtai-language");
+let language = storedLanguage === "zh"
+  ? "zh-hant"
+  : translations[storedLanguage]
+    ? storedLanguage
+    : navigator.language.toLowerCase().includes("hans") || navigator.language.toLowerCase().includes("cn")
+      ? "zh-hans"
+      : navigator.language.toLowerCase().startsWith("zh")
+        ? "zh-hant"
+        : "en";
 
 function applyLanguage() {
-  document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
+  document.documentElement.lang = language === "zh-hant" ? "zh-Hant" : language === "zh-hans" ? "zh-Hans" : "en";
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n;
     const value = translations[language][key];
@@ -205,14 +251,14 @@ function applyLanguage() {
     else element.textContent = value;
   });
   const languageButton = document.querySelector("#langToggle");
-  if (languageButton) languageButton.textContent = language === "en" ? "繁" : "EN";
+  if (languageButton) languageButton.textContent = language === "en" ? "繁" : language === "zh-hant" ? "简" : "EN";
   localStorage.setItem("gtai-language", language);
   updateSoundUI();
   window.dispatchEvent(new CustomEvent("gtai:languagechange", { detail: { language } }));
 }
 
 document.querySelector("#langToggle")?.addEventListener("click", () => {
-  language = language === "en" ? "zh" : "en";
+  language = language === "en" ? "zh-hant" : language === "zh-hant" ? "zh-hans" : "en";
   applyLanguage();
 });
 

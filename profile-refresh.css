@@ -83,11 +83,28 @@
   background: transparent;
   cursor: pointer;
 }
-.profile-refresh-language {
+.profile-language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+.profile-refresh-tools .profile-language-switcher button {
+  min-width: 30px;
+  min-height: 30px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 999px;
   font-family: "DM Sans", "Noto Sans TC", sans-serif;
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
+}
+.profile-language-switcher button.is-active {
+  color: #f1efe8;
+  background: #171813;
 }
 .profile-refresh-menu { display: none; position: relative; }
 .profile-refresh-menu span {

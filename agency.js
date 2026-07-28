@@ -120,10 +120,38 @@ const copy = {
   }
 };
 
-let language = localStorage.getItem("gtai-language") || "en";
+copy["zh-hant"] = copy.zh;
+copy["zh-hans"] = Object.fromEntries(Object.entries(copy.zh).map(([key, value]) => [
+  key,
+  value
+    .replaceAll("藝人", "艺人").replaceAll("服務", "服务").replaceAll("關於", "关于")
+    .replaceAll("聯絡", "联系").replaceAll("數字", "数字").replaceAll("鮮明", "鲜明")
+    .replaceAll("原創", "原创").replaceAll("與", "与").replaceAll("進", "进")
+    .replaceAll("檔案", "档案").replaceAll("精選", "精选").replaceAll("觀看", "观看")
+    .replaceAll("萬", "万").replaceAll("項目", "项目").replaceAll("為", "为")
+    .replaceAll("製作", "制作").replaceAll("團隊", "团队").replaceAll("創意", "创意")
+    .replaceAll("指導", "指导").replaceAll("長期", "长期").replaceAll("發佈", "发布")
+    .replaceAll("社交平台", "社交平台").replaceAll("持續", "持续").replaceAll("規模", "规模")
+    .replaceAll("客製", "定制").replaceAll("體驗", "体验").replaceAll("智能", "智能")
+    .replaceAll("關", "关").replaceAll("設施", "设施").replaceAll("擁有", "拥有")
+    .replaceAll("跨平台", "跨平台").replaceAll("市場", "市场").replaceAll("格式", "格式")
+    .replaceAll("從", "从").replaceAll("一個", "一个").replaceAll("說故事", "讲故事")
+    .replaceAll("認識", "认识").replaceAll("陣容", "阵容").replaceAll("獨一無二", "独一无二")
+    .replaceAll("靈魂", "灵魂").replaceAll("興趣", "兴趣").replaceAll("擴展", "扩展")
+    .replaceAll("將", "将").replaceAll("這裡", "这里").replaceAll("選擇", "选择")
+    .replaceAll("類型", "类型").replaceAll("搜尋", "搜索").replaceAll("地區", "地区")
+    .replaceAll("發送", "发送").replaceAll("詢盤", "咨询").replaceAll("資料", "资料")
+    .replaceAll("儲存", "存储").replaceAll("請", "请").replaceAll("欄位", "字段")
+    .replaceAll("謝謝", "谢谢").replaceAll("準備", "准备").replaceAll("連結", "链接")
+    .replaceAll("雲端", "云端").replaceAll("預算", "预算").replaceAll("時程", "时间")
+    .replaceAll("諮詢", "咨询").replaceAll("對", "对").replaceAll("應", "应")
+]));
+
+const storedLanguage = localStorage.getItem("gtai-language");
+let language = storedLanguage === "zh" ? "zh-hant" : (copy[storedLanguage] ? storedLanguage : "en");
 
 function applyLanguage() {
-  document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
+  document.documentElement.lang = language === "zh-hant" ? "zh-Hant" : language === "zh-hans" ? "zh-Hans" : "en";
   document.querySelectorAll("[data-copy]").forEach((element) => {
     const value = copy[language][element.dataset.copy];
     if (value) element.textContent = value;
@@ -132,15 +160,20 @@ function applyLanguage() {
     const value = copy[language][element.dataset.copyPlaceholder];
     if (value) element.placeholder = value;
   });
-  const toggle = document.querySelector("#languageToggle");
-  if (toggle) toggle.textContent = language === "en" ? "繁中" : "EN";
+  document.querySelectorAll("#languageSwitcher [data-language]").forEach((button) => {
+    const active = button.dataset.language === language;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
   localStorage.setItem("gtai-language", language);
 }
 
-document.querySelector("#languageToggle")?.addEventListener("click", () => {
-  language = language === "en" ? "zh" : "en";
-  applyLanguage();
-  renderBrandWork();
+document.querySelectorAll("#languageSwitcher [data-language]").forEach((button) => {
+  button.addEventListener("click", () => {
+    language = button.dataset.language;
+    applyLanguage();
+    renderBrandWork();
+  });
 });
 applyLanguage();
 

@@ -106,18 +106,27 @@ if (!profile) {
   ).join("");
 
   const renderProfileLanguage = (requestedLanguage) => {
-    const isChinese = requestedLanguage === "zh";
+    const normalizedLanguage = requestedLanguage === "zh" ? "zh-hant" : requestedLanguage;
+    const isChinese = normalizedLanguage === "zh-hant" || normalizedLanguage === "zh-hans";
+    const simplify = (value) => normalizedLanguage !== "zh-hans" ? value : value
+      .replaceAll("獨立", "独立").replaceAll("視角", "视角").replaceAll("始終", "始终")
+      .replaceAll("流動", "流动").replaceAll("時尚", "时尚").replaceAll("與", "与")
+      .replaceAll("創作者", "创作者").replaceAll("藝術", "艺术").replaceAll("個人", "个人")
+      .replaceAll("影像", "影像").replaceAll("穿梭", "穿梭").replaceAll("於", "于")
+      .replaceAll("旅遊", "旅游").replaceAll("攝影", "摄影").replaceAll("經過", "经过")
+      .replaceAll("細緻", "细致").replaceAll("空間", "空间").replaceAll("年齡", "年龄")
+      .replaceAll("血統", "血统").replaceAll("內容", "内容").replaceAll("領域", "领域");
     const headline = document.querySelector("#profileHeadline");
-    headline.innerHTML = isChinese ? profile.headlineZh : profile.headline;
-    document.querySelector("#profileBio").textContent = isChinese ? profile.bioZh : profile.bio;
-    const facts = isChinese ? profile.factsZh : profile.facts;
+    headline.innerHTML = isChinese ? simplify(profile.headlineZh) : profile.headline;
+    document.querySelector("#profileBio").textContent = isChinese ? simplify(profile.bioZh) : profile.bio;
+    const facts = isChinese ? profile.factsZh.map(([term, value]) => [simplify(term), simplify(value)]) : profile.facts;
     document.querySelector("#profileFacts").innerHTML = facts.map(([term, value]) =>
       `<div><dt>${term}</dt><dd>${value}</dd></div>`
     ).join("");
   };
 
-  renderProfileLanguage(localStorage.getItem("gtai-language") || (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en"));
+  renderProfileLanguage(localStorage.getItem("gtai-language") || (navigator.language.toLowerCase().startsWith("zh") ? "zh-hant" : "en"));
   window.addEventListener("gtai:languagechange", (event) => renderProfileLanguage(event.detail.language));
 }
 
-await import("./app.js?v=20260722-20");
+await import("./app.js?v=20260728-1");
