@@ -1665,8 +1665,8 @@ body {
 
 .artists-page .roster-hero {
   position: relative;
-  min-height: 650px;
-  padding: clamp(150px, 17vw, 230px) var(--gutter) 72px;
+  min-height: clamp(480px, 55svh, 610px);
+  padding: clamp(122px, 11vw, 170px) var(--gutter) 58px;
   border-bottom: 0;
   background: #f7f3e9;
 }
@@ -1679,7 +1679,7 @@ body {
 .artists-page .roster-kicker {
   position: absolute;
   left: var(--gutter);
-  bottom: 76px;
+  bottom: 42px;
   margin: 0;
   color: #52655d;
   font-size: 12px;
@@ -1688,23 +1688,25 @@ body {
 }
 
 .artists-page .roster-hero h1 {
-  max-width: 760px;
+  max-width: 1320px;
   margin: 0 auto;
   color: #102d24;
   font-family: "Instrument Serif", serif;
-  font-size: clamp(96px, 11vw, 190px);
+  font-size: clamp(76px, 7.8vw, 136px);
   font-weight: 400;
   letter-spacing: -0.055em;
-  line-height: 0.82;
+  line-height: 0.84;
+  text-align: center;
 }
 
 .artists-page .roster-hero h1 span,
 .artists-page .roster-hero h1 em {
   display: block;
+  white-space: nowrap;
 }
 
 .artists-page .roster-hero h1 em {
-  margin-left: 0.12em;
+  margin-left: 0;
   color: inherit;
   font-style: normal;
 }
@@ -1712,8 +1714,9 @@ body {
 .artists-page .roster-intro {
   position: absolute;
   right: var(--gutter);
-  bottom: 72px;
+  bottom: 38px;
   display: block;
+  max-width: min(68vw, 980px);
   margin: 0;
 }
 
@@ -1727,7 +1730,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, max-content);
   gap: 10px;
-  padding: 28px var(--gutter) 54px;
+  padding: 22px var(--gutter) 38px;
   background: #f7f3e9;
 }
 
@@ -1871,16 +1874,22 @@ body {
 
 @media (max-width: 700px) {
   .artists-page .roster-hero {
-    min-height: 520px;
-    padding-top: 140px;
+    min-height: 390px;
+    padding: 112px var(--gutter) 34px;
   }
   .artists-page .roster-hero h1 {
-    font-size: clamp(78px, 24vw, 120px);
+    font-size: clamp(42px, 12vw, 58px);
+    line-height: 0.9;
   }
   .artists-page .roster-kicker,
   .artists-page .roster-intro {
     position: static;
-    margin-top: 36px;
+    max-width: none;
+    margin-top: 24px;
+  }
+  .artists-page .roster-intro p {
+    font-size: 14px;
+    line-height: 1.45;
   }
   .roster-tools {
     grid-template-columns: 1fr 1fr;
