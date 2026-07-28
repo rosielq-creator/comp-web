@@ -168,24 +168,26 @@ const artistStage = document.querySelector("#artistStage");
 const tabs = [...document.querySelectorAll(".artist-tab")];
 let activeArtist = 0;
 
+// Preload the full homepage roster so desktop hover changes are immediate.
+artists.forEach((artist) => {
+  const preload = new Image();
+  preload.src = artist.image;
+});
+
 function setArtist(index, focusTab = false) {
   if (!image || index === activeArtist && image.dataset.ready) return;
   const artist = artists[index];
   activeArtist = index;
-  image.classList.add("is-switching");
-  window.setTimeout(() => {
-    image.src = artist.image;
-    image.alt = artist.alt;
-    image.style.objectPosition = artist.position;
-    name.textContent = artist.name;
-    role.textContent = artist.role;
-    number.textContent = String(index + 1).padStart(2, "0");
-    profileLink.href = artist.href;
-    artistStage.href = artist.href;
-    artistStage.setAttribute("aria-label", `View ${artist.name} profile`);
-    image.dataset.ready = "true";
-    image.classList.remove("is-switching");
-  }, 170);
+  image.src = artist.image;
+  image.alt = artist.alt;
+  image.style.objectPosition = artist.position;
+  name.textContent = artist.name;
+  role.textContent = artist.role;
+  number.textContent = String(index + 1).padStart(2, "0");
+  profileLink.href = artist.href;
+  artistStage.href = artist.href;
+  artistStage.setAttribute("aria-label", `View ${artist.name} profile`);
+  image.dataset.ready = "true";
   tabs.forEach((tab, tabIndex) => {
     const active = tabIndex === index;
     tab.classList.toggle("is-active", active);
