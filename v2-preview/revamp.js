@@ -16,30 +16,22 @@ const services = [
   {
     number: "01",
     title: "AI Video Production",
-    copy: "Concept, creative direction and AI-powered film production for campaigns and branded stories.",
-    image: "assets/work/mgm-01-poster.jpg",
-    alt: "Macau MGM campaign film still"
+    copy: "Concept, creative direction and AI-powered film production for campaigns and branded stories."
   },
   {
     number: "02",
     title: "Digital Human Creation",
-    copy: "Original AI artists with distinctive identities, visual worlds and long-term content potential.",
-    image: "assets/profiles/maya/black-tailoring.png",
-    alt: "Maya, a GreenTomato AI artist"
+    copy: "Original AI artists with distinctive identities, visual worlds and long-term content potential."
   },
   {
     number: "03",
     title: "AI Campaign & Social",
-    copy: "Scalable films and photography for launches, campaign systems and always-on social content.",
-    image: "assets/work/grams-color.jpg",
-    alt: "GRAMS campaign still"
+    copy: "Scalable films and photography for launches, campaign systems and always-on social content."
   },
   {
     number: "04",
     title: "AI-Powered Devices & Live Digital Humans",
-    copy: "AI integrated with physical devices and live settings—from delivery and bartending machines to real-time digital humans for meetings and events.",
-    image: "",
-    alt: ""
+    copy: "AI integrated with physical devices and live settings—from delivery and bartending machines to real-time digital humans for meetings and events."
   }
 ];
 
@@ -370,43 +362,14 @@ function setupWorkCollection({ index = false } = {}) {
 
 function setupServices() {
   const list = document.querySelector("[data-service-list]");
-  const visual = document.querySelector("[data-service-visual]");
-  if (!list || !visual) return;
+  if (!list) return;
   list.innerHTML = services.map((service, index) => `
-    <button class="service-item${index === 0 ? " is-active" : ""}" type="button" data-service-index="${index}">
+    <article class="service-item">
       <small>${service.number}</small>
       <h3>${escapeHTML(service.title)}</h3>
-      <span>→</span>
       <p>${escapeHTML(service.copy)}</p>
-    </button>
+    </article>
   `).join("");
-
-  const setActive = (index) => {
-    const service = services[index];
-    list.querySelectorAll(".service-item").forEach((item) => item.classList.toggle("is-active", Number(item.dataset.serviceIndex) === index));
-    if (service.image) {
-      visual.innerHTML = `
-        <img src="${service.image}" alt="${escapeHTML(service.alt)}">
-        <div class="service-visual__scan" aria-hidden="true"></div>
-        <figcaption>Selected project imagery</figcaption>
-      `;
-    } else {
-      visual.innerHTML = `
-        <div class="about-signal" aria-hidden="true" style="height:100%;min-height:0;border:0">
-          <div class="signal-grid"></div>
-          <div class="signal-orbit signal-orbit--a"></div>
-          <div class="signal-orbit signal-orbit--b"></div>
-          <span>DEVICE / LIVE RESPONSE / PROTOTYPE</span>
-        </div>
-        <figcaption>Abstract study · not presented as a client case</figcaption>
-      `;
-    }
-  };
-
-  list.querySelectorAll("[data-service-index]").forEach((item) => {
-    item.addEventListener("mouseenter", () => setActive(Number(item.dataset.serviceIndex)));
-    item.addEventListener("focus", () => setActive(Number(item.dataset.serviceIndex)));
-  });
 }
 
 function setupInquiryForms() {
