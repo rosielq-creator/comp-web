@@ -1441,26 +1441,6 @@ body {
   display: none;
 }
 
-.work-browse-hint {
-  display: flex;
-  min-height: 44px;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-  margin: 0 0 4px;
-  color: var(--work-muted);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.work-browse-hint b {
-  color: var(--ink);
-  font-size: 18px;
-  font-weight: 400;
-}
-
 .work-categories button {
   flex: 0 0 auto;
   min-height: 48px;
@@ -1979,12 +1959,6 @@ body {
   html[lang="zh-Hans"] .roster-home h1 em {
     font-family: inherit;
     font-weight: inherit;
-  }
-
-  .work-browse-hint {
-    justify-content: space-between;
-    margin-top: 2px;
-    font-size: 11px;
   }
 
   .text-link,
