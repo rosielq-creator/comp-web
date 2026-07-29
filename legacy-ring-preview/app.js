@@ -6,10 +6,32 @@ const translations = {
     tagline: "Next-Generation AI Talents",
     home: "Home",
     talents: "Talents",
-    homeLineOne: "The new faces",
-    homeLineTwo: "of imagination.",
+    companyNav: "Company",
+    servicesNav: "Services",
+    artistsNav: "Artists",
+    allArtists: "All artists",
+    workNav: "Work",
+    crewNav: "Crew",
+    crewHeadline: "Meet the crew.<br><em>Profiles coming next.</em>",
+    crewIntro: "The crew directory is ready for approved names, roles, portraits and biographies.",
+    profileSlogan: "IMAGINED WITH AI. MADE TO MOVE PEOPLE.",
+    homeLineOne: "AI PRODUCTION",
+    homeLineTwo: "",
     homeManifesto: "An independent roster of AI talents built for fashion, culture and the next visual era.",
-    meetTalents: "Meet the talents",
+    meetTalents: "Meet the artists",
+    servicesHeadline: "Ideas become<br><em>living worlds.</em>",
+    servicesIntro: "From AI film and digital humans to always-on social content, we unite creative direction, production and technology in one team.",
+    serviceVideo: "Concept, art direction and AI-powered film production for campaigns and branded stories.",
+    serviceHuman: "Distinctive virtual personalities designed for long-term brand worlds, content and engagement.",
+    serviceSocial: "Scalable creative systems for launch campaigns, social channels and continuous content.",
+    serviceIntegration: "Persona, voice, agentic tools and tailored software, hardware or data connections.",
+    clientsPartners: "Clients & partners",
+    projectsDelivered: "Projects delivered",
+    professionals: "Professionals",
+    awards: "Awards",
+    workHeadline: "Built with brands.<br><em>Made for culture.</em>",
+    workIntro: "A selection of brands and creative partnerships featured across the GreenTomato company portfolio.",
+    workDisclaimer: "Project imagery and detailed credits will be added after final approval.",
     account: "Account",
     password: "Password",
     enter: "Enter GTAI",
@@ -30,10 +52,30 @@ const translations = {
     height: "Height",
     focus: "Focus",
     platforms: "Platforms",
+    guangdongChina: "Guangdong, China",
+    marioFocusValue: "Lifestyle / Fashion / Sport / Travel",
     socialData: "Social data",
     signalHeadline: "Audience signal,<br><em>made legible.</em>",
     sampleNote: "Prototype data — not live metrics",
+    marioDataNote: "Public profile counts + creator analytics · Updated 2026.07.22",
     followers: "Followers",
+    currentFollowers: "Current followers",
+    xiaohongshuLabel: "Xiaohongshu ↗",
+    last30Days: "Last 30 days",
+    impressions: "Impressions",
+    views: "Views",
+    engagements: "Engagements",
+    likesCommentsSavesShares: "Likes + comments + saves + shares",
+    netGrowth: "Net growth",
+    topPerformingContent: "Top performing content",
+    mostEngaged: "Most engaged.",
+    openOriginalPost: "Open original post ↗",
+    likes: "Likes",
+    comments: "Comments",
+    saves: "Saves",
+    shares: "Shares",
+    engagementRate: "Engagement rate",
+    byViews: "By views",
     engagement: "Engagement",
     audience: "Top audience",
     growth: "90D growth",
@@ -58,10 +100,32 @@ const translations = {
     tagline: "新世代 AI 藝人",
     home: "首頁",
     talents: "藝人",
-    homeLineOne: "想像力的",
-    homeLineTwo: "全新面孔。",
+    companyNav: "公司",
+    servicesNav: "服務",
+    artistsNav: "藝人",
+    allArtists: "所有藝人",
+    workNav: "作品",
+    crewNav: "團隊",
+    crewHeadline: "認識幕後團隊。<br><em>成員檔案即將登場。</em>",
+    crewIntro: "團隊名錄已準備好加入經確認的姓名、職位、照片與簡介。",
+    profileSlogan: "由 AI 構想，為打動人而生。",
+    homeLineOne: "AI PRODUCTION",
+    homeLineTwo: "",
     homeManifesto: "一組面向時尚、文化與下一個視覺時代的獨立 AI 藝人陣容。",
     meetTalents: "探索藝人陣容",
+    servicesHeadline: "讓創意成為<br><em>鮮活世界。</em>",
+    servicesIntro: "從 AI 影片、數字人到持續運作的社交內容，我們以一個團隊整合創意指導、製作與技術。",
+    serviceVideo: "為品牌企劃與故事提供概念、藝術指導及 AI 影片製作。",
+    serviceHuman: "建立鮮明的虛擬人物，延伸為品牌世界、長期內容及互動體驗。",
+    serviceSocial: "為品牌發佈、社交平台及持續內容建立可規模化的創意系統。",
+    serviceIntegration: "整合人物設定、聲音、智能工具，以及客製軟件、硬件與數據連接。",
+    clientsPartners: "客戶與合作夥伴",
+    projectsDelivered: "完成項目",
+    professionals: "專業團隊",
+    awards: "獎項",
+    workHeadline: "與品牌共創，<br><em>為文化而生。</em>",
+    workIntro: "精選 GreenTomato 公司作品集中涵蓋的品牌與創意合作。",
+    workDisclaimer: "項目圖片及詳細製作名單將於最終確認後加入。",
     account: "帳號",
     password: "密碼",
     enter: "進入 GTAI",
@@ -82,10 +146,30 @@ const translations = {
     height: "身高",
     focus: "內容領域",
     platforms: "平台",
+    guangdongChina: "中國廣東",
+    marioFocusValue: "生活風格／時尚／運動／旅遊",
     socialData: "社交數據",
     signalHeadline: "讓受眾訊號，<br><em>變得清晰可讀。</em>",
     sampleNote: "原型資料 — 非即時數據",
+    marioDataNote: "公開帳號粉絲數＋創作者後台數據 · 更新於 2026.07.22",
     followers: "粉絲數",
+    currentFollowers: "目前粉絲數",
+    xiaohongshuLabel: "小紅書 ↗",
+    last30Days: "最近 30 天",
+    impressions: "曝光",
+    views: "觀看",
+    engagements: "互動總數",
+    likesCommentsSavesShares: "讚好＋評論＋收藏＋分享",
+    netGrowth: "淨增粉",
+    topPerformingContent: "熱門內容",
+    mostEngaged: "最高互動內容。",
+    openOriginalPost: "查看原帖 ↗",
+    likes: "讚好",
+    comments: "評論",
+    saves: "收藏",
+    shares: "分享",
+    engagementRate: "互動率",
+    byViews: "按觀看量計算",
     engagement: "互動率",
     audience: "主要受眾",
     growth: "90 日增長",
@@ -108,7 +192,7 @@ const translations = {
   }
 };
 
-const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether"]);
+const richTextKeys = new Set(["marioHeadline", "signalHeadline", "portfolioHeadline", "workTogether", "servicesHeadline", "workHeadline", "crewHeadline"]);
 let language = localStorage.getItem("gtai-language") || (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
 
 function applyLanguage() {
@@ -124,6 +208,7 @@ function applyLanguage() {
   if (languageButton) languageButton.textContent = language === "en" ? "繁" : "EN";
   localStorage.setItem("gtai-language", language);
   updateSoundUI();
+  window.dispatchEvent(new CustomEvent("gtai:languagechange", { detail: { language } }));
 }
 
 document.querySelector("#langToggle")?.addEventListener("click", () => {
@@ -203,6 +288,142 @@ const unlocked = sessionStorage.getItem("gtai-preview") === "unlocked";
 let crystalStarted = false;
 let kineticStarted = false;
 
+/* Mario uses a small articulated canvas rig so his racket arm swings independently. */
+function initMarioTennisRig() {
+  if (page !== "home") return;
+  const canvas = document.querySelector(".mario-tennis-canvas");
+  const rig = canvas?.closest(".mario-tennis-rig");
+  const source = canvas?.dataset.source;
+  if (!canvas || !rig || !source) return;
+
+  const context = canvas.getContext("2d");
+  const image = new Image();
+  image.decoding = "async";
+  image.src = source;
+  image.onload = () => {
+    const sourceWidth = image.naturalWidth;
+    const sourceHeight = image.naturalHeight;
+    const scaleX = canvas.width / sourceWidth;
+    const scaleY = canvas.height / sourceHeight;
+    const bodyLayer = document.createElement("canvas");
+    const armLayer = document.createElement("canvas");
+    bodyLayer.width = armLayer.width = canvas.width;
+    bodyLayer.height = armLayer.height = canvas.height;
+    const body = bodyLayer.getContext("2d");
+    const arm = armLayer.getContext("2d");
+
+    const traceArm = (target) => {
+      target.beginPath();
+      target.moveTo(36 * scaleX, 188 * scaleY);
+      target.lineTo(298 * scaleX, 176 * scaleY);
+      target.lineTo(430 * scaleX, 328 * scaleY);
+      target.lineTo(545 * scaleX, 366 * scaleY);
+      target.lineTo(610 * scaleX, 455 * scaleY);
+      target.lineTo(558 * scaleX, 535 * scaleY);
+      target.lineTo(432 * scaleX, 510 * scaleY);
+      target.lineTo(286 * scaleX, 474 * scaleY);
+      target.lineTo(40 * scaleX, 505 * scaleY);
+      target.closePath();
+    };
+
+    body.drawImage(image, 0, 0, canvas.width, canvas.height);
+    body.globalCompositeOperation = "destination-out";
+    traceArm(body);
+    body.fill();
+    body.beginPath();
+    body.arc(218 * scaleX, 419 * scaleY, 54 * scaleX, 0, Math.PI * 2);
+    body.fill();
+
+    traceArm(arm);
+    arm.clip();
+    arm.drawImage(image, 0, 0, canvas.width, canvas.height);
+    arm.globalCompositeOperation = "destination-out";
+    arm.beginPath();
+    arm.arc(218 * scaleX, 419 * scaleY, 54 * scaleX, 0, Math.PI * 2);
+    arm.fill();
+
+    const pivotX = 462 * scaleX;
+    const pivotY = 382 * scaleY;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duration = 2200;
+    let frame;
+
+    const ease = (value) => value < .5
+      ? 4 * value * value * value
+      : 1 - Math.pow(-2 * value + 2, 3) / 2;
+
+    function swingAngle(progress) {
+      if (progress < .32) return -12;
+      if (progress < .48) return -12 + 31 * ease((progress - .32) / .16);
+      if (progress < .62) return 19 - 5 * ease((progress - .48) / .14);
+      return 14 - 26 * ease((progress - .62) / .38);
+    }
+
+    function drawBall(progress) {
+      let x;
+      let y;
+      let opacity = 1;
+      if (progress < .48) {
+        const inbound = Math.max(0, (progress - .18) / .3);
+        x = (45 + 173 * inbound) * scaleX;
+        y = (360 + 59 * inbound) * scaleY;
+        opacity = Math.min(1, inbound * 3);
+      } else {
+        const outbound = (progress - .48) / .52;
+        x = (218 - 330 * outbound) * scaleX;
+        y = (419 - 210 * outbound - 90 * outbound * (1 - outbound)) * scaleY;
+        opacity = Math.min(1, (1 - outbound) * 2.4);
+      }
+      if (opacity <= 0) return;
+      context.save();
+      context.globalAlpha = opacity;
+      const radius = 22 * scaleX;
+      const gradient = context.createRadialGradient(x - radius * .35, y - radius * .4, 2, x, y, radius);
+      gradient.addColorStop(0, "#ffffb8");
+      gradient.addColorStop(.38, "#edff35");
+      gradient.addColorStop(1, "#b5cf00");
+      context.fillStyle = gradient;
+      context.shadowColor = "rgba(144, 177, 0, .35)";
+      context.shadowBlur = 12;
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+    }
+
+    function draw(timestamp = 0) {
+      const progress = reducedMotion ? .48 : (timestamp % duration) / duration;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(bodyLayer, 0, 0);
+      context.save();
+      context.translate(pivotX, pivotY);
+      context.rotate(swingAngle(progress) * Math.PI / 180);
+      context.translate(-pivotX, -pivotY);
+      context.drawImage(armLayer, 0, 0);
+      context.restore();
+      drawBall(progress);
+
+      if (progress > .455 && progress < .525) {
+        const pulse = 1 - Math.abs(progress - .49) / .035;
+        context.save();
+        context.globalAlpha = Math.max(0, pulse) * .72;
+        context.strokeStyle = "#0a9b59";
+        context.lineWidth = 3 * scaleX;
+        context.beginPath();
+        context.arc(218 * scaleX, 419 * scaleY, (35 + 26 * pulse) * scaleX, -.9, .9);
+        context.stroke();
+        context.restore();
+      }
+
+      if (!reducedMotion) frame = requestAnimationFrame(draw);
+    }
+
+    rig.classList.add("is-ready");
+    draw();
+    window.addEventListener("pagehide", () => cancelAnimationFrame(frame), { once: true });
+  };
+}
+
 /* Lightweight rigid-body type: pieces fall into place, collide, and yield to the cursor. */
 function initKineticType() {
   if (kineticStarted || page !== "home") return;
@@ -215,12 +436,17 @@ function initKineticType() {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let bounds = field.getBoundingClientRect();
   const pointer = { x: -1000, y: -1000, active: false };
+  const positionRatio = (element, axis, fallback) => {
+    const mobileKey = `mobile${axis.toUpperCase()}`;
+    const value = window.innerWidth <= 520 ? element.dataset[mobileKey] : null;
+    return Number(value || element.dataset[axis] || fallback);
+  };
   const states = pieces.map((element, index) => ({
     element,
-    x: bounds.width * Number(element.dataset.x || .5),
-    y: reduceMotion ? bounds.height * Number(element.dataset.y || .5) : -90 - index * 34,
-    anchorX: bounds.width * Number(element.dataset.x || .5),
-    floorY: bounds.height * Number(element.dataset.y || .5),
+    x: bounds.width * positionRatio(element, "x", .5),
+    y: reduceMotion ? bounds.height * positionRatio(element, "y", .5) : -90 - index * 34,
+    anchorX: bounds.width * positionRatio(element, "x", .5),
+    floorY: bounds.height * positionRatio(element, "y", .5),
     vx: (index % 2 ? -1 : 1) * (.35 + index * .04),
     vy: 0,
     radius: Math.max(element.offsetWidth, element.offsetHeight) * .48,
@@ -238,8 +464,8 @@ function initKineticType() {
   function resize() {
     bounds = field.getBoundingClientRect();
     states.forEach((state) => {
-      state.anchorX = bounds.width * Number(state.element.dataset.x || .5);
-      state.floorY = bounds.height * Number(state.element.dataset.y || .5);
+      state.anchorX = bounds.width * positionRatio(state.element, "x", .5);
+      state.floorY = bounds.height * positionRatio(state.element, "y", .5);
       state.radius = Math.max(state.element.offsetWidth, state.element.offsetHeight) * .48;
     });
   }
@@ -373,30 +599,270 @@ function hydratePanel(panel) {
 
 const homeExperience = document.querySelector("#homeExperience");
 const talentStage = document.querySelector("#talentStage");
-const homeNav = document.querySelector("#homeNav");
-const talentsNav = document.querySelector("#talentsNav");
+const servicesStage = document.querySelector("#servicesStage");
+const workStage = document.querySelector("#workStage");
+const crewStage = document.querySelector("#crewStage");
+const viewNavButtons = [...document.querySelectorAll("[data-view]")];
+const workVideos = [...document.querySelectorAll("[data-work-video]")];
+const workMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const mainSiteHeader = document.querySelector(".site-header:not(.profile-header)");
 
-function showView(view) {
-  const showingTalents = view === "talents";
-  homeExperience?.classList.toggle("is-hidden", showingTalents);
-  talentStage?.classList.toggle("is-visible", showingTalents);
-  homeExperience?.setAttribute("aria-hidden", String(showingTalents));
-  talentStage?.setAttribute("aria-hidden", String(!showingTalents));
-  if (showingTalents) {
-    talentStage?.removeAttribute("inert");
-    hydratePanel(panels[currentPanel]);
-    window.setTimeout(() => hydratePanel(panels[(currentPanel + 1) % panels.length]), 500);
-  } else {
-    talentStage?.setAttribute("inert", "");
-  }
-  homeNav?.classList.toggle("is-active", !showingTalents);
-  talentsNav?.classList.toggle("is-active", showingTalents);
+function syncWorkAudioButton(button, isSoundOn) {
+  button.classList.toggle("is-muted", !isSoundOn);
+  button.setAttribute("aria-label", isSoundOn ? "Mute project video" : "Turn sound on");
+  button.setAttribute("aria-pressed", String(isSoundOn));
 }
 
-document.querySelector("#rosterEntry")?.addEventListener("click", () => showView("talents"));
-homeNav?.addEventListener("click", () => showView("home"));
-talentsNav?.addEventListener("click", () => showView("talents"));
-if (page === "home" && window.location.hash === "#talents") showView("talents");
+/* The information views scroll inside their own fixed-height panels, so the
+   reading-aware header must follow those scrollers rather than window.scrollY. */
+document.querySelectorAll(".information-stage .info-stage-inner").forEach((scroller) => {
+  let lastScrollTop = Math.max(scroller.scrollTop, 0);
+  let scrollFrame = 0;
+
+  scroller.addEventListener("scroll", () => {
+    if (scrollFrame || !scroller.closest(".information-stage")?.classList.contains("is-visible")) return;
+    scrollFrame = requestAnimationFrame(() => {
+      const currentScrollTop = Math.max(scroller.scrollTop, 0);
+      const delta = currentScrollTop - lastScrollTop;
+      if (currentScrollTop <= 24 || delta < -6) mainSiteHeader?.classList.remove("is-hidden");
+      else if (delta > 8 && currentScrollTop > (mainSiteHeader?.offsetHeight || 72)) mainSiteHeader?.classList.add("is-hidden");
+      lastScrollTop = currentScrollTop;
+      scrollFrame = 0;
+    });
+  }, { passive: true });
+
+  scroller.addEventListener("scrollend", () => {
+    lastScrollTop = Math.max(scroller.scrollTop, 0);
+  }, { passive: true });
+});
+
+function syncWorkVideoPlayback() {
+  const workIsActive = workStage?.classList.contains("is-visible") && !document.hidden;
+  if (!workIsActive) {
+    workVideos.forEach((video) => { video.muted = true; });
+    document.querySelectorAll(".work-audio-toggle").forEach((button) => {
+      syncWorkAudioButton(button, false);
+    });
+  }
+  workVideos.forEach((video) => {
+    /* Playback is always user initiated. Leaving WORK, hiding the tab or
+       scrolling a card out of view pauses it without scheduling a resume. */
+    const shouldPause = !workIsActive || video.dataset.inView !== "true" || document.hidden;
+    if (shouldPause) video.pause();
+  });
+}
+
+function formatWorkTime(value) {
+  if (!Number.isFinite(value)) return "0:00";
+  const minutes = Math.floor(value / 60);
+  const seconds = Math.floor(value % 60).toString().padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
+/* Custom controls keep every reel visually consistent while exposing play,
+   seeking, sound and fullscreen without permanently covering the work. */
+workVideos.forEach((video) => {
+  const card = video.closest(".work-card");
+  const media = video.closest(".work-media");
+  if (!card || !media) return;
+
+  const controls = document.createElement("div");
+  controls.className = "work-video-controls";
+  controls.innerHTML = `
+    <button class="work-play-toggle" type="button" aria-label="Pause project video">
+      <span aria-hidden="true">Ⅱ</span>
+    </button>
+    <input class="work-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Video progress">
+    <output class="work-time" aria-live="off">0:00 / 0:00</output>
+    <button class="work-audio-toggle work-control-icon is-muted" type="button" aria-label="Turn sound on" aria-pressed="false">
+      <svg class="work-audio-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path class="work-audio-speaker" d="M4 9h4l5-4v14l-5-4H4z"/>
+        <path class="work-audio-waves" d="M16 9.2c.9.8 1.4 1.7 1.4 2.8s-.5 2-1.4 2.8M18.5 6.8c1.6 1.4 2.5 3.1 2.5 5.2s-.9 3.8-2.5 5.2"/>
+        <path class="work-audio-slash" d="M4.5 4.5l15 15"/>
+      </svg>
+    </button>
+    <button class="work-fullscreen-toggle work-control-icon" type="button" aria-label="Enter fullscreen">
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M7 3H3v4M13 3h4v4M7 17H3v-4M13 17h4v-4"/>
+      </svg>
+    </button>
+  `;
+  video.insertAdjacentElement("afterend", controls);
+
+  const playButton = controls.querySelector(".work-play-toggle");
+  const playIcon = playButton.querySelector("span");
+  const progress = controls.querySelector(".work-progress");
+  const time = controls.querySelector(".work-time");
+  const audioButton = controls.querySelector(".work-audio-toggle");
+  const fullscreenButton = controls.querySelector(".work-fullscreen-toggle");
+
+  /* Pointer interaction must never pin the controls open after the cursor
+     leaves. Keyboard focus remains supported until an actual pointer exit. */
+  card.addEventListener("pointerleave", () => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    controls.querySelector(":focus")?.blur();
+    card.classList.remove("is-controls-visible");
+  });
+
+  const updatePlayState = () => {
+    const isPaused = video.paused;
+    playIcon.textContent = isPaused ? "▶" : "Ⅱ";
+    playButton.setAttribute("aria-label", `${isPaused ? "Play" : "Pause"} project video`);
+    card.classList.toggle("is-video-paused", isPaused);
+  };
+
+  const updateTimeline = () => {
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    progress.value = duration ? String(Math.round((video.currentTime / duration) * 1000)) : "0";
+    progress.style.setProperty("--work-progress", `${duration ? (video.currentTime / duration) * 100 : 0}%`);
+    time.value = `${formatWorkTime(video.currentTime)} / ${formatWorkTime(duration)}`;
+  };
+
+  playButton.addEventListener("click", () => {
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+
+  video.addEventListener("click", () => {
+    if (!window.matchMedia("(hover: none)").matches) return;
+    document.querySelectorAll(".work-card.is-controls-visible").forEach((item) => {
+      if (item !== card) item.classList.remove("is-controls-visible");
+    });
+    card.classList.toggle("is-controls-visible");
+  });
+
+  progress.addEventListener("input", () => {
+    if (!Number.isFinite(video.duration)) return;
+    video.currentTime = (Number(progress.value) / 1000) * video.duration;
+    updateTimeline();
+  });
+
+  audioButton.addEventListener("click", () => {
+    const enableSound = video.muted;
+    workVideos.forEach((item) => { item.muted = true; });
+    document.querySelectorAll(".work-audio-toggle").forEach((button) => {
+      syncWorkAudioButton(button, false);
+    });
+    if (enableSound) {
+      video.muted = false;
+      syncWorkAudioButton(audioButton, true);
+      soundOn = false;
+      sessionStorage.setItem("gtai-sound", "off");
+      stopAmbient();
+    }
+  });
+
+  const enterFullscreen = () => {
+    if (media.requestFullscreen) {
+      media.requestFullscreen().catch(() => {});
+    } else if (video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen();
+    }
+  };
+
+  fullscreenButton.addEventListener("click", () => {
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else enterFullscreen();
+  });
+
+  video.addEventListener("dblclick", () => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else enterFullscreen();
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    const isFullscreen = document.fullscreenElement === media;
+    fullscreenButton.setAttribute("aria-label", `${isFullscreen ? "Exit" : "Enter"} fullscreen`);
+    card.classList.toggle("is-fullscreen", isFullscreen);
+  });
+
+  video.addEventListener("play", updatePlayState);
+  video.addEventListener("pause", updatePlayState);
+  video.addEventListener("loadedmetadata", updateTimeline);
+  video.addEventListener("durationchange", updateTimeline);
+  video.addEventListener("timeupdate", updateTimeline);
+  updatePlayState();
+  updateTimeline();
+});
+
+if (workVideos.length && "IntersectionObserver" in window) {
+  const workVideoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.dataset.inView = String(entry.isIntersecting && entry.intersectionRatio >= .12);
+    });
+    syncWorkVideoPlayback();
+  }, { root: workStage?.querySelector(".info-stage-inner") || null, threshold: [.12, .35] });
+  workVideos.forEach((video) => workVideoObserver.observe(video));
+} else {
+  workVideos.forEach((video) => { video.dataset.inView = "true"; });
+}
+
+document.addEventListener("visibilitychange", syncWorkVideoPlayback);
+workMotionQuery.addEventListener?.("change", syncWorkVideoPlayback);
+
+function showView(view) {
+  const normalizedView = view === "talents" ? "artists" : view;
+  const stages = [
+    ["home", homeExperience],
+    ["artists", talentStage],
+    ["services", servicesStage],
+    ["work", workStage],
+    ["crew", crewStage]
+  ];
+  stages.forEach(([name, stage]) => {
+    const isCurrent = name === normalizedView;
+    stage?.classList.toggle(name === "home" ? "is-hidden" : "is-visible", name === "home" ? !isCurrent : isCurrent);
+    stage?.setAttribute("aria-hidden", String(!isCurrent));
+    if (isCurrent) stage?.removeAttribute("inert");
+    else stage?.setAttribute("inert", "");
+  });
+  if (normalizedView === "artists") {
+    hydratePanel(panels[currentPanel]);
+    window.setTimeout(() => hydratePanel(panels[(currentPanel + 1) % panels.length]), 500);
+  }
+  viewNavButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.view === normalizedView));
+  mainSiteHeader?.classList.remove("is-hidden");
+  if (page === "home") history.replaceState(null, "", normalizedView === "home" ? location.pathname : `#${normalizedView}`);
+  window.requestAnimationFrame(syncWorkVideoPlayback);
+}
+
+document.querySelector("#rosterEntry")?.addEventListener("click", () => showView("artists"));
+viewNavButtons.forEach((button) => button.addEventListener("click", () => showView(button.dataset.view)));
+if (page === "home") {
+  const initialView = location.hash.slice(1);
+  if (["artists", "talents", "services", "work", "crew"].includes(initialView)) showView(initialView);
+}
+
+/* ARTISTS remains a direct route to the carousel while the adjacent chevron
+   exposes individual profiles. This avoids the ambiguous first-tap behavior
+   of a single control that is both a link and a disclosure. */
+document.querySelectorAll(".artist-nav-menu").forEach((menu) => {
+  const toggle = menu.querySelector(".artist-menu-toggle");
+  const close = () => {
+    menu.classList.remove("is-open");
+    toggle?.setAttribute("aria-expanded", "false");
+  };
+  toggle?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const open = !menu.classList.contains("is-open");
+    document.querySelectorAll(".artist-nav-menu.is-open").forEach((item) => item.classList.remove("is-open"));
+    menu.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+  menu.querySelectorAll(".artist-dropdown a, .artist-dropdown button").forEach((item) => item.addEventListener("click", close));
+});
+document.addEventListener("pointerdown", (event) => {
+  document.querySelectorAll(".artist-nav-menu.is-open").forEach((menu) => {
+    if (!menu.contains(event.target)) {
+      menu.classList.remove("is-open");
+      menu.querySelector(".artist-menu-toggle")?.setAttribute("aria-expanded", "false");
+    }
+  });
+});
 
 function showPanel(nextIndex, direction) {
   if (!panels.length || changing || nextIndex === currentPanel) return;
@@ -423,7 +889,7 @@ document.querySelector("#prevTalent")?.addEventListener("click", () => showPanel
 document.querySelectorAll(".talent-guide, .toy-talent").forEach((guide) => {
   guide.addEventListener("click", () => {
     const nextIndex = Number(guide.dataset.talent);
-    showView("talents");
+    showView("artists");
     if (Number.isInteger(nextIndex) && nextIndex !== currentPanel) {
       const forward = nextIndex > currentPanel ? 1 : -1;
       window.setTimeout(() => showPanel(nextIndex, forward), 120);
@@ -437,35 +903,24 @@ if (panels.length) {
   });
 }
 
-/* The long first profile section converts vertical reading into a diagonal image rail. */
-const profileShowcase = document.querySelector("#profileShowcase");
-const profileRail = document.querySelector("#profileRail");
-if (profileShowcase && profileRail) {
-  const profileReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let railFrame = 0;
+/* Profile header yields on downward reading and returns immediately on upward intent. */
+const profileHeader = document.querySelector(".profile-header");
+if (profileHeader) {
+  let lastScrollY = Math.max(window.scrollY, 0);
+  let headerFrame = 0;
 
-  function positionProfileRail() {
-    railFrame = 0;
-    if (profileReduceMotion) return;
-    const bounds = profileShowcase.getBoundingClientRect();
-    const travel = Math.max(profileShowcase.offsetHeight - window.innerHeight, 1);
-    const progress = Math.min(1, Math.max(0, -bounds.top / travel));
-    const available = Math.max(profileRail.scrollWidth - window.innerWidth * .86, window.innerWidth * .7);
-    const x = window.innerWidth * .08 - progress * available;
-    const y = 26 - progress * Math.min(110, window.innerHeight * .12);
-    profileRail.style.setProperty("--rail-x", `${x.toFixed(1)}px`);
-    profileRail.style.setProperty("--rail-y", `${y.toFixed(1)}px`);
+  function updateProfileHeader() {
+    headerFrame = 0;
+    const currentScrollY = Math.max(window.scrollY, 0);
+    const delta = currentScrollY - lastScrollY;
+    if (currentScrollY <= 24 || delta < -6) profileHeader.classList.remove("is-hidden");
+    else if (delta > 8 && currentScrollY > profileHeader.offsetHeight) profileHeader.classList.add("is-hidden");
+    lastScrollY = currentScrollY;
   }
 
-  function requestRailPosition() {
-    if (!railFrame) railFrame = requestAnimationFrame(positionProfileRail);
-  }
-
-  window.addEventListener("scroll", requestRailPosition, { passive: true });
-  window.addEventListener("resize", requestRailPosition, { passive: true });
-  window.addEventListener("load", requestRailPosition, { once: true });
-  profileRail.querySelectorAll("img").forEach((image) => image.addEventListener("load", requestRailPosition, { once: true }));
-  requestRailPosition();
+  window.addEventListener("scroll", () => {
+    if (!headerFrame) headerFrame = requestAnimationFrame(updateProfileHeader);
+  }, { passive: true });
 }
 
 /* Mario gallery. */
@@ -525,6 +980,52 @@ if (profileSections.length) {
     }, { threshold: .14, rootMargin: "0px 0px -8%" });
     profileSections.forEach((section) => sectionObserver.observe(section));
   }
+}
+
+/* Build two pixel-identical image groups and move by exactly one group width.
+   Extra shots are added to the first group on wide screens so the viewport can
+   never outrun the loop and reveal an empty seam. */
+function buildProfileRailLoop() {
+  const rail = document.querySelector("#profileRail");
+  const firstGroup = rail?.querySelector(".profile-rail-group");
+  if (!rail || !firstGroup) return;
+
+  rail.classList.remove("is-ready");
+  rail.querySelectorAll(".profile-rail-group:not(:first-child)").forEach((group) => group.remove());
+  firstGroup.querySelectorAll("[data-loop-fill]").forEach((shot) => shot.remove());
+
+  const sourceShots = [...firstGroup.children];
+  const minimumGroupWidth = window.innerWidth * 1.35;
+  let sourceIndex = 0;
+  while (firstGroup.scrollWidth < minimumGroupWidth && sourceShots.length && sourceIndex < 32) {
+    const clone = sourceShots[sourceIndex % sourceShots.length].cloneNode(true);
+    clone.dataset.loopFill = "";
+    clone.querySelector("img")?.setAttribute("alt", "");
+    firstGroup.append(clone);
+    sourceIndex += 1;
+  }
+
+  const secondGroup = firstGroup.cloneNode(true);
+  secondGroup.setAttribute("aria-hidden", "true");
+  secondGroup.querySelectorAll("img").forEach((image) => image.setAttribute("alt", ""));
+  rail.append(secondGroup);
+
+  const loopDistance = firstGroup.getBoundingClientRect().width;
+  rail.style.setProperty("--rail-loop-distance", `-${loopDistance}px`);
+  rail.style.setProperty("--rail-loop-duration", `${Math.max(26, loopDistance / 55)}s`);
+  requestAnimationFrame(() => rail.classList.add("is-ready"));
+}
+
+if (document.querySelector("#profileRail")) {
+  const profileImages = [...document.querySelectorAll("#profileRail img")];
+  Promise.all(profileImages.map((image) => image.decode?.().catch(() => {}) ?? Promise.resolve()))
+    .then(buildProfileRailLoop);
+
+  let profileRailResizeFrame = 0;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(profileRailResizeFrame);
+    profileRailResizeFrame = requestAnimationFrame(buildProfileRailLoop);
+  }, { passive: true });
 }
 
 document.querySelector("#inquiryForm")?.addEventListener("submit", (event) => {
@@ -628,6 +1129,7 @@ async function initCrystal() {
   }
 }
 
+initMarioTennisRig();
 applyLanguage();
 updateSoundUI();
 if (page === "home" && unlocked) scheduleCrystal();
